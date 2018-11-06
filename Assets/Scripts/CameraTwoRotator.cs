@@ -33,7 +33,6 @@ public class CameraTwoRotator : MonoBehaviour {
 
     private void Update()
     {
-        Debug.Log(currentPos);
         if(Input.GetMouseButtonDown(0))
         {
             if (currentPos == "One")
