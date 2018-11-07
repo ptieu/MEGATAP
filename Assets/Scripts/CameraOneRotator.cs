@@ -5,10 +5,10 @@ using UnityEngine;
 public class CameraOneRotator : MonoBehaviour {
 
     [SerializeField] private Camera playerOneCam;
-    [SerializeField] private static int camPosHorizontal = 10;
-    [SerializeField] private static int camPosVertical = 2;
-    [SerializeField] private static int camRotationX = 10;
-    [SerializeField] private static int camRotationY = 0;
+    private static int camPosHorizontal = 22;
+    private static int camPosVertical = 5;
+    private static int camRotationX = 10;
+    private static int camRotationY = 0;
 
 
     private Vector3 pos1 = new Vector3(0, camPosVertical, -camPosHorizontal);
