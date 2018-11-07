@@ -48,7 +48,6 @@ public class CameraOneRotator : MonoBehaviour {
         //Camera rotation
         if(moving)
         {
-            //Debug.Log(moving);
             covered = (Time.time - startTime) * moveSpeed;
             remaining = covered / distance;
 
