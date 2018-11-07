@@ -5,10 +5,10 @@ using UnityEngine;
 public class CameraTwoRotator : MonoBehaviour {
 
     [SerializeField] private Camera playerTwoCam;
-    [SerializeField] private static int camPosHorizontal = 18;
-    [SerializeField] private static int camPosVertical = 8;
-    [SerializeField] private static int camRotationX = 15;
-    [SerializeField] private static int camRotationY = -45;
+    private static int camPosHorizontal = 18;
+    private static int camPosVertical = 8;
+    private static int camRotationX = 15;
+    private static int camRotationY = -45;
 
     private Vector3 pos1 = new Vector3(camPosHorizontal, camPosVertical, -camPosHorizontal);
     private Quaternion rot1 = Quaternion.Euler(camRotationX, camRotationY, 0);
