@@ -30,7 +30,9 @@ public class CameraTwoRotator : MonoBehaviour {
     private float startTime;
     private Vector3 prevPosition, goalPosition;
     private Quaternion prevRotation, goalRotation;
+
     private bool moving = false;
+    private bool mouseEnabled = true;
 
     private void Start()
     {
@@ -42,6 +44,7 @@ public class CameraTwoRotator : MonoBehaviour {
         distance = Vector3.Distance(pos1, pos2);
 
         moving = false;
+        mouseEnabled = true;
     }
 
     private void Update()
@@ -54,48 +57,54 @@ public class CameraTwoRotator : MonoBehaviour {
             playerTwoCam.transform.position = Vector3.Lerp(prevPosition, goalPosition, remaining);
             playerTwoCam.transform.rotation = Quaternion.Slerp(prevRotation, goalRotation, remaining);
 
-            if (Time.time - startTime >= 2)
+            if (Time.time - startTime >= 1.25)
             {
                 moving = false;
+                mouseEnabled = true;
             }
         }
 
-        if(Input.GetMouseButtonDown(0))
+        if (mouseEnabled)
         {
-            if (currentPos == "One")
+            if (Input.GetMouseButtonDown(0))
             {
-                startMove(pos1, pos4, rot1, rot4, "Four");
+                mouseEnabled = false;
+                if (currentPos == "One")
+                {
+                    startMove(pos1, pos4, rot1, rot4, "Four");
+                }
+                else if (currentPos == "Two")
+                {
+                    startMove(pos2, pos1, rot2, rot1, "One");
+                }
+                else if (currentPos == "Three")
+                {
+                    startMove(pos3, pos2, rot3, rot2, "Two");
+                }
+                else if (currentPos == "Four")
+                {
+                    startMove(pos4, pos3, rot4, rot3, "Three");
+                }
             }
-            else if (currentPos == "Two")
+            if (Input.GetMouseButtonDown(1))
             {
-                startMove(pos2, pos1, rot2, rot1, "One");
-            }
-            else if (currentPos == "Three")
-            {
-                startMove(pos3, pos2, rot3, rot2, "Two");
-            }
-            else if (currentPos == "Four")
-            {
-                startMove(pos4, pos3, rot4, rot3, "Three");
-            }
-        }
-        if(Input.GetMouseButtonDown(1))
-        {
-            if(currentPos == "One")
-            {
-                startMove(pos1, pos2, rot1, rot2, "Two");
-            }
-            else if (currentPos == "Two")
-            {
-                startMove(pos2, pos3, rot2, rot3, "Three");
-            }
-            else if (currentPos == "Three")
-            {
-                startMove(pos3, pos4, rot3, rot4, "Four");
-            }
-            else if (currentPos == "Four")
-            {
-                startMove(pos4, pos1, rot4, rot1, "One");
+                mouseEnabled = false;
+                if (currentPos == "One")
+                {
+                    startMove(pos1, pos2, rot1, rot2, "Two");
+                }
+                else if (currentPos == "Two")
+                {
+                    startMove(pos2, pos3, rot2, rot3, "Three");
+                }
+                else if (currentPos == "Three")
+                {
+                    startMove(pos3, pos4, rot3, rot4, "Four");
+                }
+                else if (currentPos == "Four")
+                {
+                    startMove(pos4, pos1, rot4, rot1, "One");
+                }
             }
         }
     }
