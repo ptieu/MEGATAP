@@ -5,8 +5,8 @@ using UnityEngine;
 public class CameraTwoRotator : MonoBehaviour {
 
     [SerializeField] private Camera playerTwoCam;
-    [SerializeField] private static int camPosHorizontal = 8;
-    [SerializeField] private static int camPosVertical = 3;
+    [SerializeField] private static int camPosHorizontal = 18;
+    [SerializeField] private static int camPosVertical = 8;
     [SerializeField] private static int camRotationX = 15;
     [SerializeField] private static int camRotationY = -45;
 
