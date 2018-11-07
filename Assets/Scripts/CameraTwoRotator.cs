@@ -54,7 +54,7 @@ public class CameraTwoRotator : MonoBehaviour {
             playerTwoCam.transform.position = Vector3.Lerp(prevPosition, goalPosition, remaining);
             playerTwoCam.transform.rotation = Quaternion.Slerp(prevRotation, goalRotation, remaining);
 
-            if (Time.time - startTime >= 1)
+            if (Time.time - startTime >= 2)
             {
                 moving = false;
             }
