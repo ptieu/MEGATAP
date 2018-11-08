@@ -438,20 +438,9 @@ Prefab:
       propertyPath: playerOneCam
       value: 
       objectReference: {fileID: 534669904}
-    - target: {fileID: 114896629519390852, guid: d620287fa4e747d4da3b388c0e830b50,
-        type: 2}
-      propertyPath: cam
-      value: 
-      objectReference: {fileID: 1890906326}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d620287fa4e747d4da3b388c0e830b50, type: 2}
   m_IsPrefabAsset: 0
---- !u!114 &1890906326 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114166697101588666, guid: d620287fa4e747d4da3b388c0e830b50,
-    type: 2}
-  m_PrefabInternal: {fileID: 1640634108}
-  m_Script: {fileID: 11500000, guid: 8a99e4dd110c91541b836d45d1d5ecd8, type: 3}
 --- !u!1001 &2077754589
 Prefab:
   m_ObjectHideFlags: 0
@@ -461,15 +450,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4940846812731354, guid: 295df6c694235764eac79c393ed826dc, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 18
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4940846812731354, guid: 295df6c694235764eac79c393ed826dc, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4940846812731354, guid: 295df6c694235764eac79c393ed826dc, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -18
+      value: -20
       objectReference: {fileID: 0}
     - target: {fileID: 4940846812731354, guid: 295df6c694235764eac79c393ed826dc, type: 2}
       propertyPath: m_LocalRotation.x
