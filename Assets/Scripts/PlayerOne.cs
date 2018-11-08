@@ -4,13 +4,27 @@ using UnityEngine;
 
 public class PlayerOne : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
+    [SerializeField] private CameraOneRotator cam;
+    private int state = 1;
+
 	void Update () {
-        this.transform.Translate(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        state = cam.getState();
+
+        if (state == 1)
+        {
+            this.transform.Translate(Input.GetAxis("Horizontal"), 0,0);
+        }
+        else if(state == 2)
+        {
+            this.transform.Translate(0, 0, Input.GetAxis("Horizontal"));
+        }
+        else if(state == 3)
+        {
+            this.transform.Translate(-Input.GetAxis("Horizontal"), 0, 0);
+        }
+        else if (state == 4)
+        {
+            this.transform.Translate(0, 0, -Input.GetAxis("Horizontal"));
+        }
     }
 }

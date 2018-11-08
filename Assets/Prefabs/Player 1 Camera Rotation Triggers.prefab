@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 33498978834619490}
   - component: {fileID: 23054022047306846}
   - component: {fileID: 65574539701116868}
-  - component: {fileID: 114324123934044460}
   m_Layer: 0
   m_Name: RotateTrigger3
   m_TagString: Trigger3
@@ -56,7 +55,6 @@ GameObject:
   - component: {fileID: 33293944852922638}
   - component: {fileID: 23713899119775178}
   - component: {fileID: 65659043421106374}
-  - component: {fileID: 114147507156909944}
   m_Layer: 0
   m_Name: RotateTrigger4
   m_TagString: Trigger4
@@ -75,7 +73,6 @@ GameObject:
   - component: {fileID: 33849611702641758}
   - component: {fileID: 23184612065364408}
   - component: {fileID: 65739966285702822}
-  - component: {fileID: 114978133320690336}
   m_Layer: 0
   m_Name: RotateTrigger1
   m_TagString: Trigger1
@@ -94,7 +91,6 @@ GameObject:
   - component: {fileID: 33345573062196284}
   - component: {fileID: 23782263720891376}
   - component: {fileID: 65117836422318638}
-  - component: {fileID: 114152872036340958}
   m_Layer: 0
   m_Name: RotateTrigger2
   m_TagString: Trigger2
@@ -387,55 +383,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114147507156909944
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1395203495226880}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a99e4dd110c91541b836d45d1d5ecd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerOneCam: {fileID: 0}
-  moveSpeed: 30
---- !u!114 &114152872036340958
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1959111827762346}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a99e4dd110c91541b836d45d1d5ecd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerOneCam: {fileID: 0}
-  moveSpeed: 30
---- !u!114 &114324123934044460
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1147812231136688}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a99e4dd110c91541b836d45d1d5ecd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerOneCam: {fileID: 0}
-  moveSpeed: 30
---- !u!114 &114978133320690336
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1708401624569232}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a99e4dd110c91541b836d45d1d5ecd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerOneCam: {fileID: 0}
-  moveSpeed: 30
