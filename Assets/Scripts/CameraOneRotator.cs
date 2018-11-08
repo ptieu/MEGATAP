@@ -32,11 +32,13 @@ public class CameraOneRotator : MonoBehaviour {
     private Quaternion prevRotation, goalRotation;
     private bool moving = false;
 
+    private int cameraState = 1;
 
     private void Start()
     {
         playerOneCam.transform.position = pos1;
         playerOneCam.transform.rotation = rot1;
+        cameraState = 1;
 
         distance = Vector3.Distance(pos1, pos2);
 
@@ -63,48 +65,55 @@ public class CameraOneRotator : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player")
-        {
-            if(this.tag == "Trigger1")
-            { 
-                distance = Vector3.Distance(pos1, pos2);
-                startTime = Time.time;
-                moving = true;
-                prevPosition = pos1;
-                goalPosition = pos2;
-                prevRotation = rot1;
-                goalRotation = rot2;
-            }
-            if (this.tag == "Trigger2")
-            {
-                distance = Vector3.Distance(pos2, pos3);
-                startTime = Time.time;
-                moving = true;
-                prevPosition = pos2;
-                goalPosition = pos3;
-                prevRotation = rot2;
-                goalRotation = rot3;
-            }
-            if (this.tag == "Trigger3")
-            {
-                distance = Vector3.Distance(pos3, pos4);
-                startTime = Time.time;
-                moving = true;
-                prevPosition = pos3;
-                goalPosition = pos4;
-                prevRotation = rot3;
-                goalRotation = rot4;
-            }
-            if (this.tag == "Trigger4")
-            {
-                distance = Vector3.Distance(pos4, pos1);
-                startTime = Time.time;
-                moving = true;
-                prevPosition = pos4;
-                goalPosition = pos1;
-                prevRotation = rot4;
-                goalRotation = rot1;
-            }
+        if(other.tag == "Trigger1")
+        { 
+            distance = Vector3.Distance(pos1, pos2);
+            startTime = Time.time;
+            moving = true;
+            prevPosition = pos1;
+            goalPosition = pos2;
+            prevRotation = rot1;
+            goalRotation = rot2;
+            cameraState = 2;
         }
+        if (other.tag == "Trigger2")
+        {
+            distance = Vector3.Distance(pos2, pos3);
+            startTime = Time.time;
+            moving = true;
+            prevPosition = pos2;
+            goalPosition = pos3;
+            prevRotation = rot2;
+            goalRotation = rot3;
+            cameraState = 3;
+        }
+        if (other.tag == "Trigger3")
+        {
+            Debug.Log("Trigger3");
+            distance = Vector3.Distance(pos3, pos4);
+            startTime = Time.time;
+            moving = true;
+            prevPosition = pos3;
+            goalPosition = pos4;
+            prevRotation = rot3;
+            goalRotation = rot4;
+            cameraState = 4;
+        }
+        if (other.tag == "Trigger4")
+        {
+            distance = Vector3.Distance(pos4, pos1);
+            startTime = Time.time;
+            moving = true;
+            prevPosition = pos4;
+            goalPosition = pos1;
+            prevRotation = rot4;
+            goalRotation = rot1;
+            cameraState = 1;
+        }
+    }
+
+    public int getState()
+    {
+        return cameraState;
     }
 }

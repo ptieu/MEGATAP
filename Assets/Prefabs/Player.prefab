@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 136025461055727100}
   - component: {fileID: 114896629519390852}
   - component: {fileID: 54465177588059718}
+  - component: {fileID: 114166697101588666}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -99,8 +100,21 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &114166697101588666
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1449188100816200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a99e4dd110c91541b836d45d1d5ecd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerOneCam: {fileID: 0}
+  moveSpeed: 30
 --- !u!114 &114896629519390852
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -112,6 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0287b94620a0be046bc297479c9d2885, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cam: {fileID: 114166697101588666}
 --- !u!136 &136025461055727100
 CapsuleCollider:
   m_ObjectHideFlags: 1
