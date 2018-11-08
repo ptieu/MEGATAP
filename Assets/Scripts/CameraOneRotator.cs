@@ -88,8 +88,7 @@ public class CameraOneRotator : MonoBehaviour {
             cameraState = 3;
         }
         if (other.tag == "Trigger3")
-        {
-            Debug.Log("Trigger3");
+        { 
             distance = Vector3.Distance(pos3, pos4);
             startTime = Time.time;
             moving = true;
