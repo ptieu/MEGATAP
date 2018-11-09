@@ -9,7 +9,7 @@ public class CameraOneRotator : MonoBehaviour {
     [SerializeField] private Camera playerOneCam;
     [SerializeField] private int moveSpeed = 2;
 
-    //Change these if the tower size changes
+    //Change these if the tower is scaled
     private static int camPosHorizontal = 45;
     private static int camPosVertical   = 5;
     private static int camRotationX     = 10;

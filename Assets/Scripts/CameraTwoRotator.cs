@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//<alexc> This class rotates the Player 2 (right side camera) on a given input.
 public class CameraTwoRotator : MonoBehaviour {
 
     [SerializeField] private Camera playerTwoCam;
