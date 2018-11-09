@@ -114,7 +114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerOneCam: {fileID: 0}
-  moveSpeed: 2
+  moveSpeed: 0.5
 --- !u!114 &114896629519390852
 MonoBehaviour:
   m_ObjectHideFlags: 1
