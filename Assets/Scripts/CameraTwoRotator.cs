@@ -58,6 +58,7 @@ public class CameraTwoRotator : MonoBehaviour {
             if (Input.GetMouseButtonDown(0))
             {
                 mouseEnabled = false;
+
                 if(currentPos == 1)
                 {
                     StartMove(basePositions[currentPos-1], basePositions[basePositions.Length-1], baseRotations[currentPos-1], baseRotations[baseRotations.Length-1], basePositions.Length);
@@ -79,33 +80,6 @@ public class CameraTwoRotator : MonoBehaviour {
                 {
                     StartMove(basePositions[currentPos - 1], basePositions[currentPos], baseRotations[currentPos - 1], baseRotations[currentPos], currentPos + 1);
                 }
-                //switch(currentPos)
-                //{
-                //    case 1:
-                //        StartMove(basePositions[0], basePositions[1], baseRotations[0], baseRotations[1], 2);
-                //        break;
-                //    case 2:
-                //        StartMove(basePositions[1], basePositions[2], baseRotations[1], baseRotations[2], 3);
-                //        break;
-                //    case 3:
-                //        StartMove(basePositions[2], basePositions[3], baseRotations[2], baseRotations[3], 4);
-                //        break;
-                //    case 4:
-                //        StartMove(basePositions[3], basePositions[4], baseRotations[3], baseRotations[4], 5);
-                //        break;
-                //    case 5:
-                //        StartMove(basePositions[4], basePositions[5], baseRotations[4], baseRotations[5], 6);
-                //        break;
-                //    case 6:
-                //        StartMove(basePositions[5], basePositions[6], baseRotations[5], baseRotations[6], 7);
-                //        break;
-                //    case 7:
-                //        StartMove(basePositions[6], basePositions[7], baseRotations[6], baseRotations[7], 8);
-                //        break;
-                //    case 8:
-                //        StartMove(basePositions[7], basePositions[0], baseRotations[7], baseRotations[0], 1);
-                //        break;
-                //}
             }
         }
     }
