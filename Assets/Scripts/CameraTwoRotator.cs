@@ -78,74 +78,98 @@ public class CameraTwoRotator : MonoBehaviour {
             if (Input.GetMouseButtonDown(0))
             {
                 mouseEnabled = false;
-                if (currentPos == 1)
+
+                switch(currentPos)
                 {
-                    startMove(basePositions[0], basePositions[7], baseRotations[0], baseRotations[7], 8);
-                }
-                else if (currentPos == 2)
-                {
-                    startMove(basePositions[1], basePositions[0], baseRotations[1], baseRotations[0], 1);
-                }
-                else if (currentPos == 3)
-                {
-                    startMove(basePositions[2], basePositions[1], baseRotations[2], baseRotations[1], 2);
-                }
-                else if (currentPos == 4)
-                {
-                    startMove(basePositions[3], basePositions[2], baseRotations[3], baseRotations[2], 3);
-                }
-                else if (currentPos == 5)
-                {
-                    startMove(basePositions[4], basePositions[3], baseRotations[4], baseRotations[3], 4);
-                }
-                else if (currentPos == 6)
-                {
-                    startMove(basePositions[5], basePositions[4], baseRotations[5], baseRotations[4], 5);
-                }
-                else if (currentPos == 7)
-                {
-                    startMove(basePositions[6], basePositions[5], baseRotations[6], baseRotations[5], 6);
-                }
-                else if (currentPos == 8)
-                {
-                    startMove(basePositions[7], basePositions[6], baseRotations[7], baseRotations[6], 7);
+                    case 1:
+                        startMove(basePositions[0], basePositions[7], baseRotations[0], baseRotations[7], 8);
+                        break;
+                    case 2:
+                        startMove(basePositions[1], basePositions[0], baseRotations[1], baseRotations[0], 1);
+                        break;
+                    case 3:
+                        startMove(basePositions[2], basePositions[1], baseRotations[2], baseRotations[1], 2);
+                        break;
+                    case 4:
+                        startMove(basePositions[3], basePositions[2], baseRotations[3], baseRotations[2], 3);
+                        break;
+                    case 5:
+                        startMove(basePositions[4], basePositions[3], baseRotations[4], baseRotations[3], 4);
+                        break;
+                    case 6:
+                        startMove(basePositions[5], basePositions[4], baseRotations[5], baseRotations[4], 5);
+                        break;
+                    case 7:
+                        startMove(basePositions[6], basePositions[5], baseRotations[6], baseRotations[5], 6);
+                        break;
+                    case 8:
+                        startMove(basePositions[7], basePositions[6], baseRotations[7], baseRotations[6], 7);
+                        break;
                 }
             }
             if (Input.GetMouseButtonDown(1))
             {
                 mouseEnabled = false;
-                if (currentPos == 1)
+
+                switch(currentPos)
                 {
-                    startMove(basePositions[0], basePositions[1], baseRotations[0], baseRotations[1], 2);
+                    case 1:
+                        startMove(basePositions[0], basePositions[1], baseRotations[0], baseRotations[1], 2);
+                        break;
+                    case 2:
+                        startMove(basePositions[1], basePositions[2], baseRotations[1], baseRotations[2], 3);
+                        break;
+                    case 3:
+                        startMove(basePositions[2], basePositions[3], baseRotations[2], baseRotations[3], 4);
+                        break;
+                    case 4:
+                        startMove(basePositions[3], basePositions[4], baseRotations[3], baseRotations[4], 5);
+                        break;
+                    case 5:
+                        startMove(basePositions[4], basePositions[5], baseRotations[4], baseRotations[5], 6);
+                        break;
+                    case 6:
+                        startMove(basePositions[5], basePositions[6], baseRotations[5], baseRotations[6], 7);
+                        break;
+                    case 7:
+                        startMove(basePositions[6], basePositions[7], baseRotations[6], baseRotations[7], 8);
+                        break;
+                    case 8:
+                        startMove(basePositions[7], basePositions[0], baseRotations[7], baseRotations[0], 1);
+                        break;
                 }
-                else if (currentPos == 2)
-                {
-                    startMove(basePositions[1], basePositions[2], baseRotations[1], baseRotations[2], 3);
-                }
-                else if (currentPos == 3)
-                {
-                    startMove(basePositions[2], basePositions[3], baseRotations[2], baseRotations[3], 4);
-                }
-                else if (currentPos == 4)
-                {
-                    startMove(basePositions[3], basePositions[4], baseRotations[3], baseRotations[4], 5);
-                }
-                else if (currentPos == 5)
-                {
-                    startMove(basePositions[4], basePositions[5], baseRotations[4], baseRotations[5], 6);
-                }
-                else if (currentPos == 6)
-                {
-                    startMove(basePositions[5], basePositions[6], baseRotations[5], baseRotations[6], 7);
-                }
-                else if (currentPos == 7)
-                {
-                    startMove(basePositions[6], basePositions[7], baseRotations[6], baseRotations[7], 8);
-                }
-                else if (currentPos == 8)
-                {
-                    startMove(basePositions[7], basePositions[0], baseRotations[7], baseRotations[0], 1);
-                }
+                //if (currentPos == 1)
+                //{
+                //    startMove(basePositions[0], basePositions[1], baseRotations[0], baseRotations[1], 2);
+                //}
+                //else if (currentPos == 2)
+                //{
+                //    startMove(basePositions[1], basePositions[2], baseRotations[1], baseRotations[2], 3);
+                //}
+                //else if (currentPos == 3)
+                //{
+                //    startMove(basePositions[2], basePositions[3], baseRotations[2], baseRotations[3], 4);
+                //}
+                //else if (currentPos == 4)
+                //{
+                //    startMove(basePositions[3], basePositions[4], baseRotations[3], baseRotations[4], 5);
+                //}
+                //else if (currentPos == 5)
+                //{
+                //    startMove(basePositions[4], basePositions[5], baseRotations[4], baseRotations[5], 6);
+                //}
+                //else if (currentPos == 6)
+                //{
+                //    startMove(basePositions[5], basePositions[6], baseRotations[5], baseRotations[6], 7);
+                //}
+                //else if (currentPos == 7)
+                //{
+                //    startMove(basePositions[6], basePositions[7], baseRotations[6], baseRotations[7], 8);
+                //}
+                //else if (currentPos == 8)
+                //{
+                //    startMove(basePositions[7], basePositions[0], baseRotations[7], baseRotations[0], 1);
+                //}
             }
         }
     }
