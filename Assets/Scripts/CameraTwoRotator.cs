@@ -141,8 +141,8 @@ public class CameraTwoRotator : MonoBehaviour {
 
         for (float t = 0; t < time; t += Time.deltaTime)
         {
-            playerTwoCam.transform.position = Vector3.Lerp(currentPos, targetPos, t);
-            playerTwoCam.transform.rotation = Quaternion.Slerp(currentRot, targetRot, t);
+            playerTwoCam.transform.position = Vector3.Lerp(currentPos, targetPos, t/time);
+            playerTwoCam.transform.rotation = Quaternion.Slerp(currentRot, targetRot, t/time);
             yield return null;
         }
 

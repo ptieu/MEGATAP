@@ -7,7 +7,7 @@ using UnityEngine;
 public class CameraOneRotator : MonoBehaviour {
 
     [SerializeField] private Camera playerOneCam;
-    [SerializeField] private int moveSpeed = 2;
+    [SerializeField] private float moveSpeed = 2;
 
     //Change these if the tower is scaled
     private static int camPosHorizontal = 45;
@@ -77,8 +77,8 @@ public class CameraOneRotator : MonoBehaviour {
 
         for (float t = 0; t < time; t += Time.deltaTime)
         {
-            playerOneCam.transform.position = Vector3.Lerp(currentPos, targetPos, t);
-            playerOneCam.transform.rotation = Quaternion.Slerp(currentRot, targetRot, t);
+            playerOneCam.transform.position = Vector3.Lerp(currentPos, targetPos, t/time);
+            playerOneCam.transform.rotation = Quaternion.Slerp(currentRot, targetRot, t/time);
             yield return null;
         }
 

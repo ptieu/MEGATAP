@@ -101,4 +101,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTwoCam: {fileID: 20558474140203254}
-  moveSpeed: 1
+  moveSpeed: 0.25
