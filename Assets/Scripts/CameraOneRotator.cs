@@ -7,10 +7,10 @@ using UnityEngine;
 public class CameraOneRotator : MonoBehaviour {
 
     [SerializeField] private Camera playerOneCam;
-    [SerializeField] private float moveSpeed = 30;
+    [SerializeField] private int moveSpeed = 2;
 
     //Change these if the tower size changes
-    private static int camPosHorizontal = 22;
+    private static int camPosHorizontal = 45;
     private static int camPosVertical   = 5;
     private static int camRotationX     = 10;
     private static int camRotationY     = 0;
@@ -18,50 +18,24 @@ public class CameraOneRotator : MonoBehaviour {
 
     //TODO: Create more positions as we add more height/levels to the tower. 
     //TODO: Once we have a ton of positions, create a method to generate Vectors instead of having a huge array.
-    private Vector3[] positions = new[] {  new Vector3(0, camPosVertical, -camPosHorizontal),
-                                           new Vector3(camPosHorizontal, camPosVertical, 0),
-                                           new Vector3(0, camPosVertical, camPosHorizontal),
-                                           new Vector3(-camPosHorizontal, camPosVertical, 0)};
+    private Vector3[] basePositions = new[] {  new Vector3(0,                 camPosVertical, -camPosHorizontal),
+                                               new Vector3(camPosHorizontal,  camPosVertical, 0),
+                                               new Vector3(0,                 camPosVertical, camPosHorizontal),
+                                               new Vector3(-camPosHorizontal, camPosVertical, 0)};
 
     private Quaternion[] rotations = new[] { Quaternion.Euler(camRotationX, camRotationY, 0),
                                              Quaternion.Euler(camRotationX, camRotationY - 90, 0),
                                              Quaternion.Euler(camRotationX, camRotationY - 180, 0),
                                              Quaternion.Euler(camRotationX, camRotationY - 270, 0)};
 
-    private float distance, covered, remaining;
-    private float startTime;
-    private Vector3 prevPosition, goalPosition;
-    private Quaternion prevRotation, goalRotation;
-    private bool moving = false;
-
+    private IEnumerator camTween;
     private int cameraState = 1;
 
     private void Start()
     {
-        playerOneCam.transform.position = positions[0];
+        playerOneCam.transform.position = basePositions[0];
         playerOneCam.transform.rotation = rotations[0];
         cameraState = 1;
-
-        distance = Vector3.Distance(positions[0], positions[1]);
-
-        moving = false;
-    }
-
-    private void Update()
-    {
-        if(moving)
-        {
-            covered = (Time.time - startTime) * moveSpeed;
-            remaining = covered / distance;
-
-            playerOneCam.transform.position = Vector3.Lerp(prevPosition, goalPosition, remaining);
-            playerOneCam.transform.rotation = Quaternion.Slerp(prevRotation, goalRotation, remaining);
-
-            if(Time.time - startTime >= 2)
-            {
-                moving = false;
-            }
-        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -69,94 +43,52 @@ public class CameraOneRotator : MonoBehaviour {
         switch(other.tag)
         {
             case "Trigger1":
-                distance = Vector3.Distance(positions[0], positions[1]);
-                startTime = Time.time;
-                moving = true;
-                prevPosition = positions[0];
-                goalPosition = positions[1];
-                prevRotation = rotations[0];
-                goalRotation = rotations[1];
-                cameraState = 2;
+                StartMove(basePositions[0], basePositions[1], rotations[0], rotations[1], 2);
                 break;
             case "Trigger2":
-                distance = Vector3.Distance(positions[1], positions[2]);
-                startTime = Time.time;
-                moving = true;
-                prevPosition = positions[1];
-                goalPosition = positions[2];
-                prevRotation = rotations[1];
-                goalRotation = rotations[2];
-                cameraState = 3;
+                StartMove(basePositions[1], basePositions[2], rotations[1], rotations[2], 3);
                 break;
             case "Trigger3":
-                distance = Vector3.Distance(positions[2], positions[3]);
-                startTime = Time.time;
-                moving = true;
-                prevPosition = positions[2];
-                goalPosition = positions[3];
-                prevRotation = rotations[2];
-                goalRotation = rotations[3];
-                cameraState = 4;
+                StartMove(basePositions[2], basePositions[3], rotations[2], rotations[3], 4);
                 break;
             case "Trigger4":
-                distance = Vector3.Distance(positions[3], positions[0]);
-                startTime = Time.time;
-                moving = true;
-                prevPosition = positions[3];
-                goalPosition = positions[0];
-                prevRotation = rotations[3];
-                goalRotation = rotations[0];
-                cameraState = 1;
+                StartMove(basePositions[3], basePositions[0], rotations[3], rotations[0], 1);
                 break;
         }
-
-        //if(other.tag == "Trigger1")
-        //{ 
-        //    distance = Vector3.Distance(positions[0], positions[1]);
-        //    startTime = Time.time;
-        //    moving = true;
-        //    prevPosition = positions[0];
-        //    goalPosition = positions[1];
-        //    prevRotation = rotations[0];
-        //    goalRotation = rotations[1];
-        //    cameraState = 2;
-        //}
-        //if (other.tag == "Trigger2")
-        //{
-        //    distance = Vector3.Distance(positions[1], positions[2]);
-        //    startTime = Time.time;
-        //    moving = true;
-        //    prevPosition = positions[1];
-        //    goalPosition = positions[2];
-        //    prevRotation = rotations[1];
-        //    goalRotation = rotations[2];
-        //    cameraState = 3;
-        //}
-        //if (other.tag == "Trigger3")
-        //{ 
-        //    distance = Vector3.Distance(positions[2], positions[3]);
-        //    startTime = Time.time;
-        //    moving = true;
-        //    prevPosition = positions[2];
-        //    goalPosition = positions[3];
-        //    prevRotation = rotations[2];
-        //    goalRotation = rotations[3];
-        //    cameraState = 4;
-        //}
-        //if (other.tag == "Trigger4")
-        //{
-        //    distance = Vector3.Distance(positions[3], positions[0]);
-        //    startTime = Time.time;
-        //    moving = true;
-        //    prevPosition = positions[3];
-        //    goalPosition = positions[0];
-        //    prevRotation = rotations[3];
-        //    goalRotation = rotations[0];
-        //    cameraState = 1;
-        //}
     }
 
-    public int getState()
+
+    private void StartMove(Vector3 prevPos, Vector3 goalPos, Quaternion prevRot, Quaternion goalRot, int camState)
+    {
+        cameraState  = camState;
+
+        if(camTween != null)
+        {
+            StopCoroutine(camTween);
+        }
+        camTween = TweenToPosition(goalPos, goalRot, moveSpeed);
+        StartCoroutine(camTween);
+    }
+
+    private IEnumerator TweenToPosition(Vector3 targetPos, Quaternion targetRot, float time)
+    {
+        Vector3 currentPos = playerOneCam.transform.position;
+        Quaternion currentRot = playerOneCam.transform.rotation;
+
+        for (float t = 0; t < time; t += Time.deltaTime)
+        {
+            playerOneCam.transform.position = Vector3.Lerp(currentPos, targetPos, t);
+            playerOneCam.transform.rotation = Quaternion.Slerp(currentRot, targetRot, t);
+            yield return null;
+        }
+
+        playerOneCam.transform.position = targetPos;
+        playerOneCam.transform.rotation = targetRot;
+
+        camTween = null;
+    }
+
+    public int GetState()
     {
         return cameraState;
     }
