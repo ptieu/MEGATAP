@@ -13,29 +13,26 @@ public class CameraTwoRotator : MonoBehaviour {
     private static int camRotationX = 15;
     private static int camRotationY = -45;
 
-    private Vector3 pos1 = new Vector3(camPosHorizontal, camPosVertical, -camPosHorizontal);
-    private Quaternion rot1 = Quaternion.Euler(camRotationX, camRotationY, 0);
 
-    private Vector3 pos2 = new Vector3(camPosHorizontal + 5, camPosVertical, 0);
-    private Quaternion rot2 = Quaternion.Euler(camRotationX, camRotationY - 45, 0);
+    //TODO: Create more positions as we add more height/levels to the tower. 
+    //TODO: Once we have a ton of positions, create a method to generate Vectors instead of having a huge array.
+    private Vector3[] basePositions = new [] { new Vector3(camPosHorizontal,        camPosVertical, -camPosHorizontal),
+                                               new Vector3(camPosHorizontal + 5,    camPosVertical, 0),
+                                               new Vector3(camPosHorizontal,        camPosVertical, camPosHorizontal),
+                                               new Vector3(0,                       camPosVertical, camPosHorizontal + 5),
+                                               new Vector3(-camPosHorizontal,       camPosVertical, camPosHorizontal),
+                                               new Vector3(-(camPosHorizontal + 5), camPosVertical, 0),
+                                               new Vector3(-camPosHorizontal,       camPosVertical, -camPosHorizontal),
+                                               new Vector3(0,                       camPosVertical, -(camPosHorizontal + 5))};
 
-    private Vector3 pos3 = new Vector3(camPosHorizontal, camPosVertical, camPosHorizontal);
-    private Quaternion rot3 = Quaternion.Euler(camRotationX, camRotationY - 90, 0);
-
-    private Vector3 pos4 = new Vector3(0, camPosVertical, camPosHorizontal + 5);
-    private Quaternion rot4 = Quaternion.Euler(camRotationX, camRotationY - 135, 0);
-
-    private Vector3 pos5 = new Vector3(-camPosHorizontal, camPosVertical, camPosHorizontal);
-    private Quaternion rot5 = Quaternion.Euler(camRotationX, camRotationY - 180, 0);
-
-    private Vector3 pos6 = new Vector3(-(camPosHorizontal + 5), camPosVertical, 0);
-    private Quaternion rot6 = Quaternion.Euler(camRotationX, camRotationY - 225, 0);
-
-    private Vector3 pos7 = new Vector3(-camPosHorizontal, camPosVertical, -camPosHorizontal);
-    private Quaternion rot7 = Quaternion.Euler(camRotationX, camRotationY - 270, 0);
-
-    private Vector3 pos8 = new Vector3(0, camPosVertical, -(camPosHorizontal + 5));
-    private Quaternion rot8 = Quaternion.Euler(camRotationX, camRotationY - 315, 0);
+    private Quaternion[] baseRotations = new[] { Quaternion.Euler(camRotationX, camRotationY, 0),
+                                                 Quaternion.Euler(camRotationX, camRotationY - 45, 0),
+                                                 Quaternion.Euler(camRotationX, camRotationY - 90, 0),
+                                                 Quaternion.Euler(camRotationX, camRotationY - 135, 0),
+                                                 Quaternion.Euler(camRotationX, camRotationY - 180, 0),
+                                                 Quaternion.Euler(camRotationX, camRotationY - 225, 0),
+                                                 Quaternion.Euler(camRotationX, camRotationY - 270, 0),
+                                                 Quaternion.Euler(camRotationX, camRotationY - 315, 0)};
 
     private int currentPos;
     private float distance, covered, remaining;
@@ -48,12 +45,12 @@ public class CameraTwoRotator : MonoBehaviour {
 
     private void Start()
     {
-        playerTwoCam.transform.position = pos1;
-        playerTwoCam.transform.rotation = rot1;
+        playerTwoCam.transform.position = basePositions[0];
+        playerTwoCam.transform.rotation = baseRotations[0];
 
         currentPos = 1;
 
-        distance = Vector3.Distance(pos1, pos2);
+        distance = Vector3.Distance(basePositions[0], basePositions[1]);
 
         moving = false;
         mouseEnabled = true;
@@ -69,7 +66,7 @@ public class CameraTwoRotator : MonoBehaviour {
             playerTwoCam.transform.position = Vector3.Lerp(prevPosition, goalPosition, remaining);
             playerTwoCam.transform.rotation = Quaternion.Slerp(prevRotation, goalRotation, remaining);
 
-            if (Time.time - startTime >= 0.75)
+            if (Time.time - startTime >= 1)
             {
                 moving = false;
                 mouseEnabled = true;
@@ -83,35 +80,35 @@ public class CameraTwoRotator : MonoBehaviour {
                 mouseEnabled = false;
                 if (currentPos == 1)
                 {
-                    startMove(pos1, pos8, rot1, rot8, 8);
+                    startMove(basePositions[0], basePositions[7], baseRotations[0], baseRotations[7], 8);
                 }
                 else if (currentPos == 2)
                 {
-                    startMove(pos2, pos1, rot2, rot1, 1);
+                    startMove(basePositions[1], basePositions[0], baseRotations[1], baseRotations[0], 1);
                 }
                 else if (currentPos == 3)
                 {
-                    startMove(pos3, pos2, rot3, rot2, 2);
+                    startMove(basePositions[2], basePositions[1], baseRotations[2], baseRotations[1], 2);
                 }
                 else if (currentPos == 4)
                 {
-                    startMove(pos4, pos3, rot4, rot3, 3);
+                    startMove(basePositions[3], basePositions[2], baseRotations[3], baseRotations[2], 3);
                 }
                 else if (currentPos == 5)
                 {
-                    startMove(pos5, pos4, rot5, rot4, 4);
+                    startMove(basePositions[4], basePositions[3], baseRotations[4], baseRotations[3], 4);
                 }
                 else if (currentPos == 6)
                 {
-                    startMove(pos6, pos5, rot6, rot5, 5);
+                    startMove(basePositions[5], basePositions[4], baseRotations[5], baseRotations[4], 5);
                 }
                 else if (currentPos == 7)
                 {
-                    startMove(pos7, pos6, rot7, rot6, 6);
+                    startMove(basePositions[6], basePositions[5], baseRotations[6], baseRotations[5], 6);
                 }
                 else if (currentPos == 8)
                 {
-                    startMove(pos8, pos7, rot8, rot7, 7);
+                    startMove(basePositions[7], basePositions[6], baseRotations[7], baseRotations[6], 7);
                 }
             }
             if (Input.GetMouseButtonDown(1))
@@ -119,35 +116,35 @@ public class CameraTwoRotator : MonoBehaviour {
                 mouseEnabled = false;
                 if (currentPos == 1)
                 {
-                    startMove(pos1, pos2, rot1, rot2, 2);
+                    startMove(basePositions[0], basePositions[1], baseRotations[0], baseRotations[1], 2);
                 }
                 else if (currentPos == 2)
                 {
-                    startMove(pos2, pos3, rot2, rot3, 3);
+                    startMove(basePositions[1], basePositions[2], baseRotations[1], baseRotations[2], 3);
                 }
                 else if (currentPos == 3)
                 {
-                    startMove(pos3, pos4, rot3, rot4, 4);
+                    startMove(basePositions[2], basePositions[3], baseRotations[2], baseRotations[3], 4);
                 }
                 else if (currentPos == 4)
                 {
-                    startMove(pos4, pos5, rot4, rot5, 5);
+                    startMove(basePositions[3], basePositions[4], baseRotations[3], baseRotations[4], 5);
                 }
                 else if (currentPos == 5)
                 {
-                    startMove(pos5, pos6, rot5, rot6, 6);
+                    startMove(basePositions[4], basePositions[5], baseRotations[4], baseRotations[5], 6);
                 }
                 else if (currentPos == 6)
                 {
-                    startMove(pos6, pos7, rot6, rot7, 7);
+                    startMove(basePositions[5], basePositions[6], baseRotations[5], baseRotations[6], 7);
                 }
                 else if (currentPos == 7)
                 {
-                    startMove(pos7, pos8, rot7, rot8, 8);
+                    startMove(basePositions[6], basePositions[7], baseRotations[6], baseRotations[7], 8);
                 }
                 else if (currentPos == 8)
                 {
-                    startMove(pos8, pos1, rot8, rot1, 1);
+                    startMove(basePositions[7], basePositions[0], baseRotations[7], baseRotations[0], 1);
                 }
             }
         }
