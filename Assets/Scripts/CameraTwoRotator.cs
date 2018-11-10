@@ -114,4 +114,9 @@ public class CameraTwoRotator : MonoBehaviour {
         mouseEnabled = true;
         camTween = null;
     }
+
+    public int GetState()
+    {
+        return currentPos;
+    }
 }
