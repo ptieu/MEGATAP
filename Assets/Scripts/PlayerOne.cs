@@ -7,6 +7,21 @@ public class PlayerOne : MonoBehaviour {
     [SerializeField] private CameraOneRotator cam;
     private int state = 1;
 
+	//jump 
+	private Vector3 jump;
+	[SerializeField] private float jumpForce = 3.0f;
+	private bool isGrounded;
+	Rigidbody rb;
+
+	void Start() {
+		rb = GetComponent<Rigidbody> ();
+		jump = new Vector3 (0.0f, 2.0f, 0.0f);
+	}
+
+	void OnCollisionStay() {
+		isGrounded = true;
+	}
+
 	void Update () {
         state = cam.GetState();
 
@@ -26,5 +41,13 @@ public class PlayerOne : MonoBehaviour {
         {
             this.transform.Translate(0, 0, -Input.GetAxis("Horizontal") * 0.25f);
         }
+
+		// implement simple jump
+		// Currently character can double jump. Implementation is weird. 
+		if (Input.GetKeyDown (KeyCode.UpArrow) && isGrounded) {
+			isGrounded = false;
+			rb.AddForce (jump * jumpForce, ForceMode.Impulse);
+
+		}
     }
 }
