@@ -44,7 +44,7 @@ public class PlayerOne : MonoBehaviour {
 
 		// implement simple jump
 		// Currently character can double jump. Implementation is weird. 
-		if (Input.GetKeyDown (KeyCode.UpArrow) && isGrounded) {
+		if (Input.GetKeyDown (KeyCode.Space) && isGrounded) {
 			isGrounded = false;
 			rb.AddForce (jump * jumpForce, ForceMode.Impulse);
 
