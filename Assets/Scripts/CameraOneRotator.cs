@@ -8,6 +8,7 @@ public class CameraOneRotator : MonoBehaviour {
 
     [SerializeField] private Camera playerOneCam;
     [SerializeField] private float moveSpeed = 2;
+    [SerializeField] private GameObject playerModel;
 
     //Change these if the tower is scaled
     private static int camPosHorizontal = 45;
@@ -16,9 +17,6 @@ public class CameraOneRotator : MonoBehaviour {
     private static int camRotationY     = 0;
     private static int numFloors = 3;
 
-
-    //TODO: Create more positions as we add more height/levels to the tower. 
-    //TODO: Once we have a ton of positions, create a method to generate Vectors instead of having a huge array.
     private Vector3[] basePositions = new[] {  new Vector3(0,                 camPosVertical, -camPosHorizontal),
                                                new Vector3(camPosHorizontal,  camPosVertical, 0),
                                                new Vector3(0,                 camPosVertical, camPosHorizontal),
@@ -72,6 +70,9 @@ public class CameraOneRotator : MonoBehaviour {
 
     private void StartMove(Vector3 prevPos, Vector3 goalPos, Quaternion prevRot, Quaternion goalRot, int camState)
     {
+
+        RotatePlayer();
+
         cameraState  = camState;
 
         if(camTween != null)
@@ -107,6 +108,12 @@ public class CameraOneRotator : MonoBehaviour {
         this.transform.position = new Vector3(this.transform.position.x + 2, this.transform.position.y + 8, this.transform.position.z);
     }
 
+    private void RotatePlayer()
+    {
+        //float yRot = playerModel.transform.rotation.y;
+        //Debug.Log(playerModel.transform.rotation.y);
+        playerModel.transform.rotation = Quaternion.Euler(0, cameraState * 90 + 90, 0);
+    }
     public int GetState()
     {
         return cameraState;
