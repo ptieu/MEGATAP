@@ -143,7 +143,7 @@ public class CameraTwoRotator : MonoBehaviour {
         }
         else
         {
-            return currentPos + (floor-1) * 8/;
+            return currentPos + (floor-1) * 8;
         }
     }
 }
