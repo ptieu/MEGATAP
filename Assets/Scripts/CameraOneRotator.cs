@@ -110,8 +110,6 @@ public class CameraOneRotator : MonoBehaviour {
 
     private void RotatePlayer()
     {
-        //float yRot = playerModel.transform.rotation.y;
-        //Debug.Log(playerModel.transform.rotation.y);
         playerModel.transform.rotation = Quaternion.Euler(0, cameraState * 90 + 90, 0);
     }
     public int GetState()
