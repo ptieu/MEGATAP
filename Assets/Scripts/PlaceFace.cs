@@ -11,10 +11,9 @@ public class PlaceFace : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        pos = cam.GetState();
-
         if (Input.GetKeyDown(KeyCode.Return))
         {
+            pos = cam.GetState();
             if (pos == 2)
             {
                 Instantiate(TowerFaces[1], new Vector3(12f, 0, 0), Quaternion.Euler(0, 90, 0));

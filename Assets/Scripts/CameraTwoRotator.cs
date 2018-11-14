@@ -2,21 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//<alexc> This class rotates the Player 2 (right side camera) on a given input.
+//<alexc> This class rotates and moves the Player 2 (right side camera) on a given input.
 public class CameraTwoRotator : MonoBehaviour {
 
     [SerializeField] private Camera playerTwoCam;
     [SerializeField] private float moveSpeed = 2;
 
-    //Change these if tower is scaled
+    //Change these static variables iff tower is scaled
     private static int camPosHorizontal = 30;
     private static int camPosVertical = 9;
     private static int camRotationX = 15;
     private static int camRotationY = -45;
+    private static int numFloors = 3;
+    
 
-
-    //TODO: Create more positions as we add more height/levels to the tower. 
-    //TODO: Once we have a ton of positions, create a method to generate Vectors instead of having a huge array.
     private Vector3[] basePositions = new [] { new Vector3(camPosHorizontal,        camPosVertical, -camPosHorizontal),
                                                new Vector3(camPosHorizontal + 5,    camPosVertical, 0),
                                                new Vector3(camPosHorizontal,        camPosVertical, camPosHorizontal),
@@ -37,9 +36,9 @@ public class CameraTwoRotator : MonoBehaviour {
 
     private IEnumerator camTween;
 
-    private int currentPos;
+    private int currentPos, floor;
 
-    private bool mouseEnabled = true;
+    private bool moveEnabled = true;
 
     private void Start()
     {
@@ -47,44 +46,63 @@ public class CameraTwoRotator : MonoBehaviour {
         playerTwoCam.transform.rotation = baseRotations[0];
 
         currentPos = 1;
+        floor = 1;
 
-        mouseEnabled = true;
+        moveEnabled = true;
     }
 
     private void Update()
     {
-        if (mouseEnabled)
+        if (moveEnabled)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
-                mouseEnabled = false;
+                moveEnabled = false;
 
                 if(currentPos == 1)
                 {
-                    StartMove(basePositions[currentPos-1], basePositions[basePositions.Length-1], baseRotations[currentPos-1], baseRotations[baseRotations.Length-1], basePositions.Length);
+                    StartMove(basePositions[basePositions.Length-1], baseRotations[baseRotations.Length-1], basePositions.Length);
                 }
                 else
                 {
-                    StartMove(basePositions[currentPos - 1], basePositions[currentPos - 2], baseRotations[currentPos - 1], baseRotations[currentPos-2], currentPos - 1);
+                    StartMove(basePositions[currentPos - 2], baseRotations[currentPos-2], currentPos - 1);
                 }
             }
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetKeyDown(KeyCode.RightArrow))
             {
-                mouseEnabled = false;
+                moveEnabled = false;
 
                 if (currentPos == basePositions.Length)
                 {
-                    StartMove(basePositions[basePositions.Length - 1], basePositions[0], baseRotations[baseRotations.Length - 1], baseRotations[0], 1);
+                    StartMove(basePositions[0], baseRotations[0], 1);
                 }
                 else
                 {
-                    StartMove(basePositions[currentPos - 1], basePositions[currentPos], baseRotations[currentPos - 1], baseRotations[currentPos], currentPos + 1);
+                    StartMove(basePositions[currentPos], baseRotations[currentPos], currentPos + 1);
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                if (floor < numFloors)
+                {
+                    moveEnabled = false;
+                    floor++;
+                    StartMove(basePositions[currentPos - 1], baseRotations[currentPos - 1], currentPos);
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                if (floor > 1)
+                {
+                    moveEnabled = false;
+                    floor--;
+                    StartMove(basePositions[currentPos - 1], baseRotations[currentPos - 1], currentPos);
                 }
             }
         }
     }
 
-    private void StartMove(Vector3 prevPos, Vector3 goalPos, Quaternion prevRot, Quaternion goalRot, int goal)
+    private void StartMove(Vector3 goalPos, Quaternion goalRot, int goal)
     {
         currentPos = goal;
 
@@ -101,6 +119,8 @@ public class CameraTwoRotator : MonoBehaviour {
         Vector3 currentPos = playerTwoCam.transform.position;
         Quaternion currentRot = playerTwoCam.transform.rotation;
 
+        targetPos.y *= floor;
+
         for (float t = 0; t < time; t += Time.deltaTime)
         {
             playerTwoCam.transform.position = Vector3.Lerp(currentPos, targetPos, t/time);
@@ -111,12 +131,19 @@ public class CameraTwoRotator : MonoBehaviour {
         playerTwoCam.transform.position = targetPos;
         playerTwoCam.transform.rotation = targetRot;
 
-        mouseEnabled = true;
+        moveEnabled = true;
         camTween = null;
     }
 
     public int GetState()
     {
-        return currentPos;
+        if(floor == 1)
+        {
+            return currentPos;
+        }
+        else
+        {
+            return currentPos + (floor-1) * 8/;
+        }
     }
 }
