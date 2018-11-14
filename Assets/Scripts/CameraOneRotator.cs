@@ -14,6 +14,7 @@ public class CameraOneRotator : MonoBehaviour {
     private static int camPosVertical   = 5;
     private static int camRotationX     = 10;
     private static int camRotationY     = 0;
+    private static int numFloors = 3;
 
 
     //TODO: Create more positions as we add more height/levels to the tower. 
@@ -29,13 +30,14 @@ public class CameraOneRotator : MonoBehaviour {
                                              Quaternion.Euler(camRotationX, camRotationY - 270, 0)};
 
     private IEnumerator camTween;
-    private int cameraState = 1;
+    private int cameraState, floor;
 
     private void Start()
     {
         playerOneCam.transform.position = basePositions[0];
         playerOneCam.transform.rotation = rotations[0];
         cameraState = 1;
+        floor = 1;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -52,8 +54,18 @@ public class CameraOneRotator : MonoBehaviour {
                 StartMove(basePositions[2], basePositions[3], rotations[2], rotations[3], 4);
                 break;
             case "Trigger4":
-                StartMove(basePositions[3], basePositions[0], rotations[3], rotations[0], 1);
-                break;
+                if (floor < numFloors)
+                {
+                    floor++;
+                    MovePlayerUp();
+                    StartMove(basePositions[3], basePositions[0], rotations[3], rotations[0], 1);
+                    break;
+                }
+                else
+                {
+                    StartMove(basePositions[3], basePositions[0], rotations[3], rotations[0], 1);
+                    break;
+                }
         }
     }
 
@@ -75,6 +87,8 @@ public class CameraOneRotator : MonoBehaviour {
         Vector3 currentPos = playerOneCam.transform.position;
         Quaternion currentRot = playerOneCam.transform.rotation;
 
+        targetPos.y *= floor;
+
         for (float t = 0; t < time; t += Time.deltaTime)
         {
             playerOneCam.transform.position = Vector3.Lerp(currentPos, targetPos, t/time);
@@ -86,6 +100,11 @@ public class CameraOneRotator : MonoBehaviour {
         playerOneCam.transform.rotation = targetRot;
 
         camTween = null;
+    }
+
+    private void MovePlayerUp()
+    {
+        this.transform.position = new Vector3(this.transform.position.x + 2, this.transform.position.y + 8, this.transform.position.z);
     }
 
     public int GetState()
