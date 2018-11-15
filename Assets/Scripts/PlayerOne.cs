@@ -4,46 +4,48 @@ using UnityEngine;
 
 public class PlayerOne : MonoBehaviour {
 
+    //camera
     [SerializeField] private CameraOneRotator cam;
     private int state = 1;
 
 	//jump 
-	private Vector3 jump;
 	[SerializeField] private float jumpForce = 3.0f;
-	private bool isGrounded;
-	Rigidbody rb;
+    [SerializeField] private float moveSpeed = 0.25f;
+
+
+    private Vector3 jump;
+    private bool isGrounded;
+	private Rigidbody rb;
 
 	void Start() {
 		rb = GetComponent<Rigidbody> ();
 		jump = new Vector3 (0.0f, 2.0f, 0.0f);
 	}
 
-	void OnCollisionStay() {
+	void OnCollisionEnter() {
 		isGrounded = true;
 	}
 
 	void Update () {
         state = cam.GetState();
 
-        if (state == 1)
+        switch (state)
         {
-            this.transform.Translate(Input.GetAxis("Horizontal") * 0.25f, 0,0);
-        }
-        else if(state == 2)
-        {
-            this.transform.Translate(0, 0, Input.GetAxis("Horizontal") * 0.25f);
-        }
-        else if(state == 3)
-        {
-            this.transform.Translate(-Input.GetAxis("Horizontal") * 0.25f, 0, 0);
-        }
-        else if (state == 4)
-        {
-            this.transform.Translate(0, 0, -Input.GetAxis("Horizontal") * 0.25f);
+            case 1:
+                this.transform.Translate(Input.GetAxis("Horizontal") * moveSpeed, 0, 0);
+                break;
+            case 2:
+                this.transform.Translate(0, 0, Input.GetAxis("Horizontal") * moveSpeed);
+                break;
+            case 3:
+                this.transform.Translate(-Input.GetAxis("Horizontal") * moveSpeed, 0, 0);
+                break;
+            case 4:
+                this.transform.Translate(0, 0, -Input.GetAxis("Horizontal") * moveSpeed);
+                break;
         }
 
-		// implement simple jump
-		// Currently character can double jump. Implementation is weird. 
+        //jump
 		if (Input.GetKeyDown (KeyCode.Space) && isGrounded) {
 			isGrounded = false;
 			rb.AddForce (jump * jumpForce, ForceMode.Impulse);
