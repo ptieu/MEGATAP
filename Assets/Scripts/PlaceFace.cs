@@ -35,7 +35,7 @@ public class PlaceFace : MonoBehaviour
             pos = cam.GetState();
             floor = cam.GetFloor();
 
-            ToBePlaced = TowerFaces[Random.Range(1, 3)];
+            ToBePlaced = TowerFaces[Random.Range(1, 4)];
             ToBePlaced.gameObject.transform.localScale = new Vector3(2.5f, 2.65f, 1f);
 
             //Face placing per side per floor. <AL>
