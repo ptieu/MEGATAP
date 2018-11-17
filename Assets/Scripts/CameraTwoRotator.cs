@@ -137,13 +137,11 @@ public class CameraTwoRotator : MonoBehaviour {
 
     public int GetState()
     {
-        if(floor == 1)
-        {
-            return currentPos;
-        }
-        else
-        {
-            return currentPos + (floor-1) * 8;
-        }
+        return currentPos;
+    }
+    
+    public int GetFloor()
+    {
+        return floor-1;
     }
 }

@@ -265,6 +265,24 @@ Prefab:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1448487128}
+    - target: {fileID: 114263644773775072, guid: 7c17f18a57460024ba6258242e429410,
+        type: 2}
+      propertyPath: TowerFaces.Array.data[1]
+      value: 
+      objectReference: {fileID: 1146632545297628, guid: 52b249d7d631a054da5ce4eb51379fad,
+        type: 2}
+    - target: {fileID: 114263644773775072, guid: 7c17f18a57460024ba6258242e429410,
+        type: 2}
+      propertyPath: TowerFaces.Array.data[2]
+      value: 
+      objectReference: {fileID: 1834502053376272, guid: 6068bf631e95bcf4293052f52f6852f9,
+        type: 2}
+    - target: {fileID: 114263644773775072, guid: 7c17f18a57460024ba6258242e429410,
+        type: 2}
+      propertyPath: TowerFaces.Array.data[3]
+      value: 
+      objectReference: {fileID: 1102942950998210, guid: 58deb84e8ca1b4c42bfa4bda9d9328b9,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c17f18a57460024ba6258242e429410, type: 2}
   m_IsPrefabAsset: 0
@@ -307,6 +325,20 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 4078051121207294, guid: ff9fcda491d07404283d525387473970, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 23742947097885954, guid: ff9fcda491d07404283d525387473970,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a6159130d2ec1d24485033186ab84fbe, type: 2}
+    - target: {fileID: 23721610721221452, guid: ff9fcda491d07404283d525387473970,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a6159130d2ec1d24485033186ab84fbe, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff9fcda491d07404283d525387473970, type: 2}
   m_IsPrefabAsset: 0

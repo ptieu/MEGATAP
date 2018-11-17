@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d364c32fefb569646bd4175eed0275aa
+guid: 0a36ba6a0875ecd4c9d303fde64aed4b
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -16,6 +16,7 @@ ModelImporter:
     2300000: Cube
     3300000: Cube
     4300000: Cube
+    6400000: Cube
     10800000: Lamp
   externalObjects: {}
   materials:
@@ -50,11 +51,11 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 0
-    importLights: 1
+    importLights: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
