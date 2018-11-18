@@ -62,7 +62,18 @@ public class PlayerOne : MonoBehaviour {
 			isGrounded = false;
 			rb.AddForce (jump * jumpForce, ForceMode.Impulse);
 
-		}
+		}	
+		
+		//crouch
+		if (Input.GetKeyDown (KeyCode.S) && isGrounded) {
+			Debug.Log("S is pressed");
+			moveSpeed = 0;
+		}	
+		if (Input.GetKeyUp(KeyCode.S) && isGrounded) {
+			Debug.Log("S is released");
+			moveSpeed = 0.2f;
+		}	
+		
 
 		//fall faster
 		if (rb.velocity.y < 0) {
