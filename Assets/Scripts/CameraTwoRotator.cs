@@ -9,8 +9,8 @@ public class CameraTwoRotator : MonoBehaviour {
     [SerializeField] private float moveSpeed = 2;
 
     //Change these static variables iff tower is scaled
-    private static int camPosHorizontal = 30;
-    private static int camPosVertical = 9;
+    private static int camPosHorizontal = 55;
+    private static int camPosVertical = 7;
     private static int camRotationX = 15;
     private static int camRotationY = -45;
     private static int numFloors = 3;

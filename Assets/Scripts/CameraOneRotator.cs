@@ -12,7 +12,7 @@ public class CameraOneRotator : MonoBehaviour {
 
     //Change these if the tower is scaled
     private static int camPosHorizontal = 45;
-    private static int camPosVertical   = 5;
+    private static int camPosVertical   = 7;
     private static int camRotationX     = 10;
     private static int camRotationY     = 0;
     private static int numFloors = 3;
@@ -32,7 +32,7 @@ public class CameraOneRotator : MonoBehaviour {
 
     private void Start()
     {
-        playerOneCam.transform.position = basePositions[0];
+        playerOneCam.transform.localPosition= basePositions[0];
         playerOneCam.transform.rotation = rotations[0];
         cameraState = 1;
         floor = 1;
@@ -85,19 +85,19 @@ public class CameraOneRotator : MonoBehaviour {
 
     private IEnumerator TweenToPosition(Vector3 targetPos, Quaternion targetRot, float time)
     {
-        Vector3 currentPos = playerOneCam.transform.position;
+        Vector3 currentPos = playerOneCam.transform.localPosition;
         Quaternion currentRot = playerOneCam.transform.rotation;
 
         targetPos.y *= floor;
 
         for (float t = 0; t < time; t += Time.deltaTime)
         {
-            playerOneCam.transform.position = Vector3.Lerp(currentPos, targetPos, t/time);
+            playerOneCam.transform.localPosition = Vector3.Lerp(currentPos, targetPos, t/time);
             playerOneCam.transform.rotation = Quaternion.Slerp(currentRot, targetRot, t/time);
             yield return null;
         }
 
-        playerOneCam.transform.position = targetPos;
+        playerOneCam.transform.localPosition = targetPos;
         playerOneCam.transform.rotation = targetRot;
 
         camTween = null;
@@ -105,7 +105,7 @@ public class CameraOneRotator : MonoBehaviour {
 
     private void MovePlayerUp()
     {
-        this.transform.position = new Vector3(this.transform.position.x + 2, this.transform.position.y + 8, this.transform.position.z);
+        this.transform.position = new Vector3(this.transform.position.x + 5, this.transform.position.y + 8, this.transform.position.z);
     }
 
     private void RotatePlayer()
