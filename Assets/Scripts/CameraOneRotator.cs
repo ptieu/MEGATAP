@@ -15,7 +15,7 @@ public class CameraOneRotator : MonoBehaviour {
     private static int camPosVertical   = 7;
     private static int camRotationX     = 10;
     private static int camRotationY     = 0;
-    private static int numFloors = 3;
+    private static int numFloors = 10;
 
     private Vector3[] basePositions = new[] {  new Vector3(0,                 camPosVertical, -camPosHorizontal),
                                                new Vector3(camPosHorizontal,  camPosVertical, 0),
@@ -43,32 +43,32 @@ public class CameraOneRotator : MonoBehaviour {
         switch(other.tag)
         {
             case "Trigger1":
-                StartMove(basePositions[0], basePositions[1], rotations[0], rotations[1], 2);
+                StartMove(basePositions[1], rotations[1], 2);
                 break;
             case "Trigger2":
-                StartMove(basePositions[1], basePositions[2], rotations[1], rotations[2], 3);
+                StartMove(basePositions[2], rotations[2], 3);
                 break;
             case "Trigger3":
-                StartMove(basePositions[2], basePositions[3], rotations[2], rotations[3], 4);
+                StartMove(basePositions[3], rotations[3], 4);
                 break;
             case "Trigger4":
                 if (floor < numFloors)
                 {
                     floor++;
                     MovePlayerUp();
-                    StartMove(basePositions[3], basePositions[0], rotations[3], rotations[0], 1);
+                    StartMove(basePositions[0], rotations[0], 1);
                     break;
                 }
                 else
                 {
-                    StartMove(basePositions[3], basePositions[0], rotations[3], rotations[0], 1);
+                    StartMove(basePositions[0], rotations[0], 1);
                     break;
                 }
         }
     }
 
 
-    private void StartMove(Vector3 prevPos, Vector3 goalPos, Quaternion prevRot, Quaternion goalRot, int camState)
+    private void StartMove(Vector3 goalPos, Quaternion goalRot, int camState)
     {
 
         RotatePlayer();
@@ -102,10 +102,11 @@ public class CameraOneRotator : MonoBehaviour {
 
         camTween = null;
     }
-
+    
+    //TODO: Change this. It's not good. Bugs out sometimes and sends people all the way up. Replace with a Lerp & a ladder? 
     private void MovePlayerUp()
     {
-        this.transform.position = new Vector3(this.transform.position.x + 5, this.transform.position.y + 8, this.transform.position.z);
+        this.transform.position = new Vector3(this.transform.position.x + 5, this.transform.position.y + 10, this.transform.position.z);
     }
 
     private void RotatePlayer()
