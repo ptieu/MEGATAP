@@ -10,6 +10,7 @@ public class CameraOneRotator : MonoBehaviour {
     [SerializeField] private float moveSpeed = 2;
     [SerializeField] private GameObject playerModel;
     [SerializeField] private GameObject wall;
+    [SerializeField] private GameObject[] rotateTriggers;
 
     //Change these if the tower is scaled
     private static int camPosHorizontal = 45;
@@ -41,7 +42,11 @@ public class CameraOneRotator : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        switch(other.tag)
+        Vector3 wallPos = wall.transform.position;
+        Quaternion wallRot = wall.transform.rotation;
+        float wallY = wall.transform.position.y + 10 * (floor - 1);
+
+        switch (other.tag)
         {
             case "Trigger1":
                 StartMove(basePositions[1], rotations[1], 2);
@@ -65,6 +70,20 @@ public class CameraOneRotator : MonoBehaviour {
                     StartMove(basePositions[0], rotations[0], 1);
                     break;
                 }
+            case "Wall1":
+                wallPos = new Vector3(rotateTriggers[0].transform.position.x, wallY, rotateTriggers[0].transform.position.z + 6);
+                wallRot = Quaternion.Euler(wall.transform.rotation.x, wall.transform.rotation.y + 90, wall.transform.rotation.z);
+                Instantiate(wall, wallPos, wallRot);
+                break;
+            case "Wall2":
+                wallPos = new Vector3(rotateTriggers[1].transform.position.x - 5, wallY, rotateTriggers[1].transform.position.z);
+                Instantiate(wall, wallPos, wallRot);
+                break;
+            case "Wall3":
+                wallPos = new Vector3(rotateTriggers[2].transform.position.x, wallY, rotateTriggers[1].transform.position.z - 5);
+                wallRot = Quaternion.Euler(wall.transform.rotation.x, wall.transform.rotation.y + 90, wall.transform.rotation.z);
+                Instantiate(wall, wallPos, wallRot);
+                break;
         }
     }
 
@@ -104,9 +123,7 @@ public class CameraOneRotator : MonoBehaviour {
     //TODO: Change this. It's not good. Bugs out sometimes and sends people all the way up. Replace with a Lerp & a ladder? 
     private void MovePlayerUp()
     {
-        Vector3 wallPos = new Vector3(wall.transform.position.x, wall.transform.position.y + 10*(floor-1), wall.transform.position.z);
-        Instantiate(wall, wallPos, wall.transform.rotation);
-        this.transform.position = new Vector3(this.transform.position.x + 7, this.transform.position.y + 10, this.transform.position.z);
+        this.transform.position = new Vector3(this.transform.position.x + 6, this.transform.position.y + 10, this.transform.position.z);
     }
 
     private void RotatePlayer()
