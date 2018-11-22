@@ -9,6 +9,7 @@ public class CameraOneRotator : MonoBehaviour {
     [SerializeField] private Camera playerOneCam;
     [SerializeField] private float moveSpeed = 2;
     [SerializeField] private GameObject playerModel;
+    [SerializeField] private GameObject wall;
 
     //Change these if the tower is scaled
     private static int camPosHorizontal = 45;
@@ -97,14 +98,15 @@ public class CameraOneRotator : MonoBehaviour {
 
         playerOneCam.transform.localPosition = targetPos;
         playerOneCam.transform.rotation = targetRot;
-
         camTween = null;
     }
     
     //TODO: Change this. It's not good. Bugs out sometimes and sends people all the way up. Replace with a Lerp & a ladder? 
     private void MovePlayerUp()
     {
-        this.transform.position = new Vector3(this.transform.position.x + 5, this.transform.position.y + 10, this.transform.position.z);
+        Vector3 wallPos = new Vector3(wall.transform.position.x, wall.transform.position.y + 10*(floor-1), wall.transform.position.z);
+        Instantiate(wall, wallPos, wall.transform.rotation);
+        this.transform.position = new Vector3(this.transform.position.x + 7, this.transform.position.y + 10, this.transform.position.z);
     }
 
     private void RotatePlayer()
