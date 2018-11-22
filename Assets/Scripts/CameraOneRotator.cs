@@ -88,8 +88,6 @@ public class CameraOneRotator : MonoBehaviour {
         Vector3 currentPos = playerOneCam.transform.localPosition;
         Quaternion currentRot = playerOneCam.transform.rotation;
 
-        targetPos.y *= floor;
-
         for (float t = 0; t < time; t += Time.deltaTime)
         {
             playerOneCam.transform.localPosition = Vector3.Lerp(currentPos, targetPos, t/time);

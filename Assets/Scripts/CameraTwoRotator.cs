@@ -10,7 +10,7 @@ public class CameraTwoRotator : MonoBehaviour {
 
     //Change these static variables iff tower is scaled
     private static int camPosHorizontal = 50;
-    private static int camPosVertical = 8;
+    private static int camPosVertical = 10;
     private static int camRotationX = 15;
     private static int camRotationY = -45;
     private static int numFloors = 10;
