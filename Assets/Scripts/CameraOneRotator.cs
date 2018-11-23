@@ -43,6 +43,7 @@ public class CameraOneRotator : MonoBehaviour {
         rb = GetComponent<Rigidbody>();
     }
 
+    //4 triggers for rotating camera, 3 for putting up walls behind the player
     private void OnTriggerEnter(Collider other)
     {
         Vector3 wallPos = wall.transform.position;
@@ -90,10 +91,9 @@ public class CameraOneRotator : MonoBehaviour {
         }
     }
 
-
+    //Initialize camera movement variables and start movement coroutine
     private void StartMove(Vector3 goalPos, Quaternion goalRot, int camState)
     {
-
         rb.velocity = Vector3.zero;
         RotatePlayer();
         cameraState  = camState;
@@ -106,6 +106,7 @@ public class CameraOneRotator : MonoBehaviour {
         StartCoroutine(camTween);
     }
 
+    //Camera movement coroutine
     private IEnumerator TweenToPosition(Vector3 targetPos, Quaternion targetRot, float time)
     {
         Vector3 currentPos = playerOneCam.transform.localPosition;
@@ -129,11 +130,14 @@ public class CameraOneRotator : MonoBehaviour {
         this.transform.position = floorSpawn.position + Vector3.up * 10 * (floor - 2);
     }
 
+    //Rotate the player model when you move around the tower
     private void RotatePlayer()
     {
         float rotY = playerModel.transform.localRotation.eulerAngles.y;
         playerModel.transform.localRotation = Quaternion.Euler(0, rotY - 90, 0);
     }
+
+
     public int GetState()
     {
         return cameraState;

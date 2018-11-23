@@ -51,6 +51,7 @@ public class CameraTwoRotator : MonoBehaviour {
         moveEnabled = true;
     }
 
+    //Rotate camera around tower when arrow keys are pressed
     private void Update()
     {
         if (moveEnabled)
@@ -102,6 +103,7 @@ public class CameraTwoRotator : MonoBehaviour {
         }
     }
 
+    //Initialize camera movement variables and start movement coroutine
     private void StartMove(Vector3 goalPos, Quaternion goalRot, int goal)
     {
         currentPos = goal;
@@ -114,6 +116,7 @@ public class CameraTwoRotator : MonoBehaviour {
         StartCoroutine(camTween);
     }
 
+    //Camera movement coroutine
     private IEnumerator TweenToPosition(Vector3 targetPos, Quaternion targetRot, float time)
     {
         Vector3 currentPos = playerTwoCam.transform.position;

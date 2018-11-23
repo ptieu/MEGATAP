@@ -62,16 +62,12 @@ public class PlayerOne : MonoBehaviour {
                 break;
         }
 
+        //Return to max velocity
         if (rb.velocity.magnitude >= maxVelocity)
         {
             rb.velocity = rb.velocity.normalized * maxVelocity;
         }
 
-        if(Input.GetAxis("Horizontal") == 0)
-        {
-            float yVelocity = rb.velocity.y;
-            rb.velocity = new Vector3(0, yVelocity, 0);
-        }
         //jump
         if (Input.GetKeyDown (KeyCode.Space) && isGrounded) {
 			isGrounded = false;
