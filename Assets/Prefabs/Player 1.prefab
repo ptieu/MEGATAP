@@ -70,10 +70,10 @@ GameObject:
   - component: {fileID: 4887500721987680}
   - component: {fileID: 33453068929508368}
   - component: {fileID: 23087665736016806}
-  - component: {fileID: 136418058048495768}
   - component: {fileID: 114940724036334842}
   - component: {fileID: 54241147669559020}
   - component: {fileID: 114614076012222384}
+  - component: {fileID: 65368838794708548}
   m_Layer: 0
   m_Name: Player 1
   m_TagString: Player
@@ -177,7 +177,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1428506183960842}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -16.1, y: 1, z: -23.76}
+  m_LocalPosition: {x: -16, y: 1, z: -25}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 4512526300849048}
@@ -414,13 +414,25 @@ Rigidbody:
   m_GameObject: {fileID: 1428506183960842}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 1
+  m_Drag: 0.01
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 1
+--- !u!65 &65368838794708548
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1428506183960842}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 3.6977558, z: 1}
+  m_Center: {x: 0, y: 0.755188, z: 0}
 --- !u!81 &81698374894019034
 AudioListener:
   m_ObjectHideFlags: 1
@@ -448,6 +460,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  floorSpawn: {fileID: 0}
 --- !u!114 &114940724036334842
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -460,21 +473,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 114614076012222384}
-  jumpForce: 6
-  moveSpeed: 0.4
-  inAirSpeed: 0
-  fallMultiplier: 2.5
-  lowerJumpMultiplier: 2
---- !u!136 &136418058048495768
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1428506183960842}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 3.675601
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.8378005, z: 0}
+  jumpForce: 15
+  moveSpeed: 0.6
+  inAirSpeed: 0.2
+  fallMultiplier: 6
+  lowerJumpMultiplier: 6
+  maxVelocity: 15
+  maxJumpVelocity: 9

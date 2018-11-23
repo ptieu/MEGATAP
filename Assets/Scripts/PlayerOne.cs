@@ -10,13 +10,13 @@ public class PlayerOne : MonoBehaviour {
     private int state = 1;
 
 	//movement
-	[SerializeField] private float jumpForce = 45.0f;
-    [SerializeField] private float moveSpeed = 0.2f;
-	[Range(0.0f, 1.0f)][SerializeField] private float inAirSpeed = 0.8f; // slow player's side-to-side movement in the air
-	[SerializeField] private float fallMultiplier = 2.5f;
-	[SerializeField] private float lowerJumpMultiplier = 2f;
-    [SerializeField] private float maxVelocity = 15;
-    [SerializeField] private float maxJumpVelocity = 12;
+	[SerializeField] private float jumpForce;
+    [SerializeField] private float moveSpeed;
+	[Range(0.0f, 1.0f)][SerializeField] private float inAirSpeed; // slow player's side-to-side movement in the air
+	[SerializeField] private float fallMultiplier;
+	[SerializeField] private float lowerJumpMultiplier;
+    [SerializeField] private float maxVelocity;
+    [SerializeField] private float maxJumpVelocity;
 
 
     private Vector3 jump;
