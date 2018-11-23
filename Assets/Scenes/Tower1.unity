@@ -277,11 +277,56 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c17f18a57460024ba6258242e429410, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &352250306
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 352250307}
+  m_Layer: 0
+  m_Name: FloorSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &352250307
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 352250306}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -16, y: 11.5, z: -25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &497557894 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1665096163155028, guid: ff9fcda491d07404283d525387473970,
     type: 2}
   m_PrefabInternal: {fileID: 1065214043}
+--- !u!1 &631920525 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1428506183960842, guid: 9af0d0883e6a51441b06cd7d26274b01,
+    type: 2}
+  m_PrefabInternal: {fileID: 876396338}
+--- !u!65 &631920529
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 631920525}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 3.6977558, z: 1}
+  m_Center: {x: 0, y: 0.755188, z: 0}
 --- !u!1001 &876396338
 Prefab:
   m_ObjectHideFlags: 0
@@ -296,7 +341,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4887500721987680, guid: 9af0d0883e6a51441b06cd7d26274b01, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -16.1
+      value: -16
       objectReference: {fileID: 0}
     - target: {fileID: 4887500721987680, guid: 9af0d0883e6a51441b06cd7d26274b01, type: 2}
       propertyPath: m_LocalPosition.y
@@ -304,7 +349,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4887500721987680, guid: 9af0d0883e6a51441b06cd7d26274b01, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -23.76
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 4887500721987680, guid: 9af0d0883e6a51441b06cd7d26274b01, type: 2}
       propertyPath: m_LocalRotation.x
@@ -369,7 +414,7 @@ Prefab:
     - target: {fileID: 114940724036334842, guid: 9af0d0883e6a51441b06cd7d26274b01,
         type: 2}
       propertyPath: moveSpeed
-      value: 0.7
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114940724036334842, guid: 9af0d0883e6a51441b06cd7d26274b01,
         type: 2}
@@ -386,7 +431,28 @@ Prefab:
       propertyPath: fallMultiplier
       value: 3
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 54241147669559020, guid: 9af0d0883e6a51441b06cd7d26274b01,
+        type: 2}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
+    - target: {fileID: 54241147669559020, guid: 9af0d0883e6a51441b06cd7d26274b01,
+        type: 2}
+      propertyPath: m_Drag
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 54241147669559020, guid: 9af0d0883e6a51441b06cd7d26274b01,
+        type: 2}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114614076012222384, guid: 9af0d0883e6a51441b06cd7d26274b01,
+        type: 2}
+      propertyPath: floorSpawn
+      value: 
+      objectReference: {fileID: 352250307}
+    m_RemovedComponents:
+    - {fileID: 136418058048495768, guid: 9af0d0883e6a51441b06cd7d26274b01, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 9af0d0883e6a51441b06cd7d26274b01, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1 &972572236 stripped

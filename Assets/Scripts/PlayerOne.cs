@@ -15,6 +15,7 @@ public class PlayerOne : MonoBehaviour {
 	[Range(0.0f, 1.0f)][SerializeField] private float inAirSpeed = 0.8f; // slow player's side-to-side movement in the air
 	[SerializeField] private float fallMultiplier = 2.5f;
 	[SerializeField] private float lowerJumpMultiplier = 2f;
+    [SerializeField] private float jumpSlow = 12;
 
 
     private Vector3 jump;
@@ -33,7 +34,7 @@ public class PlayerOne : MonoBehaviour {
 		isGrounded = true;
 	}
 
-	void Update () {
+	void FixedUpdate () {
         state = cam.GetState();
 
 		if (isGrounded) {
@@ -61,6 +62,10 @@ public class PlayerOne : MonoBehaviour {
         //jump
 		if (Input.GetKeyDown (KeyCode.Space) && isGrounded) {
 			isGrounded = false;
+            if(rb.velocity.magnitude >= jumpSlow)
+            {
+                rb.velocity = rb.velocity.normalized * jumpSlow;
+            }
 			rb.AddForce (jump * jumpForce, ForceMode.Impulse);
             
 		}	
