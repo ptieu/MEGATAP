@@ -6,7 +6,7 @@ using UnityEngine;
 public class CameraTwoRotator : MonoBehaviour {
 
     [SerializeField] private Camera playerTwoCam;
-    [SerializeField] private float moveSpeed = 2;
+    [SerializeField] private float moveSpeed;
 
     //Change these static variables iff tower is scaled
     private static int camPosHorizontal = 50;

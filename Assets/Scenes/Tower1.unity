@@ -573,6 +573,31 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 401793268}
   m_CullTransparentMesh: 0
+--- !u!1 &412805861 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1611476453772502, guid: 295df6c694235764eac79c393ed826dc,
+    type: 2}
+  m_PrefabInternal: {fileID: 2077754589}
+--- !u!20 &412805862 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 20558474140203254, guid: 295df6c694235764eac79c393ed826dc,
+    type: 2}
+  m_PrefabInternal: {fileID: 2077754589}
+--- !u!114 &412805865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 412805861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -768656878, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventMask:
+    serializedVersion: 2
+    m_Bits: 512
+  m_MaxRayIntersections: 0
 --- !u!1 &416198638
 GameObject:
   m_ObjectHideFlags: 0
@@ -832,6 +857,41 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9af0d0883e6a51441b06cd7d26274b01, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &914708523 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1745271680432330, guid: ff9fcda491d07404283d525387473970,
+    type: 2}
+  m_PrefabInternal: {fileID: 1065214043}
+--- !u!114 &914708529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 914708523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 960280925}
+          m_MethodName: OnClickTower
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!1 &960280924 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1134238031081466, guid: 7c17f18a57460024ba6258242e429410,
@@ -853,7 +913,14 @@ MonoBehaviour:
   - {fileID: 401793270}
   - {fileID: 695091538}
   - {fileID: 1980877919}
-  cam: {fileID: 0}
+  traps:
+  - {fileID: 1781992477154930, guid: 978902421daf7ca4eb1ed6dc15ac1645, type: 2}
+  - {fileID: 1030923523706756, guid: 14716dac1aa2c7a488003f7bba1968d3, type: 2}
+  - {fileID: 1156793421700370, guid: 7b86cd6111e958843812033b42c97d80, type: 2}
+  - {fileID: 1174657169313092, guid: b34de131824cbe447931d0a2d1e0696b, type: 2}
+  tower: {fileID: 914708523}
+  cam: {fileID: 412805862}
+  spaceBetweenTraps: 5
 --- !u!1 &972572236 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1289600842002096, guid: ff9fcda491d07404283d525387473970,

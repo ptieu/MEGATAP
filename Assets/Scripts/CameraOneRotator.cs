@@ -7,7 +7,7 @@ using UnityEngine;
 public class CameraOneRotator : MonoBehaviour {
 
     [SerializeField] private Camera playerOneCam;
-    [SerializeField] private float moveSpeed = 2;
+    [SerializeField] private float moveSpeed;
     [SerializeField] private GameObject playerModel;
     [SerializeField] private GameObject wall;
     [SerializeField] private GameObject[] rotateTriggers;
