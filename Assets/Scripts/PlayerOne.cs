@@ -44,16 +44,16 @@ public class PlayerOne : MonoBehaviour {
         switch (state)
         {
             case 1:
-                this.transform.Translate(Input.GetAxis("Horizontal") * moveSpeed * movementMultiplier, 0, 0);
+                rb.velocity = new Vector3(Input.GetAxis("Horizontal") * moveSpeed * movementMultiplier * 60, 0, 0);
                 break;
             case 2:
-                this.transform.Translate(0, 0, Input.GetAxis("Horizontal") * moveSpeed * movementMultiplier);
+                rb.velocity = new Vector3(0, 0, Input.GetAxis("Horizontal") * moveSpeed * movementMultiplier * 60);
                 break;
             case 3:
-                this.transform.Translate(-Input.GetAxis("Horizontal") * moveSpeed * movementMultiplier, 0, 0);
+                rb.velocity = new Vector3(-Input.GetAxis("Horizontal") * moveSpeed * movementMultiplier * 60, 0, 0);
                 break;
             case 4:
-                this.transform.Translate(0, 0, -Input.GetAxis("Horizontal") * moveSpeed * movementMultiplier);
+                rb.velocity = new Vector3(0, 0, -Input.GetAxis("Horizontal") * moveSpeed * movementMultiplier  * 60);
                 break;
         }
 

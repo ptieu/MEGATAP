@@ -9,13 +9,15 @@ public class CameraOneRotator : MonoBehaviour {
     [SerializeField] private Camera playerOneCam;
     [SerializeField] private float moveSpeed = 2;
     [SerializeField] private GameObject playerModel;
+    [SerializeField] private GameObject wall;
+    [SerializeField] private GameObject[] rotateTriggers;
 
     //Change these if the tower is scaled
     private static int camPosHorizontal = 45;
-    private static int camPosVertical   = 5;
+    private static int camPosVertical   = 7;
     private static int camRotationX     = 10;
     private static int camRotationY     = 0;
-    private static int numFloors = 3;
+    private static int numFloors = 10;
 
     private Vector3[] basePositions = new[] {  new Vector3(0,                 camPosVertical, -camPosHorizontal),
                                                new Vector3(camPosHorizontal,  camPosVertical, 0),
@@ -32,7 +34,7 @@ public class CameraOneRotator : MonoBehaviour {
 
     private void Start()
     {
-        playerOneCam.transform.position = basePositions[0];
+        playerOneCam.transform.localPosition= basePositions[0];
         playerOneCam.transform.rotation = rotations[0];
         cameraState = 1;
         floor = 1;
@@ -40,35 +42,53 @@ public class CameraOneRotator : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        switch(other.tag)
+        Vector3 wallPos = wall.transform.position;
+        Quaternion wallRot = wall.transform.rotation;
+        float wallY = wall.transform.position.y + 10 * (floor - 1);
+
+        switch (other.tag)
         {
             case "Trigger1":
-                StartMove(basePositions[0], basePositions[1], rotations[0], rotations[1], 2);
+                StartMove(basePositions[1], rotations[1], 2);
                 break;
             case "Trigger2":
-                StartMove(basePositions[1], basePositions[2], rotations[1], rotations[2], 3);
+                StartMove(basePositions[2], rotations[2], 3);
                 break;
             case "Trigger3":
-                StartMove(basePositions[2], basePositions[3], rotations[2], rotations[3], 4);
+                StartMove(basePositions[3], rotations[3], 4);
                 break;
             case "Trigger4":
                 if (floor < numFloors)
                 {
                     floor++;
                     MovePlayerUp();
-                    StartMove(basePositions[3], basePositions[0], rotations[3], rotations[0], 1);
+                    StartMove(basePositions[0], rotations[0], 1);
                     break;
                 }
                 else
                 {
-                    StartMove(basePositions[3], basePositions[0], rotations[3], rotations[0], 1);
+                    StartMove(basePositions[0], rotations[0], 1);
                     break;
                 }
+            case "Wall1":
+                wallPos = new Vector3(rotateTriggers[0].transform.position.x, wallY, rotateTriggers[0].transform.position.z + 6);
+                wallRot = Quaternion.Euler(wall.transform.rotation.x, wall.transform.rotation.y + 90, wall.transform.rotation.z);
+                Instantiate(wall, wallPos, wallRot);
+                break;
+            case "Wall2":
+                wallPos = new Vector3(rotateTriggers[1].transform.position.x - 5, wallY, rotateTriggers[1].transform.position.z);
+                Instantiate(wall, wallPos, wallRot);
+                break;
+            case "Wall3":
+                wallPos = new Vector3(rotateTriggers[2].transform.position.x, wallY, rotateTriggers[1].transform.position.z - 5);
+                wallRot = Quaternion.Euler(wall.transform.rotation.x, wall.transform.rotation.y + 90, wall.transform.rotation.z);
+                Instantiate(wall, wallPos, wallRot);
+                break;
         }
     }
 
 
-    private void StartMove(Vector3 prevPos, Vector3 goalPos, Quaternion prevRot, Quaternion goalRot, int camState)
+    private void StartMove(Vector3 goalPos, Quaternion goalRot, int camState)
     {
 
         RotatePlayer();
@@ -85,27 +105,25 @@ public class CameraOneRotator : MonoBehaviour {
 
     private IEnumerator TweenToPosition(Vector3 targetPos, Quaternion targetRot, float time)
     {
-        Vector3 currentPos = playerOneCam.transform.position;
+        Vector3 currentPos = playerOneCam.transform.localPosition;
         Quaternion currentRot = playerOneCam.transform.rotation;
-
-        targetPos.y *= floor;
 
         for (float t = 0; t < time; t += Time.deltaTime)
         {
-            playerOneCam.transform.position = Vector3.Lerp(currentPos, targetPos, t/time);
+            playerOneCam.transform.localPosition = Vector3.Lerp(currentPos, targetPos, t/time);
             playerOneCam.transform.rotation = Quaternion.Slerp(currentRot, targetRot, t/time);
             yield return null;
         }
 
-        playerOneCam.transform.position = targetPos;
+        playerOneCam.transform.localPosition = targetPos;
         playerOneCam.transform.rotation = targetRot;
-
         camTween = null;
     }
-
+    
+    //TODO: Change this. It's not good. Bugs out sometimes and sends people all the way up. Replace with a Lerp & a ladder? 
     private void MovePlayerUp()
     {
-        this.transform.position = new Vector3(this.transform.position.x + 2, this.transform.position.y + 8, this.transform.position.z);
+        this.transform.position = new Vector3(this.transform.position.x + 6, this.transform.position.y + 10, this.transform.position.z);
     }
 
     private void RotatePlayer()
