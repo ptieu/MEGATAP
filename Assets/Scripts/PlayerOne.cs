@@ -15,11 +15,13 @@ public class PlayerOne : MonoBehaviour {
 	[Range(0.0f, 1.0f)][SerializeField] private float inAirSpeed = 0.8f; // slow player's side-to-side movement in the air
 	[SerializeField] private float fallMultiplier = 2.5f;
 	[SerializeField] private float lowerJumpMultiplier = 2f;
-    [SerializeField] private float jumpSlow = 12;
+    [SerializeField] private float maxVelocity = 15;
+    [SerializeField] private float maxJumpVelocity = 12;
 
 
     private Vector3 jump;
     private float tempSpeed;
+    private Vector3 tempVelocity;
     private bool isGrounded;
 	private Rigidbody rb;
 
@@ -32,13 +34,14 @@ public class PlayerOne : MonoBehaviour {
 
 	void OnCollisionEnter() {
 		isGrounded = true;
+        rb.velocity = tempVelocity;
 	}
 
 	void FixedUpdate () {
         state = cam.GetState();
 
 		if (isGrounded) {
-			movementMultiplier = 1;
+			movementMultiplier = 10;
 		} else if (!isGrounded) {
 			movementMultiplier = inAirSpeed;
 		}
@@ -59,14 +62,25 @@ public class PlayerOne : MonoBehaviour {
                 break;
         }
 
+        if (rb.velocity.magnitude >= maxVelocity)
+        {
+            rb.velocity = rb.velocity.normalized * maxVelocity;
+        }
+
+        if(Input.GetAxis("Horizontal") == 0)
+        {
+            float yVelocity = rb.velocity.y;
+            rb.velocity = new Vector3(0, yVelocity, 0);
+        }
         //jump
-		if (Input.GetKeyDown (KeyCode.Space) && isGrounded) {
+        if (Input.GetKeyDown (KeyCode.Space) && isGrounded) {
 			isGrounded = false;
-            if(rb.velocity.magnitude >= jumpSlow)
+            tempVelocity = rb.velocity;
+            if (rb.velocity.magnitude >= maxJumpVelocity)
             {
-                rb.velocity = rb.velocity.normalized * jumpSlow;
+                rb.velocity = rb.velocity.normalized * maxJumpVelocity;
             }
-			rb.AddForce (jump * jumpForce, ForceMode.Impulse);
+            rb.AddForce (jump * jumpForce, ForceMode.Impulse);
             
 		}	
 		
