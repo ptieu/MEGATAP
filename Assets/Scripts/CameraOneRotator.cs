@@ -11,6 +11,7 @@ public class CameraOneRotator : MonoBehaviour {
     [SerializeField] private GameObject playerModel;
     [SerializeField] private GameObject wall;
     [SerializeField] private GameObject[] rotateTriggers;
+    [SerializeField] private Transform floorSpawn;
 
     //Change these if the tower is scaled
     private static int camPosHorizontal = 45;
@@ -31,6 +32,7 @@ public class CameraOneRotator : MonoBehaviour {
 
     private IEnumerator camTween;
     private int cameraState, floor;
+    private Rigidbody rb;
 
     private void Start()
     {
@@ -38,6 +40,7 @@ public class CameraOneRotator : MonoBehaviour {
         playerOneCam.transform.rotation = rotations[0];
         cameraState = 1;
         floor = 1;
+        rb = GetComponent<Rigidbody>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -91,8 +94,8 @@ public class CameraOneRotator : MonoBehaviour {
     private void StartMove(Vector3 goalPos, Quaternion goalRot, int camState)
     {
 
+        rb.velocity = Vector3.zero;
         RotatePlayer();
-
         cameraState  = camState;
 
         if(camTween != null)
@@ -123,12 +126,13 @@ public class CameraOneRotator : MonoBehaviour {
     //TODO: Change this. It's not good. Bugs out sometimes and sends people all the way up. Replace with a Lerp & a ladder? 
     private void MovePlayerUp()
     {
-        this.transform.position = new Vector3(this.transform.position.x + 6, this.transform.position.y + 10, this.transform.position.z);
+        this.transform.position = floorSpawn.position + Vector3.up * 10 * (floor - 2);
     }
 
     private void RotatePlayer()
     {
-        playerModel.transform.rotation = Quaternion.Euler(0, cameraState * 90 + 90, 0);
+        float rotY = playerModel.transform.localRotation.eulerAngles.y;
+        playerModel.transform.localRotation = Quaternion.Euler(0, rotY - 90, 0);
     }
     public int GetState()
     {
