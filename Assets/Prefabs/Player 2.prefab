@@ -170,7 +170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TowerFaces:
-  - {fileID: 1463891415138598, guid: 394aaad126d60354f8894435cf100b71, type: 2}
+  - {fileID: 0}
   - {fileID: 1146632545297628, guid: 52b249d7d631a054da5ce4eb51379fad, type: 2}
   - {fileID: 1834502053376272, guid: 6068bf631e95bcf4293052f52f6852f9, type: 2}
   - {fileID: 1102942950998210, guid: 58deb84e8ca1b4c42bfa4bda9d9328b9, type: 2}
