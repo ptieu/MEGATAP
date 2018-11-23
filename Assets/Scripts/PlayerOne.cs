@@ -18,6 +18,7 @@ public class PlayerOne : MonoBehaviour {
 
 
     private Vector3 jump;
+    private float tempSpeed;
     private bool isGrounded;
 	private Rigidbody rb;
 
@@ -44,16 +45,16 @@ public class PlayerOne : MonoBehaviour {
         switch (state)
         {
             case 1:
-                rb.velocity = new Vector3(Input.GetAxis("Horizontal") * moveSpeed * movementMultiplier * 60, 0, 0);
+                rb.AddForce(Input.GetAxis("Horizontal") * moveSpeed * movementMultiplier, 0, 0, ForceMode.Impulse);
                 break;
             case 2:
-                rb.velocity = new Vector3(0, 0, Input.GetAxis("Horizontal") * moveSpeed * movementMultiplier * 60);
+                rb.AddForce(0, 0, Input.GetAxis("Horizontal") * moveSpeed * movementMultiplier, ForceMode.Impulse);
                 break;
             case 3:
-                rb.velocity = new Vector3(-Input.GetAxis("Horizontal") * moveSpeed * movementMultiplier * 60, 0, 0);
+                rb.AddForce(-Input.GetAxis("Horizontal") * moveSpeed * movementMultiplier, 0, 0, ForceMode.Impulse);
                 break;
             case 4:
-                rb.velocity = new Vector3(0, 0, -Input.GetAxis("Horizontal") * moveSpeed * movementMultiplier  * 60);
+                rb.AddForce(0, 0, -Input.GetAxis("Horizontal") * moveSpeed * movementMultiplier, ForceMode.Impulse);
                 break;
         }
 
@@ -61,25 +62,29 @@ public class PlayerOne : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.Space) && isGrounded) {
 			isGrounded = false;
 			rb.AddForce (jump * jumpForce, ForceMode.Impulse);
-
+            
 		}	
 		
 		//crouch
 		if (Input.GetKeyDown (KeyCode.S) && isGrounded) {
 			Debug.Log("S is pressed");
+            tempSpeed = moveSpeed;
 			moveSpeed = 0;
 		}	
 		if (Input.GetKeyUp(KeyCode.S) && isGrounded) {
 			Debug.Log("S is released");
-			moveSpeed = 0.2f;
-		}	
-		
-
-		//fall faster
-		if (rb.velocity.y < 0) {
-			rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
-		} else if (rb.velocity.y > 0 && !Input.GetButton("Jump")) {
-			rb.velocity += Vector3.up * Physics.gravity.y * (lowerJumpMultiplier - 1) * Time.deltaTime;
+            moveSpeed = tempSpeed;
 		}
-	}
+
+
+        //fall faster
+        if (rb.velocity.y < 0)
+        {
+            rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+        }
+        else if (rb.velocity.y > 0 && !Input.GetButton("Jump"))
+        {
+            rb.velocity += Vector3.up * Physics.gravity.y * (lowerJumpMultiplier - 1) * Time.deltaTime;
+        }
+    }
 }
