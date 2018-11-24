@@ -183,6 +183,8 @@ MonoBehaviour:
   cam: {fileID: 0}
   widthBetweenTraps: 5
   heightBetweenTraps: 2
+  horizontalGridSize: 4
+  verticalGridSize: 2
 --- !u!136 &136189357046121884
 CapsuleCollider:
   m_ObjectHideFlags: 1
