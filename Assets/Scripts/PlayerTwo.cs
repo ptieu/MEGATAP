@@ -44,7 +44,6 @@ public class PlayerTwo : MonoBehaviour {
 
             if(ghostTrap != null)
             {
-                Debug.Log("move");
                 ghostTrap.transform.position = hitPos;
                 ghostTrap.transform.rotation = hitRot;
             }
