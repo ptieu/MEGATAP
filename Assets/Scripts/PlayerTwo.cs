@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//<alexc> This class focuses on player 2 mechanics to click UI buttons and place prefab traps.
 public class PlayerTwo : MonoBehaviour {
     [SerializeField] private Button[] trapButtons;
     [SerializeField] private GameObject[] traps;
@@ -27,6 +28,18 @@ public class PlayerTwo : MonoBehaviour {
 
     private void Update()
     {
+        RaycastFromCam(false);
+    }
+    public void OnClickTower()
+    {
+        RaycastFromCam(true);
+    }
+
+
+    //Raycast from camera to center column of tower. Have a ghost trap follow the mouse if a button
+    //has been selected, and instantiate one if the tower is clicked.
+    private void RaycastFromCam(bool clicked)
+    {
         RaycastHit hit;
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 
@@ -42,31 +55,13 @@ public class PlayerTwo : MonoBehaviour {
 
 
 
-            if(ghostTrap != null)
+            if (ghostTrap != null)
             {
                 ghostTrap.transform.position = hitPos;
                 ghostTrap.transform.rotation = hitRot;
             }
-        }
-    }
-    public void OnClickTower()
-    {
-        RaycastHit hit;
-        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out hit, 99999, ~LayerMask.NameToLayer("Tower")))
-        {
-            Vector3 hitPos = hit.point + hit.normal * 5;
-            Quaternion hitRot = Quaternion.identity;
-
-            if(hit.normal.x == -1 || hit.normal.x == 1)
-            {
-                hitRot = Quaternion.Euler(0, 90, 0);
-            }
-
-           
-
-            if (CheckNearby(hit.point, widthBetweenTraps, heightBetweenTraps) && trap != null)
+            if (clicked && CheckNearby(hit.point, widthBetweenTraps, heightBetweenTraps) && trap != null)
             {
                 Instantiate(trap, hitPos, hitRot);
                 trap = null;
@@ -76,6 +71,7 @@ public class PlayerTwo : MonoBehaviour {
         }
     }
 
+    //Check for nearby platforms/traps to see if it is too close to place a new one.
     private bool CheckNearby(Vector3 center, float width, float height)
     {
         Collider[] hitColliders = Physics.OverlapBox(center, new Vector3(width, height, width));
