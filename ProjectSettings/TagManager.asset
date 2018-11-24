@@ -8,6 +8,11 @@ TagManager:
   - Trigger2
   - Trigger3
   - Trigger4
+  - Wall1
+  - Wall2
+  - Wall3
+  - Wall4
+  - Platform
   layers:
   - Default
   - TransparentFX
@@ -18,7 +23,7 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - 
+  - Tower
   - 
   - 
   - 

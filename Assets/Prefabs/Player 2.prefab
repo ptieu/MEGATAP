@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33140998972759548}
   - component: {fileID: 23349369097790388}
   - component: {fileID: 136189357046121884}
-  - component: {fileID: 114263644773775072}
+  - component: {fileID: 114684309664505246}
   m_Layer: 0
   m_Name: Player 2
   m_TagString: Untagged
@@ -67,7 +67,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1134238031081466}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 21, z: 0}
+  m_LocalPosition: {x: 0, y: 103, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4353506201628406}
@@ -158,7 +158,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1134238031081466}
   m_Mesh: {fileID: 0}
---- !u!114 &114263644773775072
+--- !u!114 &114684309664505246
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -166,15 +166,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 1134238031081466}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 961f98f7ccf32bb49a398034339536f3, type: 3}
+  m_Script: {fileID: 11500000, guid: 742fe6ba5f649494c85f78bab30f31cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TowerFaces:
-  - {fileID: 1463891415138598, guid: 394aaad126d60354f8894435cf100b71, type: 2}
-  - {fileID: 1152718192616990, guid: 0cdffd051fc953348911837d9a757ad9, type: 2}
-  - {fileID: 1656241109238360, guid: e724c701988022247bfab4bc9327e692, type: 2}
-  - {fileID: 1523947703740332, guid: 97eddfd039108d74ca885f5dc1a27beb, type: 2}
+  trapButtons:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  traps:
+  - {fileID: 1781992477154930, guid: 978902421daf7ca4eb1ed6dc15ac1645, type: 2}
+  - {fileID: 1030923523706756, guid: 14716dac1aa2c7a488003f7bba1968d3, type: 2}
+  - {fileID: 1156793421700370, guid: 7b86cd6111e958843812033b42c97d80, type: 2}
+  - {fileID: 1174657169313092, guid: b34de131824cbe447931d0a2d1e0696b, type: 2}
+  tower: {fileID: 0}
   cam: {fileID: 0}
+  widthBetweenTraps: 5
+  heightBetweenTraps: 2
+  horizontalGridSize: 4
+  verticalGridSize: 2
 --- !u!136 &136189357046121884
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -183,7 +193,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 1134238031081466}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   m_Radius: 0.55054474
   m_Height: 2
   m_Direction: 1

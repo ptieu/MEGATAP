@@ -6,14 +6,14 @@ using UnityEngine;
 public class CameraTwoRotator : MonoBehaviour {
 
     [SerializeField] private Camera playerTwoCam;
-    [SerializeField] private float moveSpeed = 2;
+    [SerializeField] private float moveSpeed;
 
     //Change these static variables iff tower is scaled
-    private static int camPosHorizontal = 30;
-    private static int camPosVertical = 9;
+    private static int camPosHorizontal = 50;
+    private static int camPosVertical = 10;
     private static int camRotationX = 15;
     private static int camRotationY = -45;
-    private static int numFloors = 3;
+    private static int numFloors = 10;
     
 
     private Vector3[] basePositions = new [] { new Vector3(camPosHorizontal,        camPosVertical, -camPosHorizontal),
@@ -51,6 +51,7 @@ public class CameraTwoRotator : MonoBehaviour {
         moveEnabled = true;
     }
 
+    //Rotate camera around tower when arrow keys are pressed
     private void Update()
     {
         if (moveEnabled)
@@ -102,6 +103,7 @@ public class CameraTwoRotator : MonoBehaviour {
         }
     }
 
+    //Initialize camera movement variables and start movement coroutine
     private void StartMove(Vector3 goalPos, Quaternion goalRot, int goal)
     {
         currentPos = goal;
@@ -114,6 +116,7 @@ public class CameraTwoRotator : MonoBehaviour {
         StartCoroutine(camTween);
     }
 
+    //Camera movement coroutine
     private IEnumerator TweenToPosition(Vector3 targetPos, Quaternion targetRot, float time)
     {
         Vector3 currentPos = playerTwoCam.transform.position;
