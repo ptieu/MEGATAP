@@ -8,7 +8,8 @@ public class PlayerTwo : MonoBehaviour {
     [SerializeField] private GameObject[] traps;
     [SerializeField] private GameObject tower;
     [SerializeField] private Camera cam;
-    [SerializeField] private float spaceBetweenTraps;
+    [SerializeField] private float widthBetweenTraps;
+    [SerializeField] private float heightBetweenTraps;
 
     private GameObject trap;
 
@@ -37,16 +38,17 @@ public class PlayerTwo : MonoBehaviour {
                 hitRot = Quaternion.Euler(0, 90, 0);
             }
 
-            if (CheckNearby(hit.point, spaceBetweenTraps) && trap != null)
+            if (CheckNearby(hit.point, widthBetweenTraps, heightBetweenTraps) && trap != null)
             {
                 Instantiate(trap, hitPos, hitRot);
+                trap = null;
             }
         }
     }
 
-    private bool CheckNearby(Vector3 center, float radius)
+    private bool CheckNearby(Vector3 center, float width, float height)
     {
-        Collider[] hitColliders = Physics.OverlapSphere(center, radius);
+        Collider[] hitColliders = Physics.OverlapBox(center, new Vector3(width, height, width));
 
         int i = 0;
         while (i < hitColliders.Length)
