@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33140998972759548}
   - component: {fileID: 23349369097790388}
   - component: {fileID: 136189357046121884}
-  - component: {fileID: 114263644773775072}
+  - component: {fileID: 114684309664505246}
   m_Layer: 0
   m_Name: Player 2
   m_TagString: Untagged
@@ -158,7 +158,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1134238031081466}
   m_Mesh: {fileID: 0}
---- !u!114 &114263644773775072
+--- !u!114 &114684309664505246
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -166,15 +166,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 1134238031081466}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 961f98f7ccf32bb49a398034339536f3, type: 3}
+  m_Script: {fileID: 11500000, guid: 742fe6ba5f649494c85f78bab30f31cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TowerFaces:
+  trapButtons:
   - {fileID: 0}
-  - {fileID: 1146632545297628, guid: 52b249d7d631a054da5ce4eb51379fad, type: 2}
-  - {fileID: 1834502053376272, guid: 6068bf631e95bcf4293052f52f6852f9, type: 2}
-  - {fileID: 1102942950998210, guid: 58deb84e8ca1b4c42bfa4bda9d9328b9, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  traps:
+  - {fileID: 1781992477154930, guid: 978902421daf7ca4eb1ed6dc15ac1645, type: 2}
+  - {fileID: 1030923523706756, guid: 14716dac1aa2c7a488003f7bba1968d3, type: 2}
+  - {fileID: 1156793421700370, guid: 7b86cd6111e958843812033b42c97d80, type: 2}
+  - {fileID: 1174657169313092, guid: b34de131824cbe447931d0a2d1e0696b, type: 2}
+  tower: {fileID: 0}
   cam: {fileID: 0}
+  widthBetweenTraps: 5
+  heightBetweenTraps: 2
 --- !u!136 &136189357046121884
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -183,7 +191,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 1134238031081466}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   m_Radius: 0.55054474
   m_Height: 2
   m_Direction: 1

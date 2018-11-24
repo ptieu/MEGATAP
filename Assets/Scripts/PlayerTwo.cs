@@ -12,6 +12,7 @@ public class PlayerTwo : MonoBehaviour {
     [SerializeField] private float heightBetweenTraps;
 
     private GameObject trap;
+    private GameObject ghostTrap;
 
 
 
@@ -23,6 +24,32 @@ public class PlayerTwo : MonoBehaviour {
         trapButtons[3].onClick.AddListener(OnClickTrap4);
     }
 
+
+    private void Update()
+    {
+        RaycastHit hit;
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out hit, 99999, ~LayerMask.NameToLayer("Tower")))
+        {
+            Vector3 hitPos = hit.point + hit.normal * 5;
+            Quaternion hitRot = Quaternion.identity;
+
+            if (hit.normal.x == -1 || hit.normal.x == 1)
+            {
+                hitRot = Quaternion.Euler(0, 90, 0);
+            }
+
+
+
+            if(ghostTrap != null)
+            {
+                Debug.Log("move");
+                ghostTrap.transform.position = hitPos;
+                ghostTrap.transform.rotation = hitRot;
+            }
+        }
+    }
     public void OnClickTower()
     {
         RaycastHit hit;
@@ -38,10 +65,14 @@ public class PlayerTwo : MonoBehaviour {
                 hitRot = Quaternion.Euler(0, 90, 0);
             }
 
+           
+
             if (CheckNearby(hit.point, widthBetweenTraps, heightBetweenTraps) && trap != null)
             {
                 Instantiate(trap, hitPos, hitRot);
                 trap = null;
+                Destroy(ghostTrap);
+                ghostTrap = null;
             }
         }
     }
@@ -66,20 +97,36 @@ public class PlayerTwo : MonoBehaviour {
     private void OnClickTrap1()
     {
         trap = traps[0];
+        SetGhost();
     }
 
     private void OnClickTrap2()
     {
         trap = traps[1];
+        SetGhost();
     }
 
     private void OnClickTrap3()
     {
         trap = traps[2];
+        SetGhost();
     }
 
     private void OnClickTrap4()
     {
         trap = traps[3];
+        SetGhost();
+    }
+
+    private void SetGhost()
+    {
+        if(trap != null)
+        {
+            ghostTrap = Instantiate(trap, Vector3.zero, Quaternion.identity);
+            Color color = ghostTrap.GetComponent<MeshRenderer>().material.color;
+            color.a = 0.5f;
+            ghostTrap.GetComponent<MeshRenderer>().material.color = color;
+            ghostTrap.tag = "Untagged";
+        }
     }
 }

@@ -344,18 +344,37 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
-    - target: {fileID: 114263644773775072, guid: 7c17f18a57460024ba6258242e429410,
+    - target: {fileID: 114684309664505246, guid: 7c17f18a57460024ba6258242e429410,
+        type: 2}
+      propertyPath: trapButtons.Array.data[0]
+      value: 
+      objectReference: {fileID: 1131481448}
+    - target: {fileID: 114684309664505246, guid: 7c17f18a57460024ba6258242e429410,
+        type: 2}
+      propertyPath: trapButtons.Array.data[1]
+      value: 
+      objectReference: {fileID: 401793270}
+    - target: {fileID: 114684309664505246, guid: 7c17f18a57460024ba6258242e429410,
+        type: 2}
+      propertyPath: trapButtons.Array.data[2]
+      value: 
+      objectReference: {fileID: 695091538}
+    - target: {fileID: 114684309664505246, guid: 7c17f18a57460024ba6258242e429410,
+        type: 2}
+      propertyPath: trapButtons.Array.data[3]
+      value: 
+      objectReference: {fileID: 1980877919}
+    - target: {fileID: 114684309664505246, guid: 7c17f18a57460024ba6258242e429410,
+        type: 2}
+      propertyPath: tower
+      value: 
+      objectReference: {fileID: 914708523}
+    - target: {fileID: 114684309664505246, guid: 7c17f18a57460024ba6258242e429410,
         type: 2}
       propertyPath: cam
       value: 
-      objectReference: {fileID: 1448487128}
-    - target: {fileID: 136189357046121884, guid: 7c17f18a57460024ba6258242e429410,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 114263644773775072, guid: 7c17f18a57460024ba6258242e429410, type: 2}
+      objectReference: {fileID: 412805862}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c17f18a57460024ba6258242e429410, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1 &306429450
@@ -867,31 +886,12 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1134238031081466, guid: 7c17f18a57460024ba6258242e429410,
     type: 2}
   m_PrefabInternal: {fileID: 170646997}
---- !u!114 &960280925
+--- !u!114 &960280925 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 960280924}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 114684309664505246, guid: 7c17f18a57460024ba6258242e429410,
+    type: 2}
+  m_PrefabInternal: {fileID: 170646997}
   m_Script: {fileID: 11500000, guid: 742fe6ba5f649494c85f78bab30f31cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  trapButtons:
-  - {fileID: 1131481448}
-  - {fileID: 401793270}
-  - {fileID: 695091538}
-  - {fileID: 1980877919}
-  traps:
-  - {fileID: 1781992477154930, guid: 978902421daf7ca4eb1ed6dc15ac1645, type: 2}
-  - {fileID: 1030923523706756, guid: 14716dac1aa2c7a488003f7bba1968d3, type: 2}
-  - {fileID: 1156793421700370, guid: 7b86cd6111e958843812033b42c97d80, type: 2}
-  - {fileID: 1174657169313092, guid: b34de131824cbe447931d0a2d1e0696b, type: 2}
-  tower: {fileID: 914708523}
-  cam: {fileID: 412805862}
-  widthBetweenTraps: 5
-  heightBetweenTraps: 2
 --- !u!1 &972572236 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1289600842002096, guid: ff9fcda491d07404283d525387473970,
@@ -941,50 +941,6 @@ Prefab:
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 960280925}
-    - target: {fileID: 1198422645562448, guid: ff9fcda491d07404283d525387473970, type: 2}
-      propertyPath: m_TagString
-      value: Untagged
-      objectReference: {fileID: 0}
-    - target: {fileID: 1338538869002168, guid: ff9fcda491d07404283d525387473970, type: 2}
-      propertyPath: m_TagString
-      value: Platform
-      objectReference: {fileID: 0}
-    - target: {fileID: 1390478518883132, guid: ff9fcda491d07404283d525387473970, type: 2}
-      propertyPath: m_TagString
-      value: Platform
-      objectReference: {fileID: 0}
-    - target: {fileID: 1749469081265586, guid: ff9fcda491d07404283d525387473970, type: 2}
-      propertyPath: m_TagString
-      value: Platform
-      objectReference: {fileID: 0}
-    - target: {fileID: 1605023427520084, guid: ff9fcda491d07404283d525387473970, type: 2}
-      propertyPath: m_TagString
-      value: Platform
-      objectReference: {fileID: 0}
-    - target: {fileID: 1357185541373962, guid: ff9fcda491d07404283d525387473970, type: 2}
-      propertyPath: m_TagString
-      value: Platform
-      objectReference: {fileID: 0}
-    - target: {fileID: 1792619168326150, guid: ff9fcda491d07404283d525387473970, type: 2}
-      propertyPath: m_TagString
-      value: Platform
-      objectReference: {fileID: 0}
-    - target: {fileID: 1226607613484342, guid: ff9fcda491d07404283d525387473970, type: 2}
-      propertyPath: m_TagString
-      value: Platform
-      objectReference: {fileID: 0}
-    - target: {fileID: 1916245955174518, guid: ff9fcda491d07404283d525387473970, type: 2}
-      propertyPath: m_TagString
-      value: Platform
-      objectReference: {fileID: 0}
-    - target: {fileID: 1981385595025362, guid: ff9fcda491d07404283d525387473970, type: 2}
-      propertyPath: m_TagString
-      value: Platform
-      objectReference: {fileID: 0}
-    - target: {fileID: 1760888879817392, guid: ff9fcda491d07404283d525387473970, type: 2}
-      propertyPath: m_TagString
-      value: Platform
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff9fcda491d07404283d525387473970, type: 2}
   m_IsPrefabAsset: 0
@@ -1178,12 +1134,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1448487128 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114956843716667498, guid: 295df6c694235764eac79c393ed826dc,
-    type: 2}
-  m_PrefabInternal: {fileID: 2077754589}
-  m_Script: {fileID: 11500000, guid: d274028cd72de9a48b760f6517f0fd29, type: 3}
 --- !u!1 &1629728421 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1917442397181180, guid: ff9fcda491d07404283d525387473970,
