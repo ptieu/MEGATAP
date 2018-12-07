@@ -18,9 +18,6 @@ public class PlayerOne : MonoBehaviour {
     [SerializeField] private float maxVelocity;
     [SerializeField] private float maxJumpVelocity;
 
-
-    private Vector3 jump;
-    private float tempSpeed;
     private Vector3 tempVelocity;
     private bool isGrounded;
 	private Rigidbody rb;
@@ -29,7 +26,6 @@ public class PlayerOne : MonoBehaviour {
 
 	void Start() {
 		rb = GetComponent<Rigidbody> ();
-		jump = new Vector3 (0.0f, 2.0f, 0.0f);
 	}
 
 	void OnCollisionEnter() {
@@ -62,6 +58,12 @@ public class PlayerOne : MonoBehaviour {
                 break;
         }
 
+        //Return to 0 (Handle drag manually)
+        if(Mathf.Abs(Input.GetAxis("Horizontal")) <= 0.5f && Mathf.Abs(Input.GetAxis("Horizontal")) >= 0f)
+        {
+            rb.velocity = new Vector3(0, rb.velocity.y, 0);
+        }
+
         //Return to max velocity
         if (rb.velocity.magnitude >= maxVelocity)
         {
@@ -76,11 +78,12 @@ public class PlayerOne : MonoBehaviour {
             {
                 rb.velocity = rb.velocity.normalized * maxJumpVelocity;
             }
-            rb.AddForce (jump * jumpForce, ForceMode.Impulse);
+            rb.AddForce (0, jumpForce, 0, ForceMode.Impulse);
             
-		}	
-		
-		//crouch
+		}
+
+        //crouch
+        float tempSpeed = moveSpeed;
 		if (Input.GetKeyDown (KeyCode.S) && isGrounded) {
 			Debug.Log("S is pressed");
             tempSpeed = moveSpeed;

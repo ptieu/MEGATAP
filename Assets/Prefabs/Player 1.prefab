@@ -473,10 +473,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 114614076012222384}
-  jumpForce: 15
+  jumpForce: 90
   moveSpeed: 0.6
   inAirSpeed: 0.2
   fallMultiplier: 6
   lowerJumpMultiplier: 6
   maxVelocity: 15
-  maxJumpVelocity: 9
+  maxJumpVelocity: 2
