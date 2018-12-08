@@ -992,12 +992,27 @@ Prefab:
     - target: {fileID: 114940724036334842, guid: 9af0d0883e6a51441b06cd7d26274b01,
         type: 2}
       propertyPath: jumpForce
-      value: 90
+      value: 170
       objectReference: {fileID: 0}
     - target: {fileID: 114940724036334842, guid: 9af0d0883e6a51441b06cd7d26274b01,
         type: 2}
       propertyPath: maxJumpVelocity
-      value: 2
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 114940724036334842, guid: 9af0d0883e6a51441b06cd7d26274b01,
+        type: 2}
+      propertyPath: inAirSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114940724036334842, guid: 9af0d0883e6a51441b06cd7d26274b01,
+        type: 2}
+      propertyPath: fallMultiplier
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 114940724036334842, guid: 9af0d0883e6a51441b06cd7d26274b01,
+        type: 2}
+      propertyPath: lowerJumpMultiplier
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9af0d0883e6a51441b06cd7d26274b01, type: 2}
