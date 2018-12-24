@@ -9,21 +9,21 @@ public class CameraTwoRotator : MonoBehaviour {
     [SerializeField] private float moveSpeed;
 
     //Change these static variables iff tower is scaled
-    private static int camPosHorizontal = 60;
-    private static int camPosVertical = 10;
+    private static int camPosHorizontal = 100;
+    private static int camPosVertical = 20;
     private static int camRotationX = 15;
     private static int camRotationY = -45;
     private static int numFloors = 10;
     
 
     private Vector3[] basePositions = new [] { new Vector3(camPosHorizontal,        camPosVertical, -camPosHorizontal),
-                                               new Vector3(camPosHorizontal + 5,    camPosVertical, 0),
+                                               new Vector3(camPosHorizontal + 50,    camPosVertical, 0),
                                                new Vector3(camPosHorizontal,        camPosVertical, camPosHorizontal),
-                                               new Vector3(0,                       camPosVertical, camPosHorizontal + 5),
+                                               new Vector3(0,                       camPosVertical, camPosHorizontal + 50),
                                                new Vector3(-camPosHorizontal,       camPosVertical, camPosHorizontal),
-                                               new Vector3(-(camPosHorizontal + 5), camPosVertical, 0),
+                                               new Vector3(-(camPosHorizontal + 50), camPosVertical, 0),
                                                new Vector3(-camPosHorizontal,       camPosVertical, -camPosHorizontal),
-                                               new Vector3(0,                       camPosVertical, -(camPosHorizontal + 5))};
+                                               new Vector3(0,                       camPosVertical, -(camPosHorizontal + 50))};
 
     private Quaternion[] baseRotations = new[] { Quaternion.Euler(camRotationX, camRotationY, 0),
                                                  Quaternion.Euler(camRotationX, camRotationY - 45, 0),
