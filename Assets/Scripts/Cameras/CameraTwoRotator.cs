@@ -9,29 +9,21 @@ public class CameraTwoRotator : MonoBehaviour {
     [SerializeField] private float moveSpeed;
 
     //Change these static variables iff tower is scaled
-    private static int camPosHorizontal = 100;
+    private static int camPosHorizontal = 150;
     private static int camPosVertical = 20;
     private static int camRotationX = 15;
     private static int camRotationY = -45;
     private static int numFloors = 10;
     
 
-    private Vector3[] basePositions = new [] { new Vector3(camPosHorizontal,        camPosVertical, -camPosHorizontal),
-                                               new Vector3(camPosHorizontal + 50,    camPosVertical, 0),
-                                               new Vector3(camPosHorizontal,        camPosVertical, camPosHorizontal),
-                                               new Vector3(0,                       camPosVertical, camPosHorizontal + 50),
-                                               new Vector3(-camPosHorizontal,       camPosVertical, camPosHorizontal),
-                                               new Vector3(-(camPosHorizontal + 50), camPosVertical, 0),
-                                               new Vector3(-camPosHorizontal,       camPosVertical, -camPosHorizontal),
-                                               new Vector3(0,                       camPosVertical, -(camPosHorizontal + 50))};
+    private Vector3[] basePositions = new [] { new Vector3(camPosHorizontal,    camPosVertical, 0),
+                                               new Vector3(0,                       camPosVertical, camPosHorizontal),
+                                               new Vector3(-(camPosHorizontal), camPosVertical, 0),
+                                               new Vector3(0,                       camPosVertical, -(camPosHorizontal))};
 
-    private Quaternion[] baseRotations = new[] { Quaternion.Euler(camRotationX, camRotationY, 0),
-                                                 Quaternion.Euler(camRotationX, camRotationY - 45, 0),
-                                                 Quaternion.Euler(camRotationX, camRotationY - 90, 0),
+    private Quaternion[] baseRotations = new[] { Quaternion.Euler(camRotationX, camRotationY - 45, 0),
                                                  Quaternion.Euler(camRotationX, camRotationY - 135, 0),
-                                                 Quaternion.Euler(camRotationX, camRotationY - 180, 0),
                                                  Quaternion.Euler(camRotationX, camRotationY - 225, 0),
-                                                 Quaternion.Euler(camRotationX, camRotationY - 270, 0),
                                                  Quaternion.Euler(camRotationX, camRotationY - 315, 0)};
 
     private IEnumerator camTween;
@@ -42,11 +34,12 @@ public class CameraTwoRotator : MonoBehaviour {
 
     private void Start()
     {
-        playerTwoCam.transform.position = basePositions[0];
+        Vector3 startPos = basePositions[0] + new Vector3(0, 20, 0);
+        playerTwoCam.transform.position = startPos;
         playerTwoCam.transform.rotation = baseRotations[0];
 
         currentPos = 1;
-        floor = 1;
+        floor = 2;
 
         moveEnabled = true;
     }
@@ -54,50 +47,25 @@ public class CameraTwoRotator : MonoBehaviour {
     //Rotate camera around tower when arrow keys are pressed
     private void Update()
     {
+        Debug.Log(currentPos);
         if (moveEnabled)
         {
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
-            {
-                moveEnabled = false;
-
-                if(currentPos == 1)
-                {
-                    StartMove(basePositions[basePositions.Length-1], baseRotations[baseRotations.Length-1], basePositions.Length);
-                }
-                else
-                {
-                    StartMove(basePositions[currentPos - 2], baseRotations[currentPos-2], currentPos - 1);
-                }
-            }
-            if (Input.GetKeyDown(KeyCode.RightArrow))
+            if (Input.GetButton("Submit"))
             {
                 moveEnabled = false;
 
                 if (currentPos == basePositions.Length)
                 {
-                    StartMove(basePositions[0], baseRotations[0], 1);
+                    if (floor < numFloors)
+                    {
+                        moveEnabled = false;
+                        floor++;
+                        StartMove(basePositions[0], baseRotations[0], 1);
+                    }
                 }
                 else
                 {
                     StartMove(basePositions[currentPos], baseRotations[currentPos], currentPos + 1);
-                }
-            }
-            if (Input.GetKeyDown(KeyCode.UpArrow))
-            {
-                if (floor < numFloors)
-                {
-                    moveEnabled = false;
-                    floor++;
-                    StartMove(basePositions[currentPos - 1], baseRotations[currentPos - 1], currentPos);
-                }
-            }
-            if (Input.GetKeyDown(KeyCode.DownArrow))
-            {
-                if (floor > 1)
-                {
-                    moveEnabled = false;
-                    floor--;
-                    StartMove(basePositions[currentPos - 1], baseRotations[currentPos - 1], currentPos);
                 }
             }
         }
