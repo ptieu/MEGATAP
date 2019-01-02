@@ -45,8 +45,7 @@ public class CameraTwoRotator : MonoBehaviour {
 
     //Rotate camera around tower when arrow keys are pressed
     private void Update()
-    {
-        Debug.Log(currentPos);
+    { 
         if (moveEnabled)
         {
             if (Input.GetButton("Submit"))
@@ -112,6 +111,6 @@ public class CameraTwoRotator : MonoBehaviour {
     
     public int GetFloor()
     {
-        return floor-1;
+        return floor;
     }
 }
