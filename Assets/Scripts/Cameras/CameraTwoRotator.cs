@@ -11,20 +11,19 @@ public class CameraTwoRotator : MonoBehaviour {
     //Change these static variables iff tower is scaled
     private static int camPosHorizontal = 150;
     private static int camPosVertical = 20;
-    private static int camRotationX = 15;
-    private static int camRotationY = -45;
+    private static int camRotationX = 5;
     private static int numFloors = 10;
     
 
-    private Vector3[] basePositions = new [] { new Vector3(camPosHorizontal,    camPosVertical, 0),
-                                               new Vector3(0,                       camPosVertical, camPosHorizontal),
-                                               new Vector3(-(camPosHorizontal), camPosVertical, 0),
-                                               new Vector3(0,                       camPosVertical, -(camPosHorizontal))};
+    private Vector3[] basePositions = new [] { new Vector3(0,                   camPosVertical, -camPosHorizontal),
+                                               new Vector3(camPosHorizontal,    camPosVertical, 0),
+                                               new Vector3(0,                   camPosVertical, camPosHorizontal),
+                                               new Vector3(-camPosHorizontal,   camPosVertical, 0)};
 
-    private Quaternion[] baseRotations = new[] { Quaternion.Euler(camRotationX, camRotationY - 45, 0),
-                                                 Quaternion.Euler(camRotationX, camRotationY - 135, 0),
-                                                 Quaternion.Euler(camRotationX, camRotationY - 225, 0),
-                                                 Quaternion.Euler(camRotationX, camRotationY - 315, 0)};
+    private Quaternion[] baseRotations = new[] { Quaternion.Euler(camRotationX,  0,   0),
+                                                 Quaternion.Euler(camRotationX, -90,  0),
+                                                 Quaternion.Euler(camRotationX, -180, 0),
+                                                 Quaternion.Euler(camRotationX, -270, 0)};
 
     private IEnumerator camTween;
 
