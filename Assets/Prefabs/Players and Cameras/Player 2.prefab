@@ -181,6 +181,7 @@ MonoBehaviour:
   - {fileID: 1174657169313092, guid: b34de131824cbe447931d0a2d1e0696b, type: 2}
   tower: {fileID: 0}
   cam: {fileID: 0}
+  camRotator: {fileID: 0}
   widthBetweenTraps: 5
   heightBetweenTraps: 2
   horizontalGridSize: 4
