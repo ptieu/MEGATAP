@@ -9,6 +9,7 @@ public class PlayerTwo : MonoBehaviour {
     [SerializeField] private GameObject[] traps;
     [SerializeField] private GameObject tower;
     [SerializeField] private Camera cam;
+    [SerializeField] private CameraTwoRotator camRotator;
     [SerializeField] private float widthBetweenTraps;
     [SerializeField] private float heightBetweenTraps;
     [SerializeField] private int horizontalGridSize;
@@ -16,7 +17,7 @@ public class PlayerTwo : MonoBehaviour {
 
     private GameObject trap;
     private GameObject ghostTrap;
-
+    private int floor;
 
 
     private void Start()
@@ -30,6 +31,7 @@ public class PlayerTwo : MonoBehaviour {
 
     private void Update()
     {
+        floor = camRotator.GetFloor();
         RaycastFromCam(false);
     }
     public void OnClickTower()
@@ -67,7 +69,7 @@ public class PlayerTwo : MonoBehaviour {
                 ghostTrap.transform.rotation = hitRot;
             }
 
-            if (clicked && CheckNearby(hit.point, widthBetweenTraps, heightBetweenTraps) && trap != null)
+            if (clicked && CheckNearby(hit.point, widthBetweenTraps, heightBetweenTraps) && CheckFloor(hitPos.y) && trap != null)
             {
                 Instantiate(trap, hitPos, hitRot);
                 trap = null;
@@ -95,6 +97,20 @@ public class PlayerTwo : MonoBehaviour {
         }
 
         return true;
+    }
+
+    private bool CheckFloor(float hitY)
+    {
+        float upperLimit = floor * 20;
+        float lowerLimit = upperLimit - 20;
+        if(hitY >= lowerLimit && hitY <= upperLimit)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     private void SetGhost()
