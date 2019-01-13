@@ -45,21 +45,21 @@ public class PlayerOne : MonoBehaviour {
         switch (state)
         {
             case 1:
-                rb.AddForce(Input.GetAxis("Horizontal") * moveSpeed * movementMultiplier, 0, 0, ForceMode.Impulse);
+                rb.AddForce(Input.GetAxis("Horizontal_Joy_1") * moveSpeed * movementMultiplier, 0, 0, ForceMode.Impulse);
                 break;
             case 2:
-                rb.AddForce(0, 0, Input.GetAxis("Horizontal") * moveSpeed * movementMultiplier, ForceMode.Impulse);
+                rb.AddForce(0, 0, Input.GetAxis("Horizontal_Joy_1") * moveSpeed * movementMultiplier, ForceMode.Impulse);
                 break;
             case 3:
-                rb.AddForce(-Input.GetAxis("Horizontal") * moveSpeed * movementMultiplier, 0, 0, ForceMode.Impulse);
+                rb.AddForce(-Input.GetAxis("Horizontal_Joy_1") * moveSpeed * movementMultiplier, 0, 0, ForceMode.Impulse);
                 break;
             case 4:
-                rb.AddForce(0, 0, -Input.GetAxis("Horizontal") * moveSpeed * movementMultiplier, ForceMode.Impulse);
+                rb.AddForce(0, 0, -Input.GetAxis("Horizontal_Joy_1") * moveSpeed * movementMultiplier, ForceMode.Impulse);
                 break;
         }
 
         //Return to 0 (Handle drag manually)
-        if(Mathf.Abs(Input.GetAxis("Horizontal")) <= 0.5f && Mathf.Abs(Input.GetAxis("Horizontal")) >= 0f)
+        if(Mathf.Abs(Input.GetAxis("Horizontal_Joy_1")) <= 0.5f && Mathf.Abs(Input.GetAxis("Horizontal_Joy_1")) >= 0f)
         {
             rb.velocity = new Vector3(0, rb.velocity.y, 0);
         }
@@ -100,7 +100,7 @@ public class PlayerOne : MonoBehaviour {
         {
             rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
-        else if (rb.velocity.y > 0 && !Input.GetButton("Jump"))
+        else if (rb.velocity.y > 0 && !Input.GetButton("Jump_Joy_1"))
         {
             rb.velocity += Vector3.up * Physics.gravity.y * (lowerJumpMultiplier - 1) * Time.deltaTime;
         }
