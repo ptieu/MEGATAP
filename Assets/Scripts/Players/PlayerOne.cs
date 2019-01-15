@@ -44,8 +44,7 @@ public class PlayerOne : MonoBehaviour {
 		} else if (!isGrounded) {
 			movementMultiplier = inAirSpeed;
 		}
-
-        Debug.Log(Input.GetJoystickNames().Length);
+        
         //TODO: Later, get rid of this and allow them to choose keyboard or controller
         //Right now, if one controller is connected, it defaults to player 1.
         if(Input.GetJoystickNames().Length > 0)
@@ -72,7 +71,6 @@ public class PlayerOne : MonoBehaviour {
         }
         else
         {
-            Debug.Log("Keyboard");
             inputAxis = Input.GetAxis("Horizontal_Keyboard");
         }
 
