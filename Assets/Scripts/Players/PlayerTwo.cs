@@ -20,12 +20,19 @@ public class PlayerTwo : MonoBehaviour {
     private int floor;
 
 
+    private string[] joysticks;
+    private bool controller;
+    [SerializeField] private Image trapSelector;
+
     private void Start()
     {
         trapButtons[0].onClick.AddListener(OnClickTrap1);
         trapButtons[1].onClick.AddListener(OnClickTrap2);
         trapButtons[2].onClick.AddListener(OnClickTrap3);
         trapButtons[3].onClick.AddListener(OnClickTrap4);
+
+        joysticks = Input.GetJoystickNames();
+        controller = false;
     }
 
 
@@ -33,7 +40,63 @@ public class PlayerTwo : MonoBehaviour {
     {
         floor = camRotator.GetFloor();
         RaycastFromCam(false);
+
+
+        if (Input.GetJoystickNames().Length > 0)
+        {
+            for (int i = 0; i < joysticks.Length; i++)
+            {
+                if (!string.IsNullOrEmpty(joysticks[i]))
+                {
+                    Debug.Log("Controller " + i + " is connected using: " + joysticks[i]);
+                    if (i == 1)
+                    {
+                        controller = true;
+                    }
+                }
+                else
+                {
+                    Debug.Log("Controller " + i + " is disconnected.");
+                    if (i == 1)
+                    {
+                        controller = false;
+                    }
+                }
+            }
+        }
+        else
+        {
+            controller = true;
+        }
+
+        if(controller)
+        {
+            trapSelector.enabled = true;
+            if(Input.GetAxisRaw("DpadX_Joy_2") == 1)
+            {
+                MoveSelectorRight();
+            }
+            else if(Input.GetAxisRaw("DpadX_Joy_2") == -1)
+            {
+                MoveSelectorLeft();
+            }
+        }
+        else
+        {
+            trapSelector.enabled = false;
+        }
     }
+
+    private void MoveSelectorRight()
+    {
+
+    }
+
+    private void MoveSelectorLeft()
+    {
+
+    }
+
     public void OnClickTower()
     {
         RaycastFromCam(true);
