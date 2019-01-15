@@ -21,11 +21,14 @@ public class PlayerOne : MonoBehaviour {
     private Vector3 tempVelocity;
     private bool isGrounded;
 	private Rigidbody rb;
+    private float inputAxis;
+    private string[] joysticks;
 
 	private float movementMultiplier = 1f; // modify movement speed 
 
 	void Start() {
 		rb = GetComponent<Rigidbody> ();
+        joysticks = Input.GetJoystickNames();
 	}
 
 	void OnCollisionEnter() {
@@ -42,24 +45,45 @@ public class PlayerOne : MonoBehaviour {
 			movementMultiplier = inAirSpeed;
 		}
 
+        if(Input.GetJoystickNames().Length > 0)
+        {
+            for(int i = 0; i < joysticks.Length; i++)
+            {
+                if(!string.IsNullOrEmpty(joysticks[i]))
+                {
+                    Debug.Log("Controller " + i + " is connected using: " + joysticks[i]);
+                }
+                else
+                {
+                    Debug.Log("Controller " + i + " is disconnected.");
+                }
+            }
+            inputAxis = Input.GetAxis("Horizontal_Joy_1");
+        }
+        else
+        {
+            Debug.Log("Keyboard");
+            inputAxis = Input.GetAxis("Horizontal_Keyboard");
+        }
+
         switch (state)
         {
             case 1:
-                rb.AddForce(Input.GetAxis("Horizontal_Joy_1") * moveSpeed * movementMultiplier, 0, 0, ForceMode.Impulse);
+                rb.AddForce(inputAxis * moveSpeed * movementMultiplier, 0, 0, ForceMode.Impulse);
                 break;
             case 2:
-                rb.AddForce(0, 0, Input.GetAxis("Horizontal_Joy_1") * moveSpeed * movementMultiplier, ForceMode.Impulse);
+                rb.AddForce(0, 0, inputAxis * moveSpeed * movementMultiplier, ForceMode.Impulse);
                 break;
             case 3:
-                rb.AddForce(-Input.GetAxis("Horizontal_Joy_1") * moveSpeed * movementMultiplier, 0, 0, ForceMode.Impulse);
+                rb.AddForce(-inputAxis * moveSpeed * movementMultiplier, 0, 0, ForceMode.Impulse);
                 break;
             case 4:
-                rb.AddForce(0, 0, -Input.GetAxis("Horizontal_Joy_1") * moveSpeed * movementMultiplier, ForceMode.Impulse);
+                rb.AddForce(0, 0, -inputAxis * moveSpeed * movementMultiplier, ForceMode.Impulse);
                 break;
         }
 
         //Return to 0 (Handle drag manually)
-        if(Mathf.Abs(Input.GetAxis("Horizontal_Joy_1")) <= 0.5f && Mathf.Abs(Input.GetAxis("Horizontal_Joy_1")) >= 0f)
+        if(Mathf.Abs(inputAxis) <= 0.5f && Mathf.Abs(inputAxis) >= 0f)
         {
             rb.velocity = new Vector3(0, rb.velocity.y, 0);
         }
