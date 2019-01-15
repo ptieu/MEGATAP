@@ -45,6 +45,9 @@ public class PlayerOne : MonoBehaviour {
 			movementMultiplier = inAirSpeed;
 		}
 
+        Debug.Log(Input.GetJoystickNames().Length);
+        //TODO: Later, get rid of this and allow them to choose keyboard or controller
+        //Right now, if one controller is connected, it defaults to player 1.
         if(Input.GetJoystickNames().Length > 0)
         {
             for(int i = 0; i < joysticks.Length; i++)
@@ -52,13 +55,20 @@ public class PlayerOne : MonoBehaviour {
                 if(!string.IsNullOrEmpty(joysticks[i]))
                 {
                     Debug.Log("Controller " + i + " is connected using: " + joysticks[i]);
+                    if(i == 0)
+                    {
+                        inputAxis = Input.GetAxis("Horizontal_Joy_1");
+                    }
                 }
                 else
                 {
                     Debug.Log("Controller " + i + " is disconnected.");
+                    if(i == 0)
+                    {
+                        inputAxis = Input.GetAxis("Horizontal_Keyboard");
+                    }
                 }
             }
-            inputAxis = Input.GetAxis("Horizontal_Joy_1");
         }
         else
         {
@@ -107,15 +117,11 @@ public class PlayerOne : MonoBehaviour {
 		}
 
         //crouch
-        float tempSpeed = moveSpeed;
-		if (Input.GetKeyDown (KeyCode.S) && isGrounded) {
-			Debug.Log("S is pressed");
-            tempSpeed = moveSpeed;
-			moveSpeed = 0;
+		if (Input.GetButton("Crouch_Joy_1") && isGrounded) {
+			Debug.Log("Crouching");
 		}	
-		if (Input.GetKeyUp(KeyCode.S) && isGrounded) {
-			Debug.Log("S is released");
-            moveSpeed = tempSpeed;
+		if (Input.GetButtonUp("Crouch_Joy_1") && isGrounded) {
+			Debug.Log("Done Crouching");
 		}
 
 
