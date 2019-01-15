@@ -95,7 +95,7 @@ public class PlayerOne : MonoBehaviour {
         }
 
         //jump
-        if (Input.GetKeyDown (KeyCode.Space) && isGrounded) {
+        if (Input.GetButton("Jump_Joy_1") && isGrounded) {
 			isGrounded = false;
             tempVelocity = rb.velocity;
             if (rb.velocity.magnitude >= maxJumpVelocity)
