@@ -186,7 +186,10 @@ MonoBehaviour:
   heightBetweenTraps: 2
   horizontalGridSize: 4
   verticalGridSize: 2
-  trapSelector: {fileID: 0}
+  eventSystem: {fileID: 0}
+  gameManager: {fileID: 0}
+  controllerCursor: {fileID: 0}
+  controllerCursorSpeed: 4
 --- !u!136 &136189357046121884
 CapsuleCollider:
   m_ObjectHideFlags: 1

@@ -18,6 +18,8 @@ public class PlayerTwo : MonoBehaviour {
 
     private GameObject trap;
     private GameObject ghostTrap;
+    private GameObject previouslySelected;
+    private bool placeEnabled;
     private int floor;
 
     [SerializeField] private EventSystem eventSystem;
@@ -46,6 +48,8 @@ public class PlayerTwo : MonoBehaviour {
         {
             controllerCursor.enabled = false;
         }
+
+        placeEnabled = false;
     }
 
 
@@ -60,6 +64,10 @@ public class PlayerTwo : MonoBehaviour {
             if(Mathf.Abs(Input.GetAxisRaw("Horizontal_Joy_2")) > 0.2 || Mathf.Abs(Input.GetAxisRaw("Vertical_Joy_2")) > 0.2)
             {
                 controllerCursor.transform.Translate(Input.GetAxisRaw("Horizontal_Joy_2") * controllerCursorSpeed, Input.GetAxisRaw("Vertical_Joy_2") * controllerCursorSpeed, 0);
+            }
+            if(Input.GetButton("Place_Joy_2") && placeEnabled)
+            {
+                RaycastFromCam(true);
             }
         }
     }
@@ -76,7 +84,15 @@ public class PlayerTwo : MonoBehaviour {
     private void RaycastFromCam(bool clicked)
     {
         RaycastHit hit;
-        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+        Ray ray;
+        if (controller)
+        {
+            ray = cam.ScreenPointToRay(controllerCursor.transform.position);
+        }
+        else
+        {
+            ray = cam.ScreenPointToRay(Input.mousePosition);
+        }
 
         if (Physics.Raycast(ray, out hit, float.MaxValue, ~LayerMask.NameToLayer("Tower")))
         {
@@ -114,6 +130,12 @@ public class PlayerTwo : MonoBehaviour {
                 trap = null;
                 Cursor.visible = true;
                 DestroyGhost();
+
+                if(controller)
+                {
+                    eventSystem.SetSelectedGameObject(previouslySelected);
+                    placeEnabled = false;
+                }
             }
         }
         else
@@ -190,28 +212,63 @@ public class PlayerTwo : MonoBehaviour {
     private void OnClickTrap1()
     {
         trap = traps[0];
+        previouslySelected = trapButtons[0].gameObject;
+        eventSystem.SetSelectedGameObject(null);
+        if (controller)
+        {
+            //controllerCursor.transform.localPosition = new Vector3(200, 0, 0);
+        }
         DestroyGhost();
         SetGhost();
+        StartCoroutine(EnableInput());
+        
     }
 
     private void OnClickTrap2()
     {
         trap = traps[1];
+        previouslySelected = trapButtons[0].gameObject;
+        eventSystem.SetSelectedGameObject(null);
+        if (controller)
+        {
+            //controllerCursor.transform.localPosition = new Vector3(200, 0, 0);
+        }
         DestroyGhost();
         SetGhost();
+        StartCoroutine(EnableInput());
     }
 
     private void OnClickTrap3()
     {
         trap = traps[2];
+        previouslySelected = trapButtons[0].gameObject;
+        eventSystem.SetSelectedGameObject(null);
+        if (controller)
+        {
+           // controllerCursor.transform.localPosition = new Vector3(200, 0, 0);
+        }
         DestroyGhost();
         SetGhost();
+        StartCoroutine(EnableInput());
     }
 
     private void OnClickTrap4()
     {
         trap = traps[3];
+        previouslySelected = trapButtons[0].gameObject;
+        eventSystem.SetSelectedGameObject(null);
+        if (controller)
+        {
+           // controllerCursor.transform.localPosition = new Vector3(200, 0, 0);
+        }
         DestroyGhost();
         SetGhost();
+        StartCoroutine(EnableInput());
+    }
+
+    IEnumerator EnableInput()
+    {
+        yield return new WaitForSeconds(0.5f);
+        placeEnabled = true;
     }
 }
