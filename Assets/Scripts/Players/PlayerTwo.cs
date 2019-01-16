@@ -214,10 +214,6 @@ public class PlayerTwo : MonoBehaviour {
         trap = traps[0];
         previouslySelected = trapButtons[0].gameObject;
         eventSystem.SetSelectedGameObject(null);
-        if (controller)
-        {
-            //controllerCursor.transform.localPosition = new Vector3(200, 0, 0);
-        }
         DestroyGhost();
         SetGhost();
         StartCoroutine(EnableInput());
@@ -227,12 +223,8 @@ public class PlayerTwo : MonoBehaviour {
     private void OnClickTrap2()
     {
         trap = traps[1];
-        previouslySelected = trapButtons[0].gameObject;
+        previouslySelected = trapButtons[1].gameObject;
         eventSystem.SetSelectedGameObject(null);
-        if (controller)
-        {
-            //controllerCursor.transform.localPosition = new Vector3(200, 0, 0);
-        }
         DestroyGhost();
         SetGhost();
         StartCoroutine(EnableInput());
@@ -241,12 +233,8 @@ public class PlayerTwo : MonoBehaviour {
     private void OnClickTrap3()
     {
         trap = traps[2];
-        previouslySelected = trapButtons[0].gameObject;
+        previouslySelected = trapButtons[2].gameObject;
         eventSystem.SetSelectedGameObject(null);
-        if (controller)
-        {
-           // controllerCursor.transform.localPosition = new Vector3(200, 0, 0);
-        }
         DestroyGhost();
         SetGhost();
         StartCoroutine(EnableInput());
@@ -255,12 +243,8 @@ public class PlayerTwo : MonoBehaviour {
     private void OnClickTrap4()
     {
         trap = traps[3];
-        previouslySelected = trapButtons[0].gameObject;
+        previouslySelected = trapButtons[3].gameObject;
         eventSystem.SetSelectedGameObject(null);
-        if (controller)
-        {
-           // controllerCursor.transform.localPosition = new Vector3(200, 0, 0);
-        }
         DestroyGhost();
         SetGhost();
         StartCoroutine(EnableInput());
