@@ -17,19 +17,20 @@ public class PlayerOne : MonoBehaviour {
 	[SerializeField] private float lowerJumpMultiplier;
     [SerializeField] private float maxVelocity;
     [SerializeField] private float maxJumpVelocity;
+    [SerializeField] private GameManager gameManager;
+    private float inputAxis;
 
     private Vector3 tempVelocity;
     private bool isGrounded;
 	private Rigidbody rb;
-    private float inputAxis;
-    private string[] joysticks;
 
 	private float movementMultiplier = 1f; // modify movement speed 
 
 	void Start() {
 		rb = GetComponent<Rigidbody> ();
-        joysticks = Input.GetJoystickNames();
-	}
+        gameManager = new GameManager();
+        inputAxis = gameManager.GetInputAxis();
+    }
 
 	void OnCollisionEnter() {
 		isGrounded = true;
@@ -44,36 +45,8 @@ public class PlayerOne : MonoBehaviour {
 		} else if (!isGrounded) {
 			movementMultiplier = inAirSpeed;
 		}
-        
-        //TODO: Later, get rid of this and allow them to choose keyboard or controller
-        //Right now, if one controller is connected, it defaults to player 1.
-        if(Input.GetJoystickNames().Length > 0)
-        {
-            for(int i = 0; i < joysticks.Length; i++)
-            {
-                if(!string.IsNullOrEmpty(joysticks[i]))
-                {
-                    Debug.Log("Controller " + i + " is connected using: " + joysticks[i]);
-                    if(i == 0)
-                    {
-                        inputAxis = Input.GetAxis("Horizontal_Joy_1");
-                    }
-                }
-                else
-                {
-                    Debug.Log("Controller " + i + " is disconnected.");
-                    if(i == 0)
-                    {
-                        inputAxis = Input.GetAxis("Horizontal_Keyboard");
-                    }
-                }
-            }
-        }
-        else
-        {
-            inputAxis = Input.GetAxis("Horizontal_Keyboard");
-        }
 
+        inputAxis = gameManager.GetInputAxis();
         switch (state)
         {
             case 1:
