@@ -131,6 +131,6 @@ public class PlayerOne : MonoBehaviour {
 
     public bool GameOver()
     {
-        return dead;
+        return lose;
     }
 }
