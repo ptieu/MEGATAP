@@ -21,7 +21,7 @@ public class PlayerOne : MonoBehaviour {
 
     //timer and death
     [SerializeField] private float time = 500f;
-    private bool dead;
+    private bool lose;
     public Text TimerText;
     
 
@@ -33,7 +33,7 @@ public class PlayerOne : MonoBehaviour {
 
 	void Start() {
 		rb = GetComponent<Rigidbody> ();
-        dead = false;
+        lose = false;
         SetTimerText();
 	}
 
@@ -119,7 +119,7 @@ public class PlayerOne : MonoBehaviour {
         SetTimerText();
         if(time < 0)
         {
-            dead = true;
+            lose = true;
             GameOver();
         }
     }

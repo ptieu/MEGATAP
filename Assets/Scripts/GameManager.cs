@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour {
 
     //Game Over Status
     [SerializeField] private PlayerOne player;
-    private bool dead = false;
+    private bool lose = false;
 
 	void Update () {
 		if(Input.GetButton("Cancel"))
@@ -15,8 +15,8 @@ public class GameManager : MonoBehaviour {
         }
 
         //Game Over from timer
-        dead = player.GameOver();
-        if(dead == true)
+        lose = player.GameOver();
+        if(lose == true)
         {
             SceneManager.LoadScene("Menu");
         }
