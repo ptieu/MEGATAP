@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour {
     private void Awake()
     {
         joysticks = Input.GetJoystickNames();
+        CheckControllers();
     }
 
     private void Update () {
@@ -20,7 +21,6 @@ public class GameManager : MonoBehaviour {
         {
             SceneManager.LoadScene("Menu");
         }
-
         CheckControllers();
 	}
 
@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour {
             {
                 if (!string.IsNullOrEmpty(joysticks[i]))
                 {
-                    Debug.Log("Controller " + i + " is connected using: " + joysticks[i]);
+                    //Debug.Log("Controller " + i + " is connected using: " + joysticks[i]);
                     if (i == 0)
                     {
                         controllerOne = true;
@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour {
                 }
                 else
                 {
-                    Debug.Log("Controller " + i + " is disconnected.");
+                    //Debug.Log("Controller " + i + " is disconnected.");
                     if (i == 0)
                     {
                         controllerOne = false;

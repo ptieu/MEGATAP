@@ -28,7 +28,6 @@ public class PlayerOne : MonoBehaviour {
 
 	void Start() {
 		rb = GetComponent<Rigidbody> ();
-        gameManager = new GameManager();
         inputAxis = gameManager.GetInputAxis();
     }
 

@@ -32,9 +32,13 @@ public class PlayerTwo : MonoBehaviour {
         trapButtons[1].onClick.AddListener(OnClickTrap2);
         trapButtons[2].onClick.AddListener(OnClickTrap3);
         trapButtons[3].onClick.AddListener(OnClickTrap4);
-        
-        controller = false;
-        gameManager = new GameManager();
+
+        controller = gameManager.GetControllerTwoState();
+        if(controller)
+        {
+            eventSystem.firstSelectedGameObject = trapButtons[0].gameObject;
+            eventSystem.SetSelectedGameObject(trapButtons[0].gameObject);
+        }
     }
 
 
@@ -46,7 +50,6 @@ public class PlayerTwo : MonoBehaviour {
         controller = gameManager.GetControllerTwoState();
         if(controller)
         {
-            eventSystem.firstSelectedGameObject = trapButtons[0].gameObject;
             if (Input.GetAxisRaw("Horizontal_Menu") == 1)
             {
                 MoveSelectorRight();
@@ -64,6 +67,7 @@ public class PlayerTwo : MonoBehaviour {
 
     private void MoveSelectorRight()
     {
+        GameObject current = eventSystem.currentSelectedGameObject;
 
     }
 
