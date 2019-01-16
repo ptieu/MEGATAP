@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour {
     {
         joysticks = Input.GetJoystickNames();
         CheckControllers();
+        Debug.Log("Player 1 controller: " + controllerOne);
+        Debug.Log("Player 2 controller: " + controllerTwo);
     }
 
     private void Update () {
@@ -61,8 +63,6 @@ public class GameManager : MonoBehaviour {
             controllerOne = false;
             controllerTwo = false;
         }
-        Debug.Log("Player 1 controller: " + controllerOne);
-        Debug.Log("Player 2 controller: " + controllerTwo);
     }
 
     public bool GetControllerTwoState()

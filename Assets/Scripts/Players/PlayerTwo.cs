@@ -22,6 +22,8 @@ public class PlayerTwo : MonoBehaviour {
 
     [SerializeField] private EventSystem eventSystem;
     [SerializeField] private GameManager gameManager;
+    [SerializeField] private Image controllerCursor;
+    [SerializeField] private float controllerCursorSpeed;
 
     private string[] joysticks;
     private bool controller;
@@ -38,6 +40,11 @@ public class PlayerTwo : MonoBehaviour {
         {
             eventSystem.firstSelectedGameObject = trapButtons[0].gameObject;
             eventSystem.SetSelectedGameObject(trapButtons[0].gameObject);
+            controllerCursor.enabled = true;
+        }
+        else
+        {
+            controllerCursor.enabled = false;
         }
     }
 
@@ -50,31 +57,13 @@ public class PlayerTwo : MonoBehaviour {
         controller = gameManager.GetControllerTwoState();
         if(controller)
         {
-            if (Input.GetAxisRaw("Horizontal_Menu") == 1)
+            if(Mathf.Abs(Input.GetAxisRaw("Horizontal_Joy_2")) > 0.2 || Mathf.Abs(Input.GetAxisRaw("Vertical_Joy_2")) > 0.2)
             {
-                MoveSelectorRight();
-            }
-            else if (Input.GetAxisRaw("Horizontal_Menu") == -1)
-            {
-                MoveSelectorLeft();
+                controllerCursor.transform.Translate(Input.GetAxisRaw("Horizontal_Joy_2") * controllerCursorSpeed, Input.GetAxisRaw("Vertical_Joy_2") * controllerCursorSpeed, 0);
             }
         }
-        else
-        {
-
-        }
     }
 
-    private void MoveSelectorRight()
-    {
-        GameObject current = eventSystem.currentSelectedGameObject;
-
-    }
-
-    private void MoveSelectorLeft()
-    {
-
-    }
 
     public void OnClickTower()
     {
@@ -89,7 +78,7 @@ public class PlayerTwo : MonoBehaviour {
         RaycastHit hit;
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out hit, 99999, ~LayerMask.NameToLayer("Tower")))
+        if (Physics.Raycast(ray, out hit, float.MaxValue, ~LayerMask.NameToLayer("Tower")))
         {
             int hitX = Mathf.RoundToInt(hit.point.x / horizontalGridSize) * horizontalGridSize;
             int hitZ = Mathf.RoundToInt(hit.point.z / horizontalGridSize) * horizontalGridSize;
@@ -107,8 +96,16 @@ public class PlayerTwo : MonoBehaviour {
 
             if (ghostTrap != null)
             {
-                ghostTrap.transform.position = hitPos;
-                ghostTrap.transform.rotation = hitRot;
+                if(controller)
+                {
+                    ghostTrap.transform.position = hitPos;
+                    ghostTrap.transform.rotation = hitRot;
+                }
+                else
+                {
+                    ghostTrap.transform.position = hitPos;
+                    ghostTrap.transform.rotation = hitRot;
+                }
             }
 
             if (clicked && CheckNearby(hit.point, widthBetweenTraps, heightBetweenTraps) && CheckFloor(hitPos.y) && trap != null)
