@@ -74,7 +74,14 @@ public class GameManager : MonoBehaviour {
     {
         if (controllerOne)
         {
-            return Input.GetAxis("Horizontal_Joy_1");
+            if(Mathf.Abs(Input.GetAxis("Horizontal_Joy_1")) > 0.4f)
+            {
+                return Input.GetAxis("Horizontal_Joy_1");
+            }
+            else
+            {
+                return 0;
+            }
         }
         else
         {
