@@ -48,7 +48,7 @@ public class CameraTwoRotator : MonoBehaviour {
     { 
         if (moveEnabled)
         {
-            if (Input.GetButton("Submit"))
+            if (Input.GetButton("Submit_Joy_2"))
             {
                 moveEnabled = false;
 
