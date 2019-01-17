@@ -17,6 +17,8 @@ public class PlayerOne : MonoBehaviour {
 	[SerializeField] private float lowerJumpMultiplier;
     [SerializeField] private float maxVelocity;
     [SerializeField] private float maxJumpVelocity;
+    [SerializeField] private GameManager gameManager;
+    private float inputAxis;
 
     private Vector3 tempVelocity;
     private bool isGrounded;
@@ -26,7 +28,8 @@ public class PlayerOne : MonoBehaviour {
 
 	void Start() {
 		rb = GetComponent<Rigidbody> ();
-	}
+        inputAxis = gameManager.GetInputAxis();
+    }
 
 	void OnCollisionEnter() {
 		isGrounded = true;
@@ -42,24 +45,25 @@ public class PlayerOne : MonoBehaviour {
 			movementMultiplier = inAirSpeed;
 		}
 
+        inputAxis = gameManager.GetInputAxis();
         switch (state)
         {
             case 1:
-                rb.AddForce(Input.GetAxis("Horizontal") * moveSpeed * movementMultiplier, 0, 0, ForceMode.Impulse);
+                rb.AddForce(inputAxis * moveSpeed * movementMultiplier, 0, 0, ForceMode.Impulse);
                 break;
             case 2:
-                rb.AddForce(0, 0, Input.GetAxis("Horizontal") * moveSpeed * movementMultiplier, ForceMode.Impulse);
+                rb.AddForce(0, 0, inputAxis * moveSpeed * movementMultiplier, ForceMode.Impulse);
                 break;
             case 3:
-                rb.AddForce(-Input.GetAxis("Horizontal") * moveSpeed * movementMultiplier, 0, 0, ForceMode.Impulse);
+                rb.AddForce(-inputAxis * moveSpeed * movementMultiplier, 0, 0, ForceMode.Impulse);
                 break;
             case 4:
-                rb.AddForce(0, 0, -Input.GetAxis("Horizontal") * moveSpeed * movementMultiplier, ForceMode.Impulse);
+                rb.AddForce(0, 0, -inputAxis * moveSpeed * movementMultiplier, ForceMode.Impulse);
                 break;
         }
 
         //Return to 0 (Handle drag manually)
-        if(Mathf.Abs(Input.GetAxis("Horizontal")) <= 0.5f && Mathf.Abs(Input.GetAxis("Horizontal")) >= 0f)
+        if(Mathf.Abs(inputAxis) <= 0.5f && Mathf.Abs(inputAxis) >= 0f)
         {
             rb.velocity = new Vector3(0, rb.velocity.y, 0);
         }
@@ -71,7 +75,7 @@ public class PlayerOne : MonoBehaviour {
         }
 
         //jump
-        if (Input.GetKeyDown (KeyCode.Space) && isGrounded) {
+        if (Input.GetButton("Jump_Joy_1") && isGrounded) {
 			isGrounded = false;
             tempVelocity = rb.velocity;
             if (rb.velocity.magnitude >= maxJumpVelocity)
@@ -83,15 +87,11 @@ public class PlayerOne : MonoBehaviour {
 		}
 
         //crouch
-        float tempSpeed = moveSpeed;
-		if (Input.GetKeyDown (KeyCode.S) && isGrounded) {
-			Debug.Log("S is pressed");
-            tempSpeed = moveSpeed;
-			moveSpeed = 0;
+		if (Input.GetButton("Crouch_Joy_1") && isGrounded) {
+			Debug.Log("Crouching");
 		}	
-		if (Input.GetKeyUp(KeyCode.S) && isGrounded) {
-			Debug.Log("S is released");
-            moveSpeed = tempSpeed;
+		if (Input.GetButtonUp("Crouch_Joy_1") && isGrounded) {
+			Debug.Log("Done Crouching");
 		}
 
 
@@ -100,7 +100,7 @@ public class PlayerOne : MonoBehaviour {
         {
             rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
-        else if (rb.velocity.y > 0 && !Input.GetButton("Jump"))
+        else if (rb.velocity.y > 0 && !Input.GetButton("Jump_Joy_1"))
         {
             rb.velocity += Vector3.up * Physics.gravity.y * (lowerJumpMultiplier - 1) * Time.deltaTime;
         }
