@@ -10,13 +10,14 @@ public class CameraOneRotator : MonoBehaviour {
     [SerializeField] private float moveSpeed;
     [SerializeField] private GameObject playerModel;
     [SerializeField] private GameObject wall;
-    [SerializeField] private GameObject[] rotateTriggers;
+    [SerializeField] private GameObject[] rotateTriggers;    //Triggers that cause tower to rotate
+    [SerializeField] private GameObject[] wallTriggers;     //Triggers that pop up invisible wall behind player
     [SerializeField] private Transform floorSpawn;
 
     //Change these if the tower is scaled
     private static int camPosHorizontal = 45;
-    private static int camPosVertical   = 7;
-    private static int camRotationX     = 10;
+    private static int camPosVertical   = 20;
+    private static int camRotationX     = 5;
     private static int camRotationY     = 0;
     private static int numFloors = 10;
 
@@ -48,7 +49,7 @@ public class CameraOneRotator : MonoBehaviour {
     {
         Vector3 wallPos = wall.transform.position;
         Quaternion wallRot = wall.transform.rotation;
-        float wallY = wall.transform.position.y + 10 * (floor - 1);
+        float wallY = wall.transform.position.y + 20 * (floor - 1);
 
         switch (other.tag)
         {
@@ -62,6 +63,7 @@ public class CameraOneRotator : MonoBehaviour {
                 StartMove(basePositions[3], rotations[3], 4);
                 break;
             case "Trigger4":
+                Debug.Log("Move up");
                 if (floor < numFloors)
                 {
                     floor++;
@@ -75,17 +77,17 @@ public class CameraOneRotator : MonoBehaviour {
                     break;
                 }
             case "Wall1":
-                wallPos = new Vector3(rotateTriggers[0].transform.position.x, wallY, rotateTriggers[0].transform.position.z + 6);
-                wallRot = Quaternion.Euler(wall.transform.rotation.x, wall.transform.rotation.y + 90, wall.transform.rotation.z);
+                wallPos = new Vector3(wallTriggers[0].transform.position.x, wallY, wallTriggers[0].transform.position.z - 2);
+                wallRot = Quaternion.Euler(wall.transform.rotation.x, wall.transform.rotation.y, wall.transform.rotation.z);
                 Instantiate(wall, wallPos, wallRot);
                 break;
             case "Wall2":
-                wallPos = new Vector3(rotateTriggers[1].transform.position.x - 5, wallY, rotateTriggers[1].transform.position.z);
+                wallPos = new Vector3(wallTriggers[1].transform.position.x + 0.5f, wallY, wallTriggers[1].transform.position.z);
                 Instantiate(wall, wallPos, wallRot);
                 break;
             case "Wall3":
-                wallPos = new Vector3(rotateTriggers[2].transform.position.x, wallY, rotateTriggers[1].transform.position.z - 5);
-                wallRot = Quaternion.Euler(wall.transform.rotation.x, wall.transform.rotation.y + 90, wall.transform.rotation.z);
+                wallPos = new Vector3(wallTriggers[2].transform.position.x, wallY, wallTriggers[2].transform.position.z + 2);
+                wallRot = Quaternion.Euler(wall.transform.rotation.x, wall.transform.rotation.y, wall.transform.rotation.z);
                 Instantiate(wall, wallPos, wallRot);
                 break;
         }
@@ -127,7 +129,7 @@ public class CameraOneRotator : MonoBehaviour {
     //TODO: Change this. It's not good. Bugs out sometimes and sends people all the way up. Replace with a Lerp & a ladder? 
     private void MovePlayerUp()
     {
-        this.transform.position = floorSpawn.position + Vector3.up * 10 * (floor - 2);
+        this.transform.position = floorSpawn.position + Vector3.up * 20 * (floor - 2);
     }
 
     //Rotate the player model when you move around the tower
