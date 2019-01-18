@@ -10,14 +10,13 @@ public class CameraOneRotator : MonoBehaviour {
     [SerializeField] private float moveSpeed;
     [SerializeField] private GameObject playerModel;
     [SerializeField] private GameObject wall;
-    [SerializeField] private GameObject[] rotateTriggers;    //Triggers that cause tower to rotate
-    [SerializeField] private GameObject[] wallTriggers;     //Triggers that pop up invisible wall behind player
+    [SerializeField] private GameObject[] rotateTriggers;
     [SerializeField] private Transform floorSpawn;
 
     //Change these if the tower is scaled
-    private static int camPosHorizontal = 25;
-    private static int camPosVertical   = 13;
-    private static int camRotationX     = 5;
+    private static int camPosHorizontal = 45;
+    private static int camPosVertical   = 7;
+    private static int camRotationX     = 10;
     private static int camRotationY     = 0;
     private static int numFloors = 10;
 
@@ -44,70 +43,49 @@ public class CameraOneRotator : MonoBehaviour {
         rb = GetComponent<Rigidbody>();
     }
 
-    private void Update()
-    {
-        switch(cameraState)
-        {
-            case 1:
-                playerOneCam.transform.position = new Vector3(playerModel.transform.position.x, playerOneCam.transform.position.y, playerModel.transform.position.z - camPosHorizontal);
-                break;
-            case 2:
-                playerOneCam.transform.position = new Vector3(playerModel.transform.position.x + camPosHorizontal, playerOneCam.transform.position.y, playerModel.transform.position.z);
-                break;
-            case 3:
-                playerOneCam.transform.position = new Vector3(playerModel.transform.position.x, playerOneCam.transform.position.y, playerModel.transform.position.z + camPosHorizontal);
-                break;
-            case 4:
-                playerOneCam.transform.position = new Vector3(playerModel.transform.position.x - camPosHorizontal, playerOneCam.transform.position.y, playerModel.transform.position.z);
-                break;
-
-        }
-    }
-
     //4 triggers for rotating camera, 3 for putting up walls behind the player
     private void OnTriggerEnter(Collider other)
     {
         Vector3 wallPos = wall.transform.position;
         Quaternion wallRot = wall.transform.rotation;
-        float wallY = wall.transform.position.y + 20 * (floor - 1);
+        float wallY = wall.transform.position.y + 10 * (floor - 1);
 
         switch (other.tag)
         {
             case "Trigger1":
-                StartMove(new Vector3(playerModel.transform.position.x + camPosHorizontal, playerOneCam.transform.position.y, playerModel.transform.position.z + 5), rotations[1], 2);
+                StartMove(basePositions[1], rotations[1], 2);
                 break;
             case "Trigger2":
-                StartMove(new Vector3(playerModel.transform.position.x - 5, playerOneCam.transform.position.y, playerModel.transform.position.z + camPosHorizontal), rotations[2], 3);
+                StartMove(basePositions[2], rotations[2], 3);
                 break;
             case "Trigger3":
-                StartMove(new Vector3(playerModel.transform.position.x - camPosHorizontal, playerOneCam.transform.position.y, playerModel.transform.position.z), rotations[3], 4);
+                StartMove(basePositions[3], rotations[3], 4);
                 break;
             case "Trigger4":
-                Debug.Log("Move up");
                 if (floor < numFloors)
                 {
                     floor++;
                     MovePlayerUp();
-                    StartMove(new Vector3(playerModel.transform.position.x, playerOneCam.transform.position.y + 20, playerModel.transform.position.z - camPosHorizontal), rotations[0], 1);
+                    StartMove(basePositions[0], rotations[0], 1);
                     break;
                 }
                 else
                 {
-                    StartMove(new Vector3(playerModel.transform.position.x, playerOneCam.transform.position.y + 20, playerModel.transform.position.z - camPosHorizontal), rotations[0], 1);
+                    StartMove(basePositions[0], rotations[0], 1);
                     break;
                 }
             case "Wall1":
-                wallPos = new Vector3(wallTriggers[0].transform.position.x, wallY, wallTriggers[0].transform.position.z - 2);
-                wallRot = Quaternion.Euler(wall.transform.rotation.x, wall.transform.rotation.y, wall.transform.rotation.z);
+                wallPos = new Vector3(rotateTriggers[0].transform.position.x, wallY, rotateTriggers[0].transform.position.z + 6);
+                wallRot = Quaternion.Euler(wall.transform.rotation.x, wall.transform.rotation.y + 90, wall.transform.rotation.z);
                 Instantiate(wall, wallPos, wallRot);
                 break;
             case "Wall2":
-                wallPos = new Vector3(wallTriggers[1].transform.position.x + 0.5f, wallY, wallTriggers[1].transform.position.z);
+                wallPos = new Vector3(rotateTriggers[1].transform.position.x - 5, wallY, rotateTriggers[1].transform.position.z);
                 Instantiate(wall, wallPos, wallRot);
                 break;
             case "Wall3":
-                wallPos = new Vector3(wallTriggers[2].transform.position.x, wallY, wallTriggers[2].transform.position.z + 2);
-                wallRot = Quaternion.Euler(wall.transform.rotation.x, wall.transform.rotation.y, wall.transform.rotation.z);
+                wallPos = new Vector3(rotateTriggers[2].transform.position.x, wallY, rotateTriggers[1].transform.position.z - 5);
+                wallRot = Quaternion.Euler(wall.transform.rotation.x, wall.transform.rotation.y + 90, wall.transform.rotation.z);
                 Instantiate(wall, wallPos, wallRot);
                 break;
         }
@@ -136,12 +114,12 @@ public class CameraOneRotator : MonoBehaviour {
 
         for (float t = 0; t < time; t += Time.deltaTime)
         {
-            playerOneCam.transform.position = Vector3.Lerp(currentPos, targetPos, t/time);
+            playerOneCam.transform.localPosition = Vector3.Lerp(currentPos, targetPos, t/time);
             playerOneCam.transform.rotation = Quaternion.Slerp(currentRot, targetRot, t/time);
             yield return null;
         }
 
-        //playerOneCam.transform.po
+        playerOneCam.transform.localPosition = targetPos;
         playerOneCam.transform.rotation = targetRot;
         camTween = null;
     }
@@ -149,8 +127,7 @@ public class CameraOneRotator : MonoBehaviour {
     //TODO: Change this. It's not good. Bugs out sometimes and sends people all the way up. Replace with a Lerp & a ladder? 
     private void MovePlayerUp()
     {
-        this.transform.position = floorSpawn.position + Vector3.up * 20 * (floor - 2);
-        //playerOneCam.transform.position = new Vector3(playerModel.transform.position.x, playerOneCam.transform.position.y+20, playerModel.transform.position.z - camPosHorizontal);
+        this.transform.position = floorSpawn.position + Vector3.up * 10 * (floor - 2);
     }
 
     //Rotate the player model when you move around the tower
