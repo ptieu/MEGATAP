@@ -61,7 +61,7 @@ public class PlayerTwo : MonoBehaviour {
         controller = gameManager.GetControllerTwoState();
         if(controller)
         {
-            if(Mathf.Abs(Input.GetAxisRaw("Horizontal_Joy_2")) > 0.2 || Mathf.Abs(Input.GetAxisRaw("Vertical_Joy_2")) > 0.2)
+            if(Mathf.Abs(Input.GetAxisRaw("Horizontal_Joy_2")) > 0.5f || Mathf.Abs(Input.GetAxisRaw("Vertical_Joy_2")) > 0.5f)
             {
                 controllerCursor.transform.Translate(Input.GetAxisRaw("Horizontal_Joy_2") * controllerCursorSpeed, Input.GetAxisRaw("Vertical_Joy_2") * controllerCursorSpeed, 0);
             }
