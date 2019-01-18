@@ -4,6 +4,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour {
 
+
+    //Game Over Status
+    [SerializeField] private PlayerOne player;
+    private bool lose = false;
+
+
     private string[] joysticks;
 
     private bool controllerOne;
@@ -19,11 +25,22 @@ public class GameManager : MonoBehaviour {
     }
 
     private void Update () {
+
 		if(Input.GetButton("Cancel"))
         {
             SceneManager.LoadScene("Menu");
         }
+
+
+        //Game Over from timer
+        lose = player.GameOver();
+        if(lose == true)
+        {
+            SceneManager.LoadScene("Menu");
+        }
+
         CheckControllers();
+
 	}
 
     private void CheckControllers()

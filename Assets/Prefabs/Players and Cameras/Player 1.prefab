@@ -481,3 +481,5 @@ MonoBehaviour:
   maxVelocity: 15
   maxJumpVelocity: 20
   gameManager: {fileID: 0}
+  time: 500
+  TimerText: {fileID: 0}
