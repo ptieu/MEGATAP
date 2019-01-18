@@ -41,8 +41,8 @@ InputManager:
     m_Name: Horizontal_Menu
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: left
-    positiveButton: right
+    negativeButton: joystick 2 button 4
+    positiveButton: joystick 2 button 5
     altNegativeButton: 
     altPositiveButton: 
     gravity: 3
