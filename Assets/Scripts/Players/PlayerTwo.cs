@@ -79,7 +79,11 @@ public class PlayerTwo : MonoBehaviour {
 
     public void OnClickTower()
     {
-        RaycastFromCam(true);
+        //Only place trap if they are clicking left mouse button (right mouse button is cancel)
+        if(!Input.GetMouseButtonUp(1))
+        {
+            RaycastFromCam(true);
+        }
     }
 
 
@@ -131,6 +135,20 @@ public class PlayerTwo : MonoBehaviour {
                 {
                     ghostTrap.transform.position = hitPos;
                     ghostTrap.transform.rotation = hitRot;
+                }
+
+                //Allow user to cancel the trap they selected
+                if(Input.GetMouseButton(1) || Input.GetButton("Cancel_Joy_2"))
+                {
+                    Cursor.visible = true;
+                    DestroyGhost();
+
+                    //Set currently selected trap button if there is a controller
+                    if (controller)
+                    {
+                        eventSystem.SetSelectedGameObject(previouslySelected);
+                        placeEnabled = false;
+                    }
                 }
             }
 
