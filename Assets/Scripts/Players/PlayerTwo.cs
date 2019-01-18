@@ -68,7 +68,7 @@ public class PlayerTwo : MonoBehaviour {
             if(Input.GetButton("Place_Joy_2") && placeEnabled)
             {
                 RaycastFromCam(true);
-            }
+            } 
         }
     }
 
@@ -217,7 +217,6 @@ public class PlayerTwo : MonoBehaviour {
         DestroyGhost();
         SetGhost();
         StartCoroutine(EnableInput());
-        
     }
 
     private void OnClickTrap2()
