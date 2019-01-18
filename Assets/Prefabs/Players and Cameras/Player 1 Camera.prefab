@@ -9,18 +9,18 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1183158076117892}
+  m_RootGameObject: {fileID: 1471729872254108}
   m_IsPrefabAsset: 1
---- !u!1 &1183158076117892
+--- !u!1 &1471729872254108
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4097841291162254}
-  - component: {fileID: 20127244597484544}
-  - component: {fileID: 81786580490577294}
+  - component: {fileID: 4124782476045882}
+  - component: {fileID: 20029879623837878}
+  - component: {fileID: 81888765460848792}
   m_Layer: 0
   m_Name: Player 1 Camera
   m_TagString: Untagged
@@ -28,25 +28,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4097841291162254
+--- !u!4 &4124782476045882
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1183158076117892}
-  m_LocalRotation: {x: 0.043619405, y: -0, z: -0, w: 0.9990483}
-  m_LocalPosition: {x: -36.4, y: 12, z: -70.89}
+  m_GameObject: {fileID: 1471729872254108}
+  m_LocalRotation: {x: 0.08715578, y: 0, z: 0, w: 0.9961947}
+  m_LocalPosition: {x: 0, y: 5, z: -45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 5, y: 0, z: 0}
---- !u!20 &20127244597484544
+  m_LocalEulerAnglesHint: {x: 10, y: 0, z: 0}
+--- !u!20 &20029879623837878
 Camera:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1183158076117892}
+  m_GameObject: {fileID: 1471729872254108}
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
@@ -81,10 +81,10 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &81786580490577294
+--- !u!81 &81888765460848792
 AudioListener:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1183158076117892}
+  m_GameObject: {fileID: 1471729872254108}
   m_Enabled: 1
