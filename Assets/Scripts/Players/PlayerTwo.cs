@@ -32,11 +32,13 @@ public class PlayerTwo : MonoBehaviour {
 
     private void Start()
     {
+        //Listeners for buttons
         trapButtons[0].onClick.AddListener(OnClickTrap1);
         trapButtons[1].onClick.AddListener(OnClickTrap2);
         trapButtons[2].onClick.AddListener(OnClickTrap3);
         trapButtons[3].onClick.AddListener(OnClickTrap4);
 
+        //Set up trap button navigation & custom cursor if controller is connected
         controller = gameManager.GetControllerTwoState();
         if(controller)
         {
@@ -61,10 +63,12 @@ public class PlayerTwo : MonoBehaviour {
         controller = gameManager.GetControllerTwoState();
         if(controller)
         {
-            if(Mathf.Abs(Input.GetAxisRaw("Horizontal_Joy_2")) > 0.2 || Mathf.Abs(Input.GetAxisRaw("Vertical_Joy_2")) > 0.2)
+            //If controller, update controller cursor position to match joystick
+            if(Mathf.Abs(Input.GetAxisRaw("Horizontal_Joy_2")) > 0.5f || Mathf.Abs(Input.GetAxisRaw("Vertical_Joy_2")) > 0.5f)
             {
                 controllerCursor.transform.Translate(Input.GetAxisRaw("Horizontal_Joy_2") * controllerCursorSpeed, Input.GetAxisRaw("Vertical_Joy_2") * controllerCursorSpeed, 0);
             }
+            //If controller & they want to place a trap, call raycast function
             if(Input.GetButton("Place_Joy_2") && placeEnabled)
             {
                 RaycastFromCam(true);
@@ -75,16 +79,23 @@ public class PlayerTwo : MonoBehaviour {
 
     public void OnClickTower()
     {
-        RaycastFromCam(true);
+        //Only place trap if they are clicking left mouse button (right mouse button is cancel)
+        if(!Input.GetMouseButtonUp(1))
+        {
+            RaycastFromCam(true);
+        }
     }
 
 
     //Raycast from camera to center column of tower. Have a ghost trap follow the mouse if a button
     //has been selected, and instantiate one if the tower is clicked.
+    //"clicked" bool should be true if the tower is clicked / the player is trying to actually place a trap down
     private void RaycastFromCam(bool clicked)
     {
         RaycastHit hit;
         Ray ray;
+        
+        //Raycast to custom cursor if controller is connected, otherwise raycast to mouse position
         if (controller)
         {
             ray = cam.ScreenPointToRay(controllerCursor.transform.position);
@@ -96,6 +107,7 @@ public class PlayerTwo : MonoBehaviour {
 
         if (Physics.Raycast(ray, out hit, float.MaxValue, ~LayerMask.NameToLayer("Tower")))
         {
+            //Round hitX, hitY, hitZ to grid based on grid sizes in inspector
             int hitX = Mathf.RoundToInt(hit.point.x / horizontalGridSize) * horizontalGridSize;
             int hitZ = Mathf.RoundToInt(hit.point.z / horizontalGridSize) * horizontalGridSize;
             int hitY = Mathf.RoundToInt(hit.point.y / verticalGridSize) * verticalGridSize;
@@ -104,15 +116,17 @@ public class PlayerTwo : MonoBehaviour {
             Vector3 hitPos = new Vector3(hitX, hitY, hitZ) + hit.normal * 5;
             Quaternion hitRot = Quaternion.identity;
 
+            //Change rotation based on normal from tower 
             if (hit.normal.x == -1 || hit.normal.x == 1)
             {
                 hitRot = Quaternion.Euler(0, 90, 0);
             }
 
 
+            //Change position & rotation of ghost trap to follow mouse if it exists
             if (ghostTrap != null)
             {
-                if(controller)
+                if (controller)
                 {
                     ghostTrap.transform.position = hitPos;
                     ghostTrap.transform.rotation = hitRot;
@@ -122,8 +136,24 @@ public class PlayerTwo : MonoBehaviour {
                     ghostTrap.transform.position = hitPos;
                     ghostTrap.transform.rotation = hitRot;
                 }
+
+                //Allow user to cancel the trap they selected
+                if(Input.GetMouseButton(1) || Input.GetButton("Cancel_Joy_2"))
+                {
+                    Cursor.visible = true;
+                    DestroyGhost();
+
+                    //Set currently selected trap button if there is a controller
+                    if (controller)
+                    {
+                        eventSystem.SetSelectedGameObject(previouslySelected);
+                        placeEnabled = false;
+                    }
+                }
             }
 
+
+            //If the player clicked on the tower / if the player is trying to place a trap, and there is enough space nearby, instantiate the trap and destroy the ghost
             if (clicked && CheckNearby(hit.point, widthBetweenTraps, heightBetweenTraps) && CheckFloor(hitPos.y) && trap != null)
             {
                 Instantiate(trap, hitPos, hitRot);
@@ -131,7 +161,8 @@ public class PlayerTwo : MonoBehaviour {
                 Cursor.visible = true;
                 DestroyGhost();
 
-                if(controller)
+                //Set currently selected trap button if there is a controller
+                if (controller)
                 {
                     eventSystem.SetSelectedGameObject(previouslySelected);
                     placeEnabled = false;
@@ -139,7 +170,9 @@ public class PlayerTwo : MonoBehaviour {
             }
         }
         else
+        {
             Cursor.visible = true;
+        }
     }
 
     //Check for nearby platforms/traps to see if it is too close to place a new one.
@@ -203,52 +236,50 @@ public class PlayerTwo : MonoBehaviour {
     {
         Cursor.visible = true;
     }
-
+    
+    //Set cursor not visible when not hovering over button
     public void OnPointerExitSetCursor()
     {
         Cursor.visible = false;
     }
 
+    //Functions that are called when buttons are pressed
     private void OnClickTrap1()
     {
-        trap = traps[0];
-        previouslySelected = trapButtons[0].gameObject;
-        eventSystem.SetSelectedGameObject(null);
-        DestroyGhost();
-        SetGhost();
-        StartCoroutine(EnableInput());
+        ClickButton(0);       
     }
 
     private void OnClickTrap2()
     {
-        trap = traps[1];
-        previouslySelected = trapButtons[1].gameObject;
-        eventSystem.SetSelectedGameObject(null);
-        DestroyGhost();
-        SetGhost();
-        StartCoroutine(EnableInput());
+        ClickButton(1);
     }
 
     private void OnClickTrap3()
     {
-        trap = traps[2];
-        previouslySelected = trapButtons[2].gameObject;
-        eventSystem.SetSelectedGameObject(null);
-        DestroyGhost();
-        SetGhost();
-        StartCoroutine(EnableInput());
+        ClickButton(2);
     }
 
     private void OnClickTrap4()
     {
-        trap = traps[3];
-        previouslySelected = trapButtons[3].gameObject;
+        ClickButton(3);
+    }
+
+    private void ClickButton(int trapNumber)
+    {
+        trap = traps[trapNumber];
+        
+        //Menu selections for controller input
+        previouslySelected = trapButtons[trapNumber].gameObject;
         eventSystem.SetSelectedGameObject(null);
+
         DestroyGhost();
         SetGhost();
+
         StartCoroutine(EnableInput());
     }
 
+    //Make player wait .5 seconds after pressing button to be able to place trap.
+    //Gets rid of controller bug where pressing A to select a trap also immediately places it
     IEnumerator EnableInput()
     {
         yield return new WaitForSeconds(0.5f);

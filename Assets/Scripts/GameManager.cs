@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour {
 
     private void Update () {
 
-		if(Input.GetButton("Cancel"))
+		if(Input.GetButton("Cancel_Menu"))
         {
             SceneManager.LoadScene("Menu");
         }
