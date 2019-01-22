@@ -19,6 +19,7 @@ public class PlayerTwo : MonoBehaviour {
     private GameObject trap;
     private GameObject ghostTrap;
     private GameObject previouslySelected;
+    private int trapRot = 0;
     private bool placeEnabled;
     private int floor;
 
@@ -50,7 +51,7 @@ public class PlayerTwo : MonoBehaviour {
         {
             controllerCursor.enabled = false;
         }
-
+        
         placeEnabled = false;
     }
 
@@ -89,6 +90,9 @@ public class PlayerTwo : MonoBehaviour {
 
     //Raycast from camera to center column of tower. Have a ghost trap follow the mouse if a button
     //has been selected, and instantiate one if the tower is clicked.
+
+    //Note that this is called every frame
+
     //"clicked" bool should be true if the tower is clicked / the player is trying to actually place a trap down
     private void RaycastFromCam(bool clicked)
     {
@@ -114,28 +118,16 @@ public class PlayerTwo : MonoBehaviour {
 
 
             Vector3 hitPos = new Vector3(hitX, hitY, hitZ) + hit.normal * 5;
-            Quaternion hitRot = Quaternion.identity;
-
-            //Change rotation based on normal from tower 
-            if (hit.normal.x == -1 || hit.normal.x == 1)
-            {
-                hitRot = Quaternion.Euler(0, 90, 0);
-            }
-
 
             //Change position & rotation of ghost trap to follow mouse if it exists
             if (ghostTrap != null)
             {
-                if (controller)
-                {
-                    ghostTrap.transform.position = hitPos;
-                    ghostTrap.transform.rotation = hitRot;
-                }
-                else
-                {
-                    ghostTrap.transform.position = hitPos;
-                    ghostTrap.transform.rotation = hitRot;
-                }
+
+                UpdateRotationInput(hit);
+                FinalizeRotation(hit);
+
+
+                ghostTrap.transform.position = hitPos;
 
                 //Allow user to cancel the trap they selected
                 if(Input.GetMouseButton(1) || Input.GetButton("Cancel_Joy_2"))
@@ -156,7 +148,7 @@ public class PlayerTwo : MonoBehaviour {
             //If the player clicked on the tower / if the player is trying to place a trap, and there is enough space nearby, instantiate the trap and destroy the ghost
             if (clicked && CheckNearby(hit.point, widthBetweenTraps, heightBetweenTraps) && CheckFloor(hitPos.y) && trap != null)
             {
-                Instantiate(trap, hitPos, hitRot);
+                Instantiate(trap, hitPos, ghostTrap.transform.rotation);
                 trap = null;
                 Cursor.visible = true;
                 DestroyGhost();
@@ -174,6 +166,47 @@ public class PlayerTwo : MonoBehaviour {
             Cursor.visible = true;
         }
     }
+
+    //Update trapRot variable used in FinalizeRotation() based on player's input
+    private void UpdateRotationInput(RaycastHit hit)
+    {
+        if (Input.GetButtonDown("RotateLeft_Joy_2"))
+        {
+            if (hit.normal.x == -1 || hit.normal.x == 1)
+            {
+                trapRot--;
+            }
+            else
+            {
+                trapRot++;
+            }
+        }
+        else if (Input.GetButtonDown("RotateRight_Joy_2"))
+        {
+            if (hit.normal.x == -1 || hit.normal.x == 1)
+            {
+                trapRot++;
+            }
+            else
+            {
+                trapRot--;
+            }
+        }
+    }
+
+    void FinalizeRotation(RaycastHit hit)
+    {
+        //Need to also change y rotation based on hit - current side of tower
+        if (hit.normal.x == -1 || hit.normal.x == 1)
+        {
+            ghostTrap.transform.rotation = Quaternion.Euler(ghostTrap.transform.rotation.x, 90, 90 * trapRot);
+        }
+        else
+        {
+            ghostTrap.transform.rotation = Quaternion.Euler(ghostTrap.transform.rotation.x, 0, 90 * trapRot);
+        }
+    }
+
 
     //Check for nearby platforms/traps to see if it is too close to place a new one.
     private bool CheckNearby(Vector3 center, float width, float height)
