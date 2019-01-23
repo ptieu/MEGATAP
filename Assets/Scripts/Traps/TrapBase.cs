@@ -5,19 +5,27 @@ using UnityEngine;
 // a base class for traps to build on
 public class TrapBase : MonoBehaviour {
 
-    // dictate where trap can be placed
-    [SerializeField] private bool canPlaceAbove;
-    [SerializeField] private bool canPlaceBelow;
-    [SerializeField] private bool canPlaceLeft;
-    [SerializeField] private bool canPlaceRight;
+    // apply knockback to inputted
+    public void KnockBack(Collision obj, int knockDistance) 
+    {
+        Debug.Log("Knockback");
+    }
 
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    // apply knockback to inputted
+    public void Stun(Collision obj, int stunDuration)
+    {
+        Debug.Log("Knockback");
+    }
+
+    // apply knockback to inputted
+    public void Slow(Collision obj, int slowDuration)
+    {
+        Debug.Log("Knockback");
+    }
+
+    // apply knockback to inputted
+    public void RestartFace(Collision obj)
+    {
+        Debug.Log("Knockback");
+    }
 }
