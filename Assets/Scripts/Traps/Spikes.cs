@@ -11,8 +11,11 @@ public class Spikes : MonoBehaviour {
     [SerializeField] private bool canPlaceRight;
     [SerializeField] private TrapBase trapBase;
 
+    // let the FixedUpdate method know that there was a collision
     private bool hit = false;
+    // the player (or whatever collided with this trap)
     private Collision player;
+    // keep track of how many frames of knockback have passed
     private int knockTimer = 0;
 
     // Use this for initialization
