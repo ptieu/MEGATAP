@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour {
 
 		if(Input.GetButton("Cancel"))
         {
-            SceneManager.LoadScene("Menu");
+            SceneManager.LoadScene("PauseMenu");
         }
 
 
