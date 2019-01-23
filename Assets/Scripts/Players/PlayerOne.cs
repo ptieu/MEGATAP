@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerOne : MonoBehaviour {
-	// test comment
+    // test comment
 
     //camera
     [SerializeField] private CameraOneRotator cam;
@@ -21,11 +21,16 @@ public class PlayerOne : MonoBehaviour {
     [SerializeField] private GameManager gameManager;
     private float inputAxis;
 
+    public int getState()
+    {
+        return state;
+    }
+
     //timer and death
     [SerializeField] private float time = 500f;
     private bool lose;
     public Text TimerText;
-    
+
 
     private Vector3 tempVelocity;
     private bool isGrounded;
