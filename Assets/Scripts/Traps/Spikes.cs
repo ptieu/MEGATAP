@@ -11,18 +11,36 @@ public class Spikes : MonoBehaviour {
     [SerializeField] private bool canPlaceRight;
     [SerializeField] private TrapBase trapBase;
 
+    public bool hit = false;
+    public Collision player;
+    public int knockTimer = 0;
+
     // Use this for initialization
     void Start () {
 
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
-	}
+    // knockback has a knockback velocity, knockup velocity, and a knockTimer to 
+    // force the knockback into an arc shape.
+	void FixedUpdate () {
+        if (hit && knockTimer < 7 && knockTimer >= 5) {
+            trapBase.KnockBack(player, 50, 0);
+            knockTimer++;
+        } else if (hit && knockTimer < 7)
+        {
+            trapBase.KnockBack(player, 50, 50);
+            knockTimer++;
+        } else
+        {
+            hit = false;
+            knockTimer = 0;
+        }
+    }
 
     void OnCollisionEnter(Collision other)
     {
-        trapBase.KnockBack(other, 5);
+        hit = true;
+        player = other;
     }
 }

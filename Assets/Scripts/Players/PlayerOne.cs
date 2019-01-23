@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerOne : MonoBehaviour {
-	// test comment
+    // test comment
 
     //camera
     [SerializeField] private CameraOneRotator cam;
@@ -19,6 +19,11 @@ public class PlayerOne : MonoBehaviour {
     [SerializeField] private float maxJumpVelocity;
     [SerializeField] private GameManager gameManager;
     private float inputAxis;
+
+    public int getState()
+    {
+        return state;
+    }
 
     private Vector3 tempVelocity;
     private bool isGrounded;
