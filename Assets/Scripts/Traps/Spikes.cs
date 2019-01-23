@@ -11,9 +11,9 @@ public class Spikes : MonoBehaviour {
     [SerializeField] private bool canPlaceRight;
     [SerializeField] private TrapBase trapBase;
 
-    public bool hit = false;
-    public Collision player;
-    public int knockTimer = 0;
+    private bool hit = false;
+    private Collision player;
+    private int knockTimer = 0;
 
     // Use this for initialization
     void Start () {

@@ -6,6 +6,8 @@ using UnityEngine;
 public class TrapBase : MonoBehaviour {
 
     // apply knockback to inputted
+    // must be used in a FixedUpdate method, will apply velocity per frame. Use a timing
+    // method to decide how many frames force is applied.
     public void KnockBack(Collision obj, int knockBackDistance, int knockUpDistance) 
     {
         // find out which way the player is facing so the knock can 
