@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerOne : MonoBehaviour {
     // test comment
@@ -25,6 +26,12 @@ public class PlayerOne : MonoBehaviour {
         return state;
     }
 
+    //timer and death
+    [SerializeField] private float time = 500f;
+    private bool lose;
+    public Text TimerText;
+
+
     private Vector3 tempVelocity;
     private bool isGrounded;
 	private Rigidbody rb;
@@ -33,8 +40,11 @@ public class PlayerOne : MonoBehaviour {
 
 	void Start() {
 		rb = GetComponent<Rigidbody> ();
+        lose = false;
+        SetTimerText();
         inputAxis = gameManager.GetInputAxis();
     }
+
 
 	void OnCollisionEnter() {
 		isGrounded = true;
@@ -109,5 +119,24 @@ public class PlayerOne : MonoBehaviour {
         {
             rb.velocity += Vector3.up * Physics.gravity.y * (lowerJumpMultiplier - 1) * Time.deltaTime;
         }
+
+        //timer countdown
+        time -= Time.deltaTime;
+        SetTimerText();
+        if(time < 0)
+        {
+            lose = true;
+            GameOver();
+        }
+    }
+
+    void SetTimerText()
+    {
+        TimerText.text = "Time: " + time.ToString("F0");
+    }
+
+    public bool GameOver()
+    {
+        return lose;
     }
 }
