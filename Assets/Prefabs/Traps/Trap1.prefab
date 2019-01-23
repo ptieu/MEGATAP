@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33678845114803110}
   - component: {fileID: 23734990183622994}
   - component: {fileID: 65038005525915332}
-  - component: {fileID: 114062102587523426}
+  - component: {fileID: 114682944826940940}
   m_Layer: 0
   m_Name: Trap1
   m_TagString: Platform
@@ -97,7 +97,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114062102587523426
+--- !u!114 &114682944826940940
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -105,10 +105,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1781992477154930}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47c919212d88d784b9324f9aadcbf615, type: 3}
+  m_Script: {fileID: 11500000, guid: 57036681b6d3c6c43adef05f87bf55bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   canPlaceAbove: 0
   canPlaceBelow: 0
   canPlaceLeft: 0
   canPlaceRight: 0
+  trapBase: {fileID: 114835074479586106, guid: d2dde8bac47aaa841a71958adfdc26e0, type: 2}
