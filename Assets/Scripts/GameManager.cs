@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour {
-
-
+	
+	public PauseMenu pause;
+	
+	
     //Game Over Status
     [SerializeField] private PlayerOne player;
     private bool lose = false;
@@ -28,7 +30,8 @@ public class GameManager : MonoBehaviour {
 
 		if(Input.GetButton("Cancel"))
         {
-            SceneManager.LoadScene("PauseMenu");
+            PauseMenu pause = gameObject.GetComponent(typeof(PauseMenu)) as PauseMenu;
+            pause.Pause();
         }
 
 
