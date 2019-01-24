@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour {
     {
         joysticks = Input.GetJoystickNames();
         CheckControllers();
+        SceneManager.LoadScene("Tower1_Platforms", LoadSceneMode.Additive);
         Debug.Log("Player 1 controller: " + controllerOne);
         Debug.Log("Player 2 controller: " + controllerTwo);
     }
