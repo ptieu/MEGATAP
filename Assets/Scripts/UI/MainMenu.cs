@@ -13,7 +13,6 @@ public class MainMenu : MonoBehaviour {
     public void OnClickPlay()
     {
         SceneManager.LoadScene("Tower1");
-        SceneManager.LoadScene("Tower1_Platforms", LoadSceneMode.Additive);
     }
     
     public void QuitGame()
