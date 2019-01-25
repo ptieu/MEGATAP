@@ -1202,6 +1202,46 @@ Prefab:
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 960280925}
+    - target: {fileID: 1198422645562448, guid: ff9fcda491d07404283d525387473970, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1226607613484342, guid: ff9fcda491d07404283d525387473970, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1390478518883132, guid: ff9fcda491d07404283d525387473970, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1749469081265586, guid: ff9fcda491d07404283d525387473970, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1357185541373962, guid: ff9fcda491d07404283d525387473970, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1981385595025362, guid: ff9fcda491d07404283d525387473970, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1605023427520084, guid: ff9fcda491d07404283d525387473970, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1916245955174518, guid: ff9fcda491d07404283d525387473970, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1338538869002168, guid: ff9fcda491d07404283d525387473970, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1792619168326150, guid: ff9fcda491d07404283d525387473970, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff9fcda491d07404283d525387473970, type: 2}
   m_IsPrefabAsset: 0
