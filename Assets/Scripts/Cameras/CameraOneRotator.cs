@@ -84,7 +84,6 @@ public class CameraOneRotator : MonoBehaviour
                 StartMove(new Vector3(playerModel.transform.position.x - camPosHorizontal, playerOneCam.transform.position.y, playerModel.transform.position.z), rotations[3], 4);
                 break;
             case "Trigger4":
-                Debug.Log("Move up");
                 if (floor < numFloors)
                 {
                     floor++;
