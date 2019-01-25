@@ -245,15 +245,23 @@ public class PlayerTwo : MonoBehaviour {
         if(trap != null)
         {
             ghostTrap = Instantiate(trap, Vector3.zero, Quaternion.identity);
+            //Destroy scripts && collider on ghost so that ghost doesn't affect player
+            foreach (MonoBehaviour script in ghostTrap.GetComponents<MonoBehaviour>())
+            {
+                Destroy(script);
+            }
+            Destroy(ghostTrap.GetComponent<Collider>()); 
+
+            //Make ghost half transparent
             Color color = ghostTrap.GetComponent<MeshRenderer>().material.color;
             color.a = 0.5f;
             ghostTrap.GetComponent<MeshRenderer>().material.color = color;
+
             ghostTrap.tag = "Untagged";
 
             Cursor.visible = false;
         }
     }
-
 
     private void DestroyGhost()
     {
