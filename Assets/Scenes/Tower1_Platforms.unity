@@ -3075,8 +3075,8 @@ Transform:
   - {fileID: 167784592}
   - {fileID: 788094938}
   - {fileID: 1940689533}
-  - {fileID: 1636439615}
   - {fileID: 40163119}
+  - {fileID: 1636439615}
   m_Father: {fileID: 0}
   m_RootOrder: 32
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -6873,10 +6873,10 @@ Transform:
   - {fileID: 412055975}
   - {fileID: 879734283}
   - {fileID: 317142620}
-  - {fileID: 1743977717}
   - {fileID: 128281901}
-  - {fileID: 2110487738}
+  - {fileID: 1743977717}
   - {fileID: 109154942}
+  - {fileID: 2110487738}
   - {fileID: 51692638}
   m_Father: {fileID: 0}
   m_RootOrder: 15
@@ -31412,7 +31412,7 @@ GameObject:
   - component: {fileID: 1414505635}
   m_Layer: 0
   m_Name: 1.1 Platforms
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38983,8 +38983,8 @@ Transform:
   - {fileID: 730189451}
   - {fileID: 1664105700}
   - {fileID: 1658143528}
-  - {fileID: 721448291}
   - {fileID: 1675977485}
+  - {fileID: 721448291}
   - {fileID: 1729945354}
   - {fileID: 1218455443}
   - {fileID: 1250969534}
