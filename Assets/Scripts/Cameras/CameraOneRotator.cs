@@ -65,12 +65,9 @@ public class CameraOneRotator : MonoBehaviour
         }
     }
 
-    //4 triggers for rotating camera, 3 for putting up walls behind the player
+    //4 triggers for rotating camera
     private void OnTriggerEnter(Collider other)
     {
-        //Vector3 wallPos = wall.transform.position;
-        //Quaternion wallRot = wall.transform.rotation;
-        //float wallY = wall.transform.position.y + 20 * (floor - 1);
 
         switch (other.tag)
         {
@@ -96,21 +93,6 @@ public class CameraOneRotator : MonoBehaviour
                     StartMove(new Vector3(playerModel.transform.position.x, playerOneCam.transform.position.y + 20, playerModel.transform.position.z - camPosHorizontal), rotations[0], 1);
                     break;
                 }
-            //case "Wall1":
-            //    wallPos = new Vector3(wallTriggers[0].transform.position.x, wallY, wallTriggers[0].transform.position.z - 2);
-            //    //wallRot = Quaternion.Euler(wall.transform.rotation.x, wall.transform.rotation.y, wall.transform.rotation.z);
-            //    Instantiate(wall, wallPos, wallRot);
-            //    break;
-            //case "Wall2":
-            //    wallPos = new Vector3(wallTriggers[1].transform.position.x + 0.5f, wallY, wallTriggers[1].transform.position.z);
-            //    wallRot = Quaternion.Euler(wall.transform.rotation.x, wall.transform.rotation.y, wall.transform.rotation.z);
-            //    Instantiate(wall, wallPos, wallRot);
-            //    break;
-            //case "Wall3":
-            //    wallPos = new Vector3(wallTriggers[2].transform.position.x, wallY, wallTriggers[2].transform.position.z + 2);
-            //    //wallRot = Quaternion.Euler(wall.transform.rotation.x, wall.transform.rotation.y, wall.transform.rotation.z);
-            //    Instantiate(wall, wallPos, wallRot);
-            //    break;
         }
     }
 
