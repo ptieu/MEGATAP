@@ -10,8 +10,8 @@ public class Rise : MonoBehaviour {
     [SerializeField] private GameObject topWall;
 
     //For speed of vines
-    private float targetPosition = 42f;
-    private float targetSize = 85f;
+    private float targetPosition = 43f;
+    private float targetSize = 87f;
     private float currentPosition;
     private float currentSize;
     private float position;
