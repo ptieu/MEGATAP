@@ -41,8 +41,6 @@ public class PlayerOneMovement : MonoBehaviour {
 	private void Update () {
         state = cam.GetState();
 
-        Debug.Log(grounded);
-
         //if (isGrounded) {
         //	movementMultiplier = 10;
         //} else if (!isGrounded) {
