@@ -5,12 +5,10 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour {
     [SerializeField] private float time = 500f;
-    private bool lose;
     [SerializeField] Text TimerText;
 
 
     void Start () {
-        lose = false;
         SetTimerText();
 	}
 	
@@ -20,11 +18,6 @@ public class Timer : MonoBehaviour {
         //timer countdown
         time -= Time.deltaTime;
         SetTimerText();
-        if (time < 0)
-        {
-            lose = true;
-            GameOver();
-        }
     }
 
     void SetTimerText()
@@ -32,8 +25,9 @@ public class Timer : MonoBehaviour {
         TimerText.text = "Time: " + time.ToString("F0");
     }
 
-    public bool GameOver()
+
+    public float getTime()
     {
-        return lose;
+        return time;
     }
 }

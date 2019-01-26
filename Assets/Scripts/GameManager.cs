@@ -5,10 +5,10 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour {
 	public static bool GameIsPaused = false;
 	private PauseMenu pause;
-	
-	
+
+
     //Game Over Status
-    [SerializeField] private Timer timer;
+    [SerializeField] private PlayerOneLose lost;
     private bool lose = false;
 
 
@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour {
         }
 
         //Game Over from timer
-        lose = timer.GameOver();
+        lose = lost.GameOver();
         if(lose == true)
         {
             SceneManager.LoadScene("Menu");
