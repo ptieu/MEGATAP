@@ -4,11 +4,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour {
 	public static bool GameIsPaused = false;
-	public PauseMenu pause;
+	private PauseMenu pause;
 	
 	
     //Game Over Status
-    [SerializeField] private PlayerOne player;
+    [SerializeField] private Timer timer;
     private bool lose = false;
 
 
@@ -27,7 +27,8 @@ public class GameManager : MonoBehaviour {
         Debug.Log("Player 2 controller: " + controllerTwo);
     }
 
-    private void Update () {
+    private void Update ()
+    {
 
 		if(Input.GetButton("Cancel"))
         {
@@ -42,7 +43,7 @@ public class GameManager : MonoBehaviour {
         }
 
         //Game Over from timer
-        lose = player.GameOver();
+        lose = timer.GameOver();
         if(lose == true)
         {
             SceneManager.LoadScene("Menu");
@@ -96,6 +97,7 @@ public class GameManager : MonoBehaviour {
         return controllerTwo;
     }
 
+    //Get InputAxis based on whether player1 is using controller or keyboard
     public float GetInputAxis()
     {
         if (controllerOne)
@@ -111,7 +113,7 @@ public class GameManager : MonoBehaviour {
         }
         else
         {
-            return Input.GetAxis("Horizontal_Keyboard");
+            return Input.GetAxisRaw("Horizontal_Keyboard");
         }
     }
 }

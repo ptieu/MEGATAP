@@ -8,12 +8,12 @@ public class TrapBase : MonoBehaviour {
     // apply knockback to inputted
     // must be used in a FixedUpdate method, will apply velocity per frame. Use a timing
     // method to decide how many frames force is applied.
-    public void KnockBack(Collision obj, int knockBackDistance, int knockUpDistance) 
+    public void KnockBack(GameObject obj, int knockBackDistance, int knockUpDistance) 
     {
         // find out which way the player is facing so the knock can 
-        int playerDirection = obj.gameObject.GetComponent<PlayerOne>().getState();
+        int playerDirection = obj.gameObject.GetComponent<PlayerOneMovement>().GetState();
         Rigidbody rb = obj.gameObject.GetComponent<Rigidbody>();
-        obj.rigidbody.AddForce(transform.forward * -1 * knockBackDistance);
+        rb.AddForce(transform.forward * -1 * knockBackDistance);
         switch (playerDirection)
         {
             case 1:

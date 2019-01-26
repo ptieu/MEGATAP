@@ -70,10 +70,11 @@ GameObject:
   - component: {fileID: 4887500721987680}
   - component: {fileID: 33453068929508368}
   - component: {fileID: 23087665736016806}
-  - component: {fileID: 114940724036334842}
   - component: {fileID: 54241147669559020}
+  - component: {fileID: 114940724036334842}
   - component: {fileID: 114614076012222384}
-  - component: {fileID: 65368838794708548}
+  - component: {fileID: 114559352700593616}
+  - component: {fileID: 136407975964972082}
   m_Layer: 0
   m_Name: Player 1
   m_TagString: Player
@@ -147,8 +148,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1428506183960842}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -36.4, y: 2, z: -48.39}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: -36.4, y: 3.92, z: -44.08}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_Children:
   - {fileID: 4512526300849048}
   m_Father: {fileID: 0}
@@ -350,18 +351,23 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 1
---- !u!65 &65368838794708548
-BoxCollider:
+--- !u!114 &114559352700593616
+MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1428506183960842}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 3.6977558, z: 1}
-  m_Center: {x: 0, y: 0.755188, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa7f555502503904b81924ffbb98e351, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallTriggers:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  wall: {fileID: 1304183516199084, guid: db135b0f7b963ae48b5599f5a08f5d03, type: 2}
+  camOneRotator: {fileID: 114614076012222384}
 --- !u!114 &114614076012222384
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -376,13 +382,11 @@ MonoBehaviour:
   playerOneCam: {fileID: 0}
   moveSpeed: 0.5
   playerModel: {fileID: 1101359674135618}
-  wall: {fileID: 1304183516199084, guid: db135b0f7b963ae48b5599f5a08f5d03, type: 2}
   rotateTriggers:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  wallTriggers: []
   floorSpawn: {fileID: 0}
 --- !u!114 &114940724036334842
 MonoBehaviour:
@@ -396,13 +400,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 114614076012222384}
-  jumpForce: 170
-  moveSpeed: 0.6
-  inAirSpeed: 1
-  fallMultiplier: 16
-  lowerJumpMultiplier: 10
-  maxVelocity: 15
-  maxJumpVelocity: 20
+  moveSpeed: 20
+  jumpHeight: 25
   gameManager: {fileID: 0}
-  time: 500
-  TimerText: {fileID: 0}
+--- !u!136 &136407975964972082
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1428506183960842}
+  m_Material: {fileID: 13400000, guid: 351ffe006e55aba499858bde6757352d, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 3.8462508
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.80432653, z: 0}
