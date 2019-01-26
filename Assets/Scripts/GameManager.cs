@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour {
         lose = lost.GameOver();
         if(lose == true)
         {
-            SceneManager.LoadScene("Menu");
+            SceneManager.LoadScene("GameOver");
         }
 
         CheckControllers();
