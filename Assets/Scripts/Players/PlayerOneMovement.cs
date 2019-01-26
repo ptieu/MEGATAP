@@ -13,12 +13,16 @@ public class PlayerOneMovement : MonoBehaviour {
     [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpHeight;
     [SerializeField] private GameManager gameManager;
+    [SerializeField] private TrapBase trapBase;
     private float inputAxis;
 
     private bool crouching;
     private bool grounded;
     private bool jumping;
     private float speed; //Change this when crouching, etc.; set it back to moveSpeed when done
+
+    //wall jump stuff
+    private int jumpTimer;
 	private Rigidbody rb;
     
 
@@ -81,6 +85,25 @@ public class PlayerOneMovement : MonoBehaviour {
             //TODO
         }
         rb.velocity = movementVector;
+
+
+        if (Physics.Raycast(transform.position, transform.right, 1) && Input.GetButtonDown("Jump_Joy_1"))
+        {
+            if (jumpTimer < 7 && jumpTimer >= 5)
+            {
+                trapBase.KnockBack(this.gameObject, 100, 10);
+                jumpTimer++;
+            }
+            else if (jumpTimer < 7)
+            {
+                trapBase.KnockBack(this.gameObject, 100, 100);
+                jumpTimer++;
+            }
+            else
+            {
+                jumpTimer = 0;
+            }
+        }
     }
 
     private void OnCollisionStay(Collision collision)
@@ -88,6 +111,9 @@ public class PlayerOneMovement : MonoBehaviour {
         if(collision.gameObject.tag == "Platform")
         {
             grounded = true;
+        }
+        else if (Physics.Raycast(transform.position, -transform.right, 1))
+        {
         }
     }
 

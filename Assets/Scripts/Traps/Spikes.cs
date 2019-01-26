@@ -14,7 +14,7 @@ public class Spikes : MonoBehaviour {
     // let the FixedUpdate method know that there was a collision
     private bool hit = false;
     // the player (or whatever collided with this trap)
-    private Collision player;
+    private GameObject player;
     // keep track of how many frames of knockback have passed
     private int knockTimer = 0;
 
@@ -44,6 +44,6 @@ public class Spikes : MonoBehaviour {
     void OnCollisionEnter(Collision other)
     {
         hit = true;
-        player = other;
+        player = other.gameObject;
     }
 }
