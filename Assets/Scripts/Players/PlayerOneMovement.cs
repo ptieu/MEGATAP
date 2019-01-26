@@ -21,8 +21,6 @@ public class PlayerOneMovement : MonoBehaviour {
     private bool jumping;
     private float speed; //Change this when crouching, etc.; set it back to moveSpeed when done
 
-    //wall jump stuff
-    private int jumpTimer;
 	private Rigidbody rb;
     
 
