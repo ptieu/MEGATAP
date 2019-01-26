@@ -11,7 +11,7 @@ public class TrapBase : MonoBehaviour {
     public void KnockBack(Collision obj, int knockBackDistance, int knockUpDistance) 
     {
         // find out which way the player is facing so the knock can 
-        int playerDirection = obj.gameObject.GetComponent<PlayerOneMovement>().getState();
+        int playerDirection = obj.gameObject.GetComponent<PlayerOneMovement>().GetState();
         Rigidbody rb = obj.gameObject.GetComponent<Rigidbody>();
         obj.rigidbody.AddForce(transform.forward * -1 * knockBackDistance);
         switch (playerDirection)

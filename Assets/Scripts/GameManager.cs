@@ -113,7 +113,7 @@ public class GameManager : MonoBehaviour {
         }
         else
         {
-            return Input.GetAxis("Horizontal_Keyboard");
+            return Input.GetAxisRaw("Horizontal_Keyboard");
         }
     }
 }
