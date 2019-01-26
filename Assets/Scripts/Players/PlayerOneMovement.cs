@@ -85,26 +85,8 @@ public class PlayerOneMovement : MonoBehaviour {
             //TODO
         }
         rb.velocity = movementVector;
-
-
-        if (Physics.Raycast(transform.position, transform.right, 1) && Input.GetButtonDown("Jump_Joy_1"))
-        {
-            if (jumpTimer < 7 && jumpTimer >= 5)
-            {
-                trapBase.KnockBack(this.gameObject, 100, 10);
-                jumpTimer++;
-            }
-            else if (jumpTimer < 7)
-            {
-                trapBase.KnockBack(this.gameObject, 100, 100);
-                jumpTimer++;
-            }
-            else
-            {
-                jumpTimer = 0;
-            }
-        }
     }
+    
 
     private void OnCollisionStay(Collision collision)
     {
