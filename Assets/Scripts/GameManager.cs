@@ -3,6 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour {
+	public static bool GameIsPaused = false;
+	private PauseMenu pause;
+
+
+    //Game Over Status
+    [SerializeField] private PlayerOneLose lost;
+    private bool lose = false;
+
 
     private string[] joysticks;
 
@@ -14,16 +22,35 @@ public class GameManager : MonoBehaviour {
     {
         joysticks = Input.GetJoystickNames();
         CheckControllers();
+        SceneManager.LoadScene("Tower1_Platforms", LoadSceneMode.Additive);
         Debug.Log("Player 1 controller: " + controllerOne);
         Debug.Log("Player 2 controller: " + controllerTwo);
     }
 
-    private void Update () {
+    private void Update ()
+    {
+
 		if(Input.GetButton("Cancel"))
         {
-            SceneManager.LoadScene("Menu");
+            PauseMenu pause = gameObject.GetComponent(typeof(PauseMenu)) as PauseMenu;
+            if(GameIsPaused){
+				pause.Resume();
+			}
+			else{
+				pause.Pause();
+			}
+            
         }
+
+        //Game Over from timer
+        lose = lost.GameOver();
+        if(lose == true)
+        {
+            SceneManager.LoadScene("GameOver");
+        }
+
         CheckControllers();
+
 	}
 
     private void CheckControllers()
@@ -70,6 +97,7 @@ public class GameManager : MonoBehaviour {
         return controllerTwo;
     }
 
+    //Get InputAxis based on whether player1 is using controller or keyboard
     public float GetInputAxis()
     {
         if (controllerOne)
@@ -85,7 +113,7 @@ public class GameManager : MonoBehaviour {
         }
         else
         {
-            return Input.GetAxis("Horizontal_Keyboard");
+            return Input.GetAxisRaw("Horizontal_Keyboard");
         }
     }
 }

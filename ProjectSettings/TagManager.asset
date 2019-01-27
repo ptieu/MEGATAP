@@ -13,6 +13,7 @@ TagManager:
   - Wall3
   - Wall4
   - Platform
+  - rise
   layers:
   - Default
   - TransparentFX
