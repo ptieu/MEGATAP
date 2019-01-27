@@ -32,6 +32,7 @@ public class PlayerOneMovement : MonoBehaviour {
 	void Start() {
 		rb = GetComponent<Rigidbody> ();
         speed = moveSpeed;
+        jumpH = jumpHeight;
     }
 
 	private void Update () {
