@@ -38,9 +38,11 @@ public class TrapBase : MonoBehaviour {
     }
 
     // apply knockback to inputted
-    public void Slow(Collision obj, int slowDuration)
+    // input directions: both "percents" should be between 0 and 1
+    public void Slow(Collision obj, float slowPercent, float jumpReductionPercent)
     {
-        Debug.Log("Slow");
+        obj.gameObject.GetComponent<PlayerOneMovement>().SetJumpHeight(obj.gameObject.GetComponent<PlayerOneMovement>().GetJumpHeight() * jumpReductionPercent);
+        obj.gameObject.GetComponent<PlayerOneMovement>().SetSpeed(obj.gameObject.GetComponent<PlayerOneMovement>().GetSpeed() * slowPercent);
     }
 
     // apply knockback to inputted
