@@ -13,10 +13,13 @@ public class Sap : MonoBehaviour {
 
     // let the FixedUpdate method know that there was a collision
     private bool hit = false;
+    // be sure to only slow the player once, not every frame
+    private bool slowTriggered = false;
     // the player (or whatever collided with this trap)
     private GameObject player = null;
     // keep track of how many frames of knockback have passed
     private int slowTimer = 0;
+    
 
     // Use this for initialization
     void Start()
@@ -34,21 +37,27 @@ public class Sap : MonoBehaviour {
             // if colliding, give an amount of slow
             if (hit)
             {
-                slowTimer = 20;
+                slowTimer = 60;
                 hit = false;
             }
-            if (slowTimer > 0)
+            if (slowTimer > 0 && slowTriggered == false)
             {
-                trapBase.Slow(player, 0.5f, 0.5f);
-                slowTimer--;
+                trapBase.Slow(player, 0.1f, 0.5f);
+                slowTriggered = true;
             }
             else
             {
                 player.GetComponent<PlayerOneMovement>().SetJumpHeight(player.GetComponent<PlayerOneMovement>().GetConstantJumpHeight());
                 player.GetComponent<PlayerOneMovement>().SetSpeed(player.GetComponent<PlayerOneMovement>().GetConstantSpeed());
+                slowTriggered = false;
             }
         }
         
+        // tick timer down if there is any
+        if (slowTimer > 0)
+        {
+            slowTimer--;
+        }
 
     }
 
