@@ -108,8 +108,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57036681b6d3c6c43adef05f87bf55bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canPlaceAbove: 0
-  canPlaceBelow: 0
-  canPlaceLeft: 0
-  canPlaceRight: 0
+  canPlaceAbove: 1
+  canPlaceBelow: 1
+  canPlaceLeft: 1
+  canPlaceRight: 1
   trapBase: {fileID: 114835074479586106, guid: d2dde8bac47aaa841a71958adfdc26e0, type: 2}
