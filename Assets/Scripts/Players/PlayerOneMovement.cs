@@ -20,6 +20,8 @@ public class PlayerOneMovement : MonoBehaviour {
     private bool grounded;
     private bool jumping;
 
+    public bool move;
+
     private float speed; //Change this when crouching, etc.; set it back to moveSpeed when done
     private float jumpH; // change this when in sap etc.; set it back to jumpHeight when done
 
@@ -33,45 +35,53 @@ public class PlayerOneMovement : MonoBehaviour {
 		rb = GetComponent<Rigidbody> ();
         speed = moveSpeed;
         jumpH = jumpHeight;
+
+        move = true;
     }
 
 	private void Update () {
         state = cam.GetState();
 
         inputAxis = gameManager.GetInputAxis();
-        switch (state)
+        if (move == true)
         {
-            case 1:
-                movementVector = new Vector3(inputAxis * speed, rb.velocity.y, 0);
-                rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
-                break;
-            case 2:
-                movementVector = new Vector3(0, rb.velocity.y, inputAxis * speed);
-                rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX;
-                break;
-            case 3:
-                movementVector = new Vector3(-inputAxis * speed, rb.velocity.y, 0);
-                rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
-                break;
-            case 4:
-                movementVector = new Vector3(0, rb.velocity.y, -inputAxis * speed);
-                rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX;
-                break;
-        }
+            switch (state)
+            {
+                case 1:
+                    movementVector = new Vector3(inputAxis * speed, rb.velocity.y, 0);
+                    rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
+                    break;
+                case 2:
+                    movementVector = new Vector3(0, rb.velocity.y, inputAxis * speed);
+                    rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX;
+                    break;
+                case 3:
+                    movementVector = new Vector3(-inputAxis * speed, rb.velocity.y, 0);
+                    rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
+                    break;
+                case 4:
+                    movementVector = new Vector3(0, rb.velocity.y, -inputAxis * speed);
+                    rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX;
+                    break;
+            }
 
-        //jumping
-        if(Input.GetButtonDown("Jump_Joy_1") && grounded)
-        {
-            jumping = true;
+
+            //jumping
+            if (Input.GetButtonDown("Jump_Joy_1") && grounded)
+            {
+                jumping = true;
+            }
+
+            //crouch
+            if (Input.GetButton("Crouch_Joy_1") && grounded)
+            {
+                crouching = true;
+            }
+            if (Input.GetButtonUp("Crouch_Joy_1") && grounded)
+            {
+                crouching = false;
+            }
         }
-      
-        //crouch
-		if (Input.GetButton("Crouch_Joy_1") && grounded) {
-            crouching = true;
-		}	
-		if (Input.GetButtonUp("Crouch_Joy_1") && grounded) {
-            crouching = false;
-		}
     }
 
     private void FixedUpdate()
@@ -144,5 +154,10 @@ public class PlayerOneMovement : MonoBehaviour {
     public float GetConstantJumpHeight()
     {
         return jumpHeight;
+    }
+
+    public void SetMove(bool m)
+    {
+        move = m;
     }
 }
