@@ -11,6 +11,10 @@ public class Spikes : MonoBehaviour {
     [SerializeField] private bool canPlaceRight;
     [SerializeField] private TrapBase trapBase;
 
+    // custom to this trap
+    [SerializeField] private int knockBackValue = 75;
+    [SerializeField] private int knockUpValue = 25;
+
     // let the FixedUpdate method know that there was a collision
     private bool hit = false;
     // the player (or whatever collided with this trap)
@@ -31,12 +35,12 @@ public class Spikes : MonoBehaviour {
         {
             if (hit && knockTimer < 7 && knockTimer >= 5)
             {
-                trapBase.KnockBack(player, 50, 0);
+                trapBase.KnockBack(player, knockBackValue, 0);
                 knockTimer++;
             }
             else if (hit && knockTimer < 7)
             {
-                trapBase.KnockBack(player, 50, 50);
+                trapBase.KnockBack(player, 0, knockUpValue);
                 knockTimer++;
             }
             else
@@ -48,9 +52,10 @@ public class Spikes : MonoBehaviour {
        
     }
 
-    void OnCollisionEnter(Collision other)
+    void OnTriggerEnter(Collider other)
     {
         hit = true;
         player = other.gameObject;
+        trapBase.UpdatePlayerVelocities(other.gameObject);
     }
 }
