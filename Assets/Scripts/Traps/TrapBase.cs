@@ -41,6 +41,8 @@ public class TrapBase : MonoBehaviour {
         }
     }
 
+    private float time;
+
     // apply knockback to inputted
     // must be used in a FixedUpdate method, will apply velocity per frame. Use a timing
     // method to decide how many frames force is applied.
@@ -69,10 +71,18 @@ public class TrapBase : MonoBehaviour {
         Debug.Log(playerx + " " + playery + " " + playerz);
     }
 
-    // apply knockback to inputted
-    public void Stun(GameObject obj, int stunDuration)
+    // apply stun to inputted
+    public void Stun(GameObject obj, int stunTime, GameObject trap)
     {
-        Debug.Log("Stun");
+        obj.gameObject.GetComponent<PlayerOneMovement>().SetMove(false);
+        obj.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, obj.gameObject.GetComponent<Rigidbody>().velocity.y, 0);
+        time += Time.deltaTime;
+        if(time >= stunTime)
+        {
+            obj.gameObject.GetComponent<PlayerOneMovement>().SetMove(true);
+            time = 0;
+            Destroy(trap);
+        }
     }
 
     // apply knockback to inputted

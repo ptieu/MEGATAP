@@ -815,6 +815,11 @@ Prefab:
       propertyPath: m_Text
       value: Sap
       objectReference: {fileID: 0}
+    - target: {fileID: 114821827470535290, guid: c130ae0761b27334089036b39347c937,
+        type: 2}
+      propertyPath: m_Text
+      value: Banana
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c130ae0761b27334089036b39347c937, type: 2}
   m_IsPrefabAsset: 0
