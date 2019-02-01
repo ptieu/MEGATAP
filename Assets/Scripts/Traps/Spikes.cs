@@ -43,7 +43,6 @@ public class Spikes : MonoBehaviour {
                 knockTimer = 0;
             }
         }
-       
     }
 
     void OnTriggerEnter(Collider other)

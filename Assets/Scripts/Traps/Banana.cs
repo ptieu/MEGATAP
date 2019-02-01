@@ -29,9 +29,7 @@ public class Banana : MonoBehaviour {
             {
                 hit = false;
             }
-            
         }
-        Debug.Log(player);
     }
 
     void OnTriggerEnter(Collider other)
