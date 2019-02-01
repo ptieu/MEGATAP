@@ -90,7 +90,7 @@ public class TrapBase : MonoBehaviour {
                 rb.velocity = new Vector3(0, knockUpDistance * -playery, -knockBackDistance * playerz);
                 break;
             case 3:
-                rb.velocity = new Vector3(knockBackDistance * -playerx, knockUpDistance * playery, 0);
+                rb.velocity = new Vector3(knockBackDistance * -playerx, knockUpDistance * -playery, 0);
                 break;
             case 4:
                 rb.velocity = new Vector3(0, knockUpDistance * -playery, knockBackDistance * playerz);
