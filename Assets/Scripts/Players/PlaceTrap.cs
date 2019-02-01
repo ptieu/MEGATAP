@@ -250,7 +250,6 @@ public class PlaceTrap : MonoBehaviour {
 
     private void OnClickTrap(int trapNum)
     {
-        Debug.Log(trapNum);
         trap = trapPrefabs[trapNum];
         
         previouslySelected = trapNum;
