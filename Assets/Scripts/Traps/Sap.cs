@@ -24,6 +24,7 @@ public class Sap : MonoBehaviour {
     // force the knockback into an arc shape.
     void FixedUpdate()
     {
+        Debug.Log(player);
         if(player != null)
         {
             // if colliding, give an amount of slow
@@ -55,7 +56,10 @@ public class Sap : MonoBehaviour {
 
     void OnTriggerStay(Collider other)
     {
-        hit = true;
-        player = other.gameObject;
+        if(other.tag == "Player")
+        {
+            hit = true;
+            player = other.gameObject;
+        }
     }
 }

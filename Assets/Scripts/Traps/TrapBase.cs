@@ -6,21 +6,21 @@ using System;
 [Flags]
 public enum Location
 {
-    FreeFloat = 0, //Doesn't need to be attached to a surface
-    Ceiling = 1,
-    Floor = 2,
-    LeftWall = 4,
-    RightWall = 8,
+    FreeFloat = 1, //Doesn't need to be attached to a surface
+    Ceiling = 2,
+    Floor = 4,
+    LeftWall = 8,
+    RightWall = 16,
 
     AnyWall = LeftWall | RightWall,
-    Anywhere = LeftWall | RightWall | Floor | Ceiling | FreeFloat,
+    //Anywhere = LeftWall | RightWall | Floor | Ceiling | FreeFloat,
     AnySurface = LeftWall | RightWall | Floor | Ceiling,
     FloorAndCeiling = Floor | Ceiling
 }
 
 // a base class for traps to build on
 public class TrapBase : MonoBehaviour {
-    [EnumFlag] [SerializeField] [Tooltip("Choose 'Anywhere' instead of 'Everything'")]
+    [EnumFlag] [SerializeField]
     public Location ValidLocations;
     
     public GameObject InstantiateTrap(Vector3 position)

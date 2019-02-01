@@ -47,8 +47,11 @@ public class Spikes : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        hit = true;
-        player = other.gameObject;
-        trapBase.UpdatePlayerVelocities(other.gameObject);
+        if(other.tag == "Player")
+        {
+            hit = true;
+            player = other.gameObject;
+            trapBase.UpdatePlayerVelocities(other.gameObject);
+        }
     }
 }
