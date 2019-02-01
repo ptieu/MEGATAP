@@ -20,7 +20,7 @@ public enum Location
 
 // a base class for traps to build on
 public class TrapBase : MonoBehaviour {
-    [EnumFlag] [SerializeField]
+    [EnumFlag] [SerializeField] [Tooltip("Choose 'Anywhere' instead of 'Everything'")]
     public Location ValidLocations;
     
     public GameObject InstantiateTrap(Vector3 position)
@@ -28,6 +28,10 @@ public class TrapBase : MonoBehaviour {
         return Instantiate(this.gameObject, position, this.transform.rotation);
     }
 
+    public GameObject InstantiateTrap(Vector3 position, Quaternion rotation)
+    {
+        return Instantiate(this.gameObject, position, rotation);
+    }
 
     // keeps track of which direction the player was moving at the moment of this save
     // be sure to call UpdatePlayerVelocities() before using these variables

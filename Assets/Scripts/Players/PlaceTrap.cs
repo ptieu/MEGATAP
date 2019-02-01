@@ -69,9 +69,18 @@ public class PlaceTrap : MonoBehaviour {
 
     private Vector3 GetGridPosition()
     {
+        RaycastHit hit = RaycastFromCam().Value;
+        int hitX = Mathf.RoundToInt(hit.point.x / gridSize) * gridSize;
+        int hitZ = Mathf.RoundToInt(hit.point.z / gridSize) * gridSize;
+        int hitY = Mathf.RoundToInt(hit.point.y / gridSize) * gridSize;
+        return new Vector3(hitX, hitY, hitZ) + hit.normal * 5;
+    }
+
+    private RaycastHit? RaycastFromCam()
+    {
         RaycastHit hit;
         Ray ray;
-        if(p2Controller)
+        if (p2Controller)
         {
             ray = cam.ScreenPointToRay(controllerCursor.transform.position);
         }
@@ -79,23 +88,17 @@ public class PlaceTrap : MonoBehaviour {
         {
             ray = cam.ScreenPointToRay(Input.mousePosition);
         }
-
         if (Physics.Raycast(ray, out hit, float.MaxValue, ~LayerMask.NameToLayer("Tower")))
         {
-            //Round position to nearest grid point
-            int hitX = Mathf.RoundToInt(hit.point.x / gridSize) * gridSize;
-            int hitZ = Mathf.RoundToInt(hit.point.z / gridSize) * gridSize;
-            int hitY = Mathf.RoundToInt(hit.point.y / gridSize) * gridSize;
-            Debug.Log(hitX + ", " + hitY + ", " + hitZ);
-            return new Vector3(hitX, hitY, hitZ) + hit.normal * 5;
+            return hit;
         }
         else
         {
-            Debug.Log("NO POSITION");
-            return Vector3.zero;
+            return null;
         }
     }
 
+    //Called from event trigger on center column of tower when player clicks on it
     public void OnClickTower()
     {
         if(!Input.GetMouseButtonUp(1))
@@ -103,13 +106,13 @@ public class PlaceTrap : MonoBehaviour {
             SetTrap();
         }
     }
+
     private void SetTrap()
     {
-        float yClick = GetGridPosition().y;
-        if (ghostTrap != null && CheckFloor(yClick))
+        Vector3 position = GetGridPosition();
+        if (ghostTrap != null && CheckFloor(position.y))
         {
-            Vector3 position = GetGridPosition();
-            trap.InstantiateTrap(position);
+            trap.InstantiateTrap(position, ghostTrap.transform.rotation);
             trap = null;
             DestroyGhost();
 
@@ -154,9 +157,11 @@ public class PlaceTrap : MonoBehaviour {
 
     private void MoveGhost()
     {
-        //TODO: ROTATION STUFF
         if (ghostTrap != null)
         {
+            UpdateRotationInput();
+            FinalizeRotationInput();
+
             Vector3 position = GetGridPosition();
             ghostTrap.transform.position = position;
 
@@ -171,6 +176,28 @@ public class PlaceTrap : MonoBehaviour {
                 }
             }
         }
+    }
+
+    private int trapRot = 0;
+    private void UpdateRotationInput()
+    {
+
+    }
+
+    //Change y rotation of hit based on current side of tower
+    private void FinalizeRotationInput()
+    {
+        RaycastHit hit = RaycastFromCam().Value;
+
+        if (hit.normal.x == -1 || hit.normal.x == 1)
+        {
+            ghostTrap.transform.rotation = Quaternion.Euler(ghostTrap.transform.rotation.x, 90, 90 * trapRot);
+        }
+        else
+        {
+            ghostTrap.transform.rotation = Quaternion.Euler(ghostTrap.transform.rotation.x, 0, 90 * trapRot);
+        }
+
     }
 
     private void DestroyGhost()
