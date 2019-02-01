@@ -75,7 +75,7 @@ public class PlaceTrap : MonoBehaviour {
             int hitX = Mathf.RoundToInt(hit.point.x / gridSize) * gridSize;
             int hitZ = Mathf.RoundToInt(hit.point.z / gridSize) * gridSize;
             int hitY = Mathf.RoundToInt(hit.point.y / gridSize) * gridSize;
-            return new Vector3(hitX, hitY, hitZ) + hit.normal * 5;
+            return new Vector3(hitX, hitY, hitZ) + hit.normal * 2f;
         }
         else return null;
     }
