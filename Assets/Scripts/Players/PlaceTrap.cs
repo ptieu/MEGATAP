@@ -23,7 +23,9 @@ public class PlaceTrap : MonoBehaviour {
     private bool p2Controller;
     //private bool placeEnabled;
 
+    //bool m_Started;
 	void Start () {
+        //m_Started = true;
         //Add click listeners for all trap buttons
 		for(int trapNum = 0; trapNum < trapButtons.Length; trapNum++)
         {
@@ -65,6 +67,7 @@ public class PlaceTrap : MonoBehaviour {
         }
 
         MoveGhost();
+        if (trap != null && ghostTrap != null) CheckValidLocation();
     }
 
     private Vector3? GetGridPosition()
@@ -72,9 +75,10 @@ public class PlaceTrap : MonoBehaviour {
         if (RaycastFromCam() != null)
         {
             RaycastHit hit = RaycastFromCam().Value;
-            int hitX = Mathf.RoundToInt(hit.point.x / gridSize) * gridSize;
-            int hitZ = Mathf.RoundToInt(hit.point.z / gridSize) * gridSize;
-            int hitY = Mathf.RoundToInt(hit.point.y / gridSize) * gridSize;
+            
+            int hitX = Mathf.RoundToInt((hit.point.x - 1) / gridSize) * gridSize + 1;
+            int hitZ = Mathf.RoundToInt((hit.point.z - 1) / gridSize) * gridSize + 1;
+            int hitY = Mathf.RoundToInt((hit.point.y - 1)/ gridSize) * gridSize + 1;
             return new Vector3(hitX, hitY, hitZ) + hit.normal * 2f;
         }
         else return null;
@@ -142,6 +146,34 @@ public class PlaceTrap : MonoBehaviour {
         return (hitY >= lowerLimit && hitY <= upperLimit);
     }
 
+    //Vector3 scale = new Vector3(2, 4, 4);
+    private bool CheckValidLocation()
+    {
+        Debug.Log(trap.ValidLocations);
+        return true;
+        //Vector3 scale = new Vector3(1, 4, 1);
+        //Collider[] hitColliders = Physics.OverlapBox(ghostTrap.transform.position + new Vector3 (0, 2, 0), scale);
+
+        //int i = 0;
+        //while (i < hitColliders.Length)
+        //{
+        //    if(hitColliders[i].tag == "Platform")
+        //    {
+        //        return false;
+        //    }
+        //    i++;
+        //}
+
+        //return true;
+    }
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.red;
+    //    //Check that it is being run in Play Mode, so it doesn't try to draw this in Editor mode
+    //    if (m_Started && ghostTrap != null)
+    //        //Draw a cube where the OverlapBox is (positioned where your GameObject is as well as a size)
+    //        Gizmos.DrawWireCube(ghostTrap.transform.position + new Vector3(0, 2, 0), scale);
+    //}
     private void SetGhost()
     {
         if(trap != null)
@@ -189,6 +221,7 @@ public class PlaceTrap : MonoBehaviour {
         }
     }
 
+    //Change x/z rotation based on player input
     private int trapRot = 0;
     private void UpdateRotationInput()
     {
