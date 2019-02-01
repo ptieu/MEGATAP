@@ -171,20 +171,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trapButtons:
-  - {fileID: 114427221803792464, guid: c130ae0761b27334089036b39347c937, type: 2}
-  - {fileID: 114339708459781538, guid: c130ae0761b27334089036b39347c937, type: 2}
-  - {fileID: 114078772452593272, guid: c130ae0761b27334089036b39347c937, type: 2}
-  - {fileID: 114340193444278970, guid: c130ae0761b27334089036b39347c937, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   trapPrefabs:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 114374902745233234, guid: 978902421daf7ca4eb1ed6dc15ac1645, type: 2}
+  - {fileID: 114603356562152718, guid: 14716dac1aa2c7a488003f7bba1968d3, type: 2}
+  - {fileID: 114426541480001402, guid: 7b86cd6111e958843812033b42c97d80, type: 2}
+  - {fileID: 114173747208991380, guid: b34de131824cbe447931d0a2d1e0696b, type: 2}
   controllerCursor: {fileID: 114544627028653530, guid: c130ae0761b27334089036b39347c937,
     type: 2}
   eventSystem: {fileID: 0}
   gm: {fileID: 0}
   cam: {fileID: 0}
+  cursorSpeed: 2
+  gridSize: 2
 --- !u!114 &114684309664505246
 MonoBehaviour:
   m_ObjectHideFlags: 1

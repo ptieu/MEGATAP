@@ -67,13 +67,17 @@ public class PlaceTrap : MonoBehaviour {
         MoveGhost();
     }
 
-    private Vector3 GetGridPosition()
+    private Vector3? GetGridPosition()
     {
-        RaycastHit hit = RaycastFromCam().Value;
-        int hitX = Mathf.RoundToInt(hit.point.x / gridSize) * gridSize;
-        int hitZ = Mathf.RoundToInt(hit.point.z / gridSize) * gridSize;
-        int hitY = Mathf.RoundToInt(hit.point.y / gridSize) * gridSize;
-        return new Vector3(hitX, hitY, hitZ) + hit.normal * 5;
+        if (RaycastFromCam() != null)
+        {
+            RaycastHit hit = RaycastFromCam().Value;
+            int hitX = Mathf.RoundToInt(hit.point.x / gridSize) * gridSize;
+            int hitZ = Mathf.RoundToInt(hit.point.z / gridSize) * gridSize;
+            int hitY = Mathf.RoundToInt(hit.point.y / gridSize) * gridSize;
+            return new Vector3(hitX, hitY, hitZ) + hit.normal * 5;
+        }
+        else return null;
     }
 
     private RaycastHit? RaycastFromCam()
@@ -109,17 +113,21 @@ public class PlaceTrap : MonoBehaviour {
 
     private void SetTrap()
     {
-        Vector3 position = GetGridPosition();
-        if (ghostTrap != null && CheckFloor(position.y))
+        if (GetGridPosition() != null)
         {
-            trap.InstantiateTrap(position, ghostTrap.transform.rotation);
-            trap = null;
-            DestroyGhost();
 
-            if (p2Controller)
+            Vector3 position = GetGridPosition().Value;
+            if (ghostTrap != null && CheckFloor(position.y))
             {
-                SetSelectedButton(previouslySelected);
-                //placeEnabled = false;
+                trap.InstantiateTrap(position, ghostTrap.transform.rotation);
+                trap = null;
+                DestroyGhost();
+
+                if (p2Controller)
+                {
+                    SetSelectedButton(previouslySelected);
+                    //placeEnabled = false;
+                }
             }
         }
     }
@@ -162,17 +170,20 @@ public class PlaceTrap : MonoBehaviour {
             UpdateRotationInput();
             FinalizeRotationInput();
 
-            Vector3 position = GetGridPosition();
-            ghostTrap.transform.position = position;
-
-            if (Input.GetMouseButton(1) || Input.GetButton("Cancel_Joy_2"))
+            if (GetGridPosition() != null)
             {
-                DestroyGhost();
+                Vector3 position = GetGridPosition().Value;
+                ghostTrap.transform.position = position;
 
-                if(p2Controller)
+                if (Input.GetMouseButton(1) || Input.GetButton("Cancel_Joy_2"))
                 {
-                    SetSelectedButton(previouslySelected);
-                    //placeEnabled = false;
+                    DestroyGhost();
+
+                    if (p2Controller)
+                    {
+                        SetSelectedButton(previouslySelected);
+                        //placeEnabled = false;
+                    }
                 }
             }
         }
@@ -181,23 +192,51 @@ public class PlaceTrap : MonoBehaviour {
     private int trapRot = 0;
     private void UpdateRotationInput()
     {
+        if (RaycastFromCam() != null)
+        {
+            RaycastHit hit = RaycastFromCam().Value;
 
+            if (Input.GetButtonDown("RotateLeft_Joy_2"))
+            {
+                if (hit.normal.x == -1 || hit.normal.x == 1)
+                {
+                    trapRot--;
+                }
+                else
+                {
+                    trapRot++;
+                }
+            }
+            else if (Input.GetButtonDown("RotateRight_Joy_2"))
+            {
+                if (hit.normal.x == -1 || hit.normal.x == 1)
+                {
+                    trapRot++;
+                }
+                else
+                {
+                    trapRot--;
+                }
+            }
+        }
     }
 
     //Change y rotation of hit based on current side of tower
     private void FinalizeRotationInput()
     {
-        RaycastHit hit = RaycastFromCam().Value;
-
-        if (hit.normal.x == -1 || hit.normal.x == 1)
+        if (RaycastFromCam() != null)
         {
-            ghostTrap.transform.rotation = Quaternion.Euler(ghostTrap.transform.rotation.x, 90, 90 * trapRot);
-        }
-        else
-        {
-            ghostTrap.transform.rotation = Quaternion.Euler(ghostTrap.transform.rotation.x, 0, 90 * trapRot);
-        }
+            RaycastHit hit = RaycastFromCam().Value;
 
+            if (hit.normal.x == -1 || hit.normal.x == 1)
+            {
+                ghostTrap.transform.rotation = Quaternion.Euler(ghostTrap.transform.rotation.x, 90, 90 * trapRot);
+            }
+            else
+            {
+                ghostTrap.transform.rotation = Quaternion.Euler(ghostTrap.transform.rotation.x, 0, 90 * trapRot);
+            }
+        }
     }
 
     private void DestroyGhost()
