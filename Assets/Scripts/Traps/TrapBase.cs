@@ -6,21 +6,21 @@ using System;
 [Flags]
 public enum Location
 {
-    FreeFloat = 0, //Doesn't need to be attached to a surface
-    Ceiling = 1,
-    Floor = 2,
-    LeftWall = 4,
-    RightWall = 8,
+    FreeFloat = 1, //Doesn't need to be attached to a surface
+    Ceiling = 2,
+    Floor = 4,
+    LeftWall = 8,
+    RightWall = 16,
 
     AnyWall = LeftWall | RightWall,
-    Anywhere = LeftWall | RightWall | Floor | Ceiling | FreeFloat,
+    //Anywhere = LeftWall | RightWall | Floor | Ceiling | FreeFloat,
     AnySurface = LeftWall | RightWall | Floor | Ceiling,
     FloorAndCeiling = Floor | Ceiling
 }
 
 // a base class for traps to build on
 public class TrapBase : MonoBehaviour {
-    [EnumFlag] [SerializeField] [Tooltip("Choose 'Anywhere' instead of 'Everything'")]
+    [EnumFlag] [SerializeField]
     public Location ValidLocations;
     
     public GameObject InstantiateTrap(Vector3 position)
@@ -90,7 +90,7 @@ public class TrapBase : MonoBehaviour {
                 rb.velocity = new Vector3(0, knockUpDistance * -playery, -knockBackDistance * playerz);
                 break;
             case 3:
-                rb.velocity = new Vector3(knockBackDistance * -playerx, knockUpDistance * playery, 0);
+                rb.velocity = new Vector3(knockBackDistance * -playerx, knockUpDistance * -playery, 0);
                 break;
             case 4:
                 rb.velocity = new Vector3(0, knockUpDistance * -playery, knockBackDistance * playerz);
