@@ -1,9 +1,37 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+
+[Flags]
+public enum Location
+{
+    FreeFloat = 0, //Doesn't need to be attached to a surface
+    Ceiling = 1,
+    Floor = 2,
+    LeftWall = 4,
+    RightWall = 8,
+
+    AnyWall = LeftWall | RightWall,
+    Anywhere = LeftWall | RightWall | Floor | Ceiling | FreeFloat,
+    AnySurface = LeftWall | RightWall | Floor | Ceiling,
+    FloorAndCeiling = Floor | Ceiling
+}
 
 // a base class for traps to build on
 public class TrapBase : MonoBehaviour {
+    [EnumFlag] [SerializeField] [Tooltip("Choose 'Anywhere' instead of 'Everything'")]
+    public Location ValidLocations;
+    
+    public GameObject InstantiateTrap(Vector3 position)
+    {
+        return Instantiate(this.gameObject, position, this.transform.rotation);
+    }
+
+    public GameObject InstantiateTrap(Vector3 position, Quaternion rotation)
+    {
+        return Instantiate(this.gameObject, position, rotation);
+    }
 
     // keeps track of which direction the player was moving at the moment of this save
     // be sure to call UpdatePlayerVelocities() before using these variables

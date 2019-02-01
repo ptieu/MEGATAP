@@ -109,11 +109,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 913634022136ee24598a17fcd2a39918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canPlaceAbove: 1
-  canPlaceBelow: 0
-  canPlaceLeft: 0
-  canPlaceRight: 0
-  trapBase: {fileID: 114835074479586106, guid: d2dde8bac47aaa841a71958adfdc26e0, type: 2}
 --- !u!114 &114426541480001402
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -125,3 +120,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47c919212d88d784b9324f9aadcbf615, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ValidLocations: 0

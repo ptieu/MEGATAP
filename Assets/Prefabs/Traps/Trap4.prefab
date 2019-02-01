@@ -108,7 +108,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47c919212d88d784b9324f9aadcbf615, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canPlaceAbove: 0
-  canPlaceBelow: 0
-  canPlaceLeft: 0
-  canPlaceRight: 0
