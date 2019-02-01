@@ -96,19 +96,39 @@ public class PlaceTrap : MonoBehaviour {
         }
     }
 
-
+    public void OnClickTower()
+    {
+        if(!Input.GetMouseButtonUp(1))
+        {
+            SetTrap();
+        }
+    }
     private void SetTrap()
     {
-        Vector3 position = GetGridPosition();
-        trap.InstantiateTrap(position);
-        trap = null;
-        DestroyGhost();
-
-        if(p2Controller)
+        float yClick = GetGridPosition().y;
+        if (ghostTrap != null && CheckFloor(yClick))
         {
-            SetSelectedButton(previouslySelected);
-            //placeEnabled = false;
+            Vector3 position = GetGridPosition();
+            trap.InstantiateTrap(position);
+            trap = null;
+            DestroyGhost();
+
+            if (p2Controller)
+            {
+                SetSelectedButton(previouslySelected);
+                //placeEnabled = false;
+            }
         }
+    }
+
+    //Check to see that mage is clicking on correct floor
+    private bool CheckFloor(float hitY)
+    {
+        int floor = cam.GetComponent<CameraTwoRotator>().GetFloor();
+        float upperLimit = floor * 20;
+        float lowerLimit = upperLimit - 20;
+
+        return (hitY >= lowerLimit && hitY <= upperLimit);
     }
 
     private void SetGhost()
