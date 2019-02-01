@@ -3,13 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Spikes : MonoBehaviour {
-
-    // dictate where trap can be placed
-    [SerializeField] private bool canPlaceAbove;
-    [SerializeField] private bool canPlaceBelow;
-    [SerializeField] private bool canPlaceLeft;
-    [SerializeField] private bool canPlaceRight;
-    [SerializeField] private TrapBase trapBase;
+    private TrapBase trapBase;
 
     // custom to this trap
     [SerializeField] private int knockBackValue = 75;
@@ -24,7 +18,7 @@ public class Spikes : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-
+        trapBase = GetComponent<TrapBase>();
 	}
 	
 	// Update is called once per frame

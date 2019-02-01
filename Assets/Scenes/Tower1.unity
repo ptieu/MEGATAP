@@ -263,6 +263,65 @@ Prefab:
       propertyPath: controllerCursor
       value: 
       objectReference: {fileID: 1513495130}
+    - target: {fileID: 114220156261559540, guid: 7c17f18a57460024ba6258242e429410,
+        type: 2}
+      propertyPath: eventSystem
+      value: 
+      objectReference: {fileID: 1160000097}
+    - target: {fileID: 114220156261559540, guid: 7c17f18a57460024ba6258242e429410,
+        type: 2}
+      propertyPath: gm
+      value: 
+      objectReference: {fileID: 1016487807}
+    - target: {fileID: 114220156261559540, guid: 7c17f18a57460024ba6258242e429410,
+        type: 2}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 412805862}
+    - target: {fileID: 114220156261559540, guid: 7c17f18a57460024ba6258242e429410,
+        type: 2}
+      propertyPath: trapButtons.Array.data[0]
+      value: 
+      objectReference: {fileID: 1131481448}
+    - target: {fileID: 114220156261559540, guid: 7c17f18a57460024ba6258242e429410,
+        type: 2}
+      propertyPath: trapButtons.Array.data[1]
+      value: 
+      objectReference: {fileID: 401793270}
+    - target: {fileID: 114220156261559540, guid: 7c17f18a57460024ba6258242e429410,
+        type: 2}
+      propertyPath: trapButtons.Array.data[2]
+      value: 
+      objectReference: {fileID: 695091538}
+    - target: {fileID: 114220156261559540, guid: 7c17f18a57460024ba6258242e429410,
+        type: 2}
+      propertyPath: trapButtons.Array.data[3]
+      value: 
+      objectReference: {fileID: 1980877919}
+    - target: {fileID: 114220156261559540, guid: 7c17f18a57460024ba6258242e429410,
+        type: 2}
+      propertyPath: trapPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 114591284626285486, guid: 978902421daf7ca4eb1ed6dc15ac1645,
+        type: 2}
+    - target: {fileID: 114220156261559540, guid: 7c17f18a57460024ba6258242e429410,
+        type: 2}
+      propertyPath: trapPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 114640903978603608, guid: 14716dac1aa2c7a488003f7bba1968d3,
+        type: 2}
+    - target: {fileID: 114220156261559540, guid: 7c17f18a57460024ba6258242e429410,
+        type: 2}
+      propertyPath: trapPrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 114550866922189314, guid: 7b86cd6111e958843812033b42c97d80,
+        type: 2}
+    - target: {fileID: 114220156261559540, guid: 7c17f18a57460024ba6258242e429410,
+        type: 2}
+      propertyPath: trapPrefabs.Array.data[3]
+      value: 
+      objectReference: {fileID: 114143784568563508, guid: b34de131824cbe447931d0a2d1e0696b,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c17f18a57460024ba6258242e429410, type: 2}
   m_IsPrefabAsset: 0

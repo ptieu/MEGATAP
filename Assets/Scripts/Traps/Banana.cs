@@ -3,13 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Banana : MonoBehaviour {
-
-    // dictate where trap can be placed
-    [SerializeField] private bool canPlaceAbove;
-    [SerializeField] private bool canPlaceBelow;
-    [SerializeField] private bool canPlaceLeft;
-    [SerializeField] private bool canPlaceRight;
-    [SerializeField] private TrapBase trapBase;
+    private TrapBase trapBase;
 
     // let the FixedUpdate method know that there was a collision
     private bool hit = false;
@@ -17,13 +11,10 @@ public class Banana : MonoBehaviour {
     private GameObject player = null;
     // keep track of how many frames of knockback have passed
 
-    // Use this for initialization
-    void Start()
+    private void Start()
     {
-
+        trapBase = GetComponent<TrapBase>();
     }
-
-    // Update is called once per frame
     // Stun has player object, stun time in seconds, trap itself
     // player has normal y velocity but is stopped in all other velocities and cannot move controls
     void FixedUpdate()

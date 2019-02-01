@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33140998972759548}
   - component: {fileID: 23349369097790388}
   - component: {fileID: 136189357046121884}
+  - component: {fileID: 114220156261559540}
   - component: {fileID: 114684309664505246}
   m_Layer: 0
   m_Name: Player 2
@@ -158,13 +159,39 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1134238031081466}
   m_Mesh: {fileID: 0}
---- !u!114 &114684309664505246
+--- !u!114 &114220156261559540
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1134238031081466}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cda5a611920cf1c49bab03c41c7f740b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trapButtons:
+  - {fileID: 114427221803792464, guid: c130ae0761b27334089036b39347c937, type: 2}
+  - {fileID: 114339708459781538, guid: c130ae0761b27334089036b39347c937, type: 2}
+  - {fileID: 114078772452593272, guid: c130ae0761b27334089036b39347c937, type: 2}
+  - {fileID: 114340193444278970, guid: c130ae0761b27334089036b39347c937, type: 2}
+  trapPrefabs:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  controllerCursor: {fileID: 114544627028653530, guid: c130ae0761b27334089036b39347c937,
+    type: 2}
+  eventSystem: {fileID: 0}
+  gm: {fileID: 0}
+  cam: {fileID: 0}
+--- !u!114 &114684309664505246
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1134238031081466}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 742fe6ba5f649494c85f78bab30f31cf, type: 3}
   m_Name: 
