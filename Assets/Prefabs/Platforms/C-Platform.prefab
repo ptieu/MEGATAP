@@ -21,12 +21,9 @@ GameObject:
   - component: {fileID: 4999389024062650}
   - component: {fileID: 33934055534339704}
   - component: {fileID: 23898436239072346}
-  - component: {fileID: 65408327153390734}
-  - component: {fileID: 65303377291850498}
-  - component: {fileID: 65495721773464208}
   m_Layer: 0
   m_Name: C-Platform
-  m_TagString: Platform
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38,7 +35,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1323709623801900}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 19.57736, y: 4.3069153, z: -60.5}
+  m_LocalPosition: {x: 19.74514, y: 38.239136, z: -106.261475}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
   m_Father: {fileID: 0}
@@ -86,39 +83,3 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1323709623801900}
   m_Mesh: {fileID: 4300000, guid: 1aa05ccf58ecab94d96009fdcf7063f2, type: 3}
---- !u!65 &65303377291850498
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1323709623801900}
-  m_Material: {fileID: 13400000, guid: 351ffe006e55aba499858bde6757352d, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.01931807, y: 0.059999987, z: 0.059999987}
-  m_Center: {x: -0.008340962, y: 0, z: 0}
---- !u!65 &65408327153390734
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1323709623801900}
-  m_Material: {fileID: 13400000, guid: 351ffe006e55aba499858bde6757352d, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.04, y: 0.059999987, z: 0.019698573}
-  m_Center: {x: 0.001999998, y: 6.0499275e-17, z: 0.020150714}
---- !u!65 &65495721773464208
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1323709623801900}
-  m_Material: {fileID: 13400000, guid: 351ffe006e55aba499858bde6757352d, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.04, y: 0.059999987, z: 0.01998781}
-  m_Center: {x: 0.001999998, y: -6.21048e-17, z: -0.0200061}
