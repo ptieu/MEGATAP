@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TrapOverlap : MonoBehaviour {
+    [HideInInspector]
     public bool nearbyTrap;
 
 
