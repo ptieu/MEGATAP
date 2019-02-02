@@ -75,11 +75,29 @@ public class PlaceTrap : MonoBehaviour {
         if (RaycastFromCam() != null)
         {
             RaycastHit hit = RaycastFromCam().Value;
-            
-            int hitX = Mathf.RoundToInt((hit.point.x - 1) / gridSize) * gridSize + 1;
-            int hitZ = Mathf.RoundToInt((hit.point.z - 1) / gridSize) * gridSize + 1;
+            int hitX = -1;
+            int hitZ = -1;
+            switch (cam.GetComponent<CameraTwoRotator>().GetState())
+            {
+                case 1:
+                    hitX = Mathf.RoundToInt((hit.point.x - 1) / gridSize) * gridSize + 1;
+                    hitZ = Mathf.RoundToInt(hit.point.z + -2);
+                    break;
+                case 2:
+                    hitX = Mathf.RoundToInt(hit.point.x + 2);
+                    hitZ = Mathf.RoundToInt((hit.point.z - 1) / gridSize) * gridSize + 1;
+                    break;
+                case 3:
+                    hitX = Mathf.RoundToInt((hit.point.x - 1) / gridSize) * gridSize + 1;
+                    hitZ = Mathf.RoundToInt(hit.point.z + 2);
+                    break;
+                case 4:
+                    hitX = Mathf.RoundToInt(hit.point.x + -2);
+                    hitZ = Mathf.RoundToInt((hit.point.z - 1) / gridSize) * gridSize + 1;
+                    break;
+            }
             int hitY = Mathf.RoundToInt((hit.point.y - 1)/ gridSize) * gridSize + 1;
-            return new Vector3(hitX, hitY, hitZ) + hit.normal * 2f;
+            return new Vector3(hitX, hitY, hitZ);
         }
         else return null;
     }
@@ -151,20 +169,7 @@ public class PlaceTrap : MonoBehaviour {
     {
         Debug.Log(trap.ValidLocations);
         return true;
-        //Vector3 scale = new Vector3(1, 4, 1);
-        //Collider[] hitColliders = Physics.OverlapBox(ghostTrap.transform.position + new Vector3 (0, 2, 0), scale);
 
-        //int i = 0;
-        //while (i < hitColliders.Length)
-        //{
-        //    if(hitColliders[i].tag == "Platform")
-        //    {
-        //        return false;
-        //    }
-        //    i++;
-        //}
-
-        //return true;
     }
     //private void OnDrawGizmos()
     //{

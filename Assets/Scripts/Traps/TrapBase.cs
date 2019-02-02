@@ -22,7 +22,16 @@ public enum Location
 public class TrapBase : MonoBehaviour {
     [EnumFlag] [SerializeField]
     public Location ValidLocations;
-    
+
+    [SerializeField] Vector3 overlapBoxOffset;
+    [SerializeField] Vector3 overlapBoxScale;
+    //For drawing overlap box
+    bool m_Started;
+    private void Start()
+    {
+        m_Started = true;
+    }
+
     public GameObject InstantiateTrap(Vector3 position)
     {
         return Instantiate(this.gameObject, position, this.transform.rotation);
@@ -125,5 +134,16 @@ public class TrapBase : MonoBehaviour {
     public void RestartFace(GameObject obj)
     {
         Debug.Log("RestartFace");
+    }
+
+
+    //This is to draw the overlap box around the object, to help with debugging
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        //Check that it is being run in Play Mode, so it doesn't try to draw this in Editor mode
+        if (m_Started)
+            //Draw a cube where the OverlapBox is (positioned where your GameObject is as well as a size)
+            Gizmos.DrawWireCube(overlapBoxOffset, overlapBoxScale);
     }
 }
