@@ -197,6 +197,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ValidLocations: 30
+  overlapBoxOffset: {x: 0, y: 3, z: 0}
+  overlapBoxScale: {x: 2, y: 6, z: 4}
 --- !u!114 &114682944826940940
 MonoBehaviour:
   m_ObjectHideFlags: 1

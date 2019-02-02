@@ -23,15 +23,28 @@ public class TrapBase : MonoBehaviour {
     [EnumFlag] [SerializeField]
     public Location ValidLocations;
 
+    CameraTwoRotator cam;
     [SerializeField] Vector3 overlapBoxOffset;
     [SerializeField] Vector3 overlapBoxScale;
+    private Vector3 offset, scale; //Change these instead of serialized field
+
     //For drawing overlap box
     bool m_Started;
     private void Start()
     {
         m_Started = true;
+        cam = GameObject.Find("Player 2 Camera").GetComponent<CameraTwoRotator>();
     }
+    private void Update()
+    {
+        
+    }
+    public Collider[] OverlapBox()
+    {
+        Collider[] hitColliders = Physics.OverlapBox(transform.position + overlapBoxOffset, overlapBoxScale);
 
+        return hitColliders;
+    }
     public GameObject InstantiateTrap(Vector3 position)
     {
         return Instantiate(this.gameObject, position, this.transform.rotation);
@@ -143,7 +156,24 @@ public class TrapBase : MonoBehaviour {
         Gizmos.color = Color.red;
         //Check that it is being run in Play Mode, so it doesn't try to draw this in Editor mode
         if (m_Started)
+        {
             //Draw a cube where the OverlapBox is (positioned where your GameObject is as well as a size)
-            Gizmos.DrawWireCube(overlapBoxOffset, overlapBoxScale);
+            switch(cam.GetState())
+            {
+                case 1:
+                case 3:
+                    offset = overlapBoxOffset;
+                    scale = overlapBoxScale;
+                    break;
+                case 2:
+                case 4:
+                    offset = new Vector3(overlapBoxOffset.z, overlapBoxOffset.y, overlapBoxOffset.x);
+                    scale = new Vector3(overlapBoxScale.z, overlapBoxScale.y, overlapBoxScale.x);
+                    break;
+
+            }
+            Gizmos.DrawWireCube(this.transform.position + offset, scale);
+            //Gizmos.DrawWireCube(Vector3.zero, Vector3.one);
+        }
     }
 }
