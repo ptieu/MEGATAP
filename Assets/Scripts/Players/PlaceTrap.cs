@@ -135,7 +135,7 @@ public class PlaceTrap : MonoBehaviour {
 
     private void SetTrap()
     {
-        if (GetGridPosition() != null)
+        if (GetGridPosition() != null && CheckNearby())
         {
 
             Vector3 position = GetGridPosition().Value;
@@ -164,21 +164,55 @@ public class PlaceTrap : MonoBehaviour {
         return (hitY >= lowerLimit && hitY <= upperLimit);
     }
 
-    //Vector3 scale = new Vector3(2, 4, 4);
+    //Check  if it's being placed on correct object
     private bool CheckValidLocation()
     {
         Debug.Log(trap.ValidLocations);
         return true;
 
     }
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.color = Color.red;
-    //    //Check that it is being run in Play Mode, so it doesn't try to draw this in Editor mode
-    //    if (m_Started && ghostTrap != null)
-    //        //Draw a cube where the OverlapBox is (positioned where your GameObject is as well as a size)
-    //        Gizmos.DrawWireCube(ghostTrap.transform.position + new Vector3(0, 2, 0), scale);
-    //}
+
+    private bool CheckNearby()
+    {
+        if (ghostTrap != null)
+        {
+            //Check nearby traps first
+            Collider[] hitColliders = Physics.OverlapBox(ghostTrap.transform.position, new Vector3(10, 10, 10));
+            for(int i = 0; i < hitColliders.Length; i++)
+            {
+                if(hitColliders[i].tag == "Trap")
+                {
+                    Collider[] otherColliders = hitColliders[i].GetComponent<TrapBase>().OverlapBox();
+                    for(int j = 0; j < otherColliders.Length; j++)
+                    {
+                        //If the ghost trap is within the other object's overlap box
+                        if(otherColliders[j].Equals(ghostTrap))
+                        {
+                            Debug.Log("Trap");
+                            return false;
+                        }
+                    }
+                }
+            }
+
+            hitColliders = ghostTrap.GetComponent<TrapBase>().OverlapBox();
+            Debug.Log(hitColliders);
+            for(int i = 0; i < hitColliders.Length; i++)
+            {
+                if(hitColliders[i].tag == "Platform")
+                {
+                    Debug.Log("Platform");
+                    return false;
+                }
+            }
+
+            Debug.Log("None!");
+            return true;
+        }
+
+        return false;
+    }
+
     private void SetGhost()
     {
         if(trap != null)
@@ -187,10 +221,10 @@ public class PlaceTrap : MonoBehaviour {
         }
 
         //Destroy scripts & collider on ghost
-        foreach (MonoBehaviour script in ghostTrap.GetComponents<MonoBehaviour>())
-        {
-            Destroy(script);
-        }
+        //foreach (MonoBehaviour script in ghostTrap.GetComponents<MonoBehaviour>())
+        //{ 
+        //    Destroy(script);
+        //}
         Destroy(ghostTrap.GetComponent<Collider>());
 
         //Make half transparent

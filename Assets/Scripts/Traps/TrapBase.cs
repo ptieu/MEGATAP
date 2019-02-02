@@ -37,11 +37,24 @@ public class TrapBase : MonoBehaviour {
     }
     private void Update()
     {
-        
+        switch (cam.GetState())
+        {
+            case 1:
+            case 3:
+                offset = overlapBoxOffset;
+                scale = overlapBoxScale;
+                break;
+            case 2:
+            case 4:
+                offset = new Vector3(overlapBoxOffset.z, overlapBoxOffset.y, overlapBoxOffset.x);
+                scale = new Vector3(overlapBoxScale.z, overlapBoxScale.y, overlapBoxScale.x);
+                break;
+
+        }
     }
     public Collider[] OverlapBox()
     {
-        Collider[] hitColliders = Physics.OverlapBox(transform.position + overlapBoxOffset, overlapBoxScale);
+        Collider[] hitColliders = Physics.OverlapBox(this.transform.position + offset, scale);
 
         return hitColliders;
     }
@@ -158,22 +171,7 @@ public class TrapBase : MonoBehaviour {
         if (m_Started)
         {
             //Draw a cube where the OverlapBox is (positioned where your GameObject is as well as a size)
-            switch(cam.GetState())
-            {
-                case 1:
-                case 3:
-                    offset = overlapBoxOffset;
-                    scale = overlapBoxScale;
-                    break;
-                case 2:
-                case 4:
-                    offset = new Vector3(overlapBoxOffset.z, overlapBoxOffset.y, overlapBoxOffset.x);
-                    scale = new Vector3(overlapBoxScale.z, overlapBoxScale.y, overlapBoxScale.x);
-                    break;
-
-            }
             Gizmos.DrawWireCube(this.transform.position + offset, scale);
-            //Gizmos.DrawWireCube(Vector3.zero, Vector3.one);
         }
     }
 }
