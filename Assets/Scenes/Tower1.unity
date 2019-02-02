@@ -2204,17 +2204,17 @@ Prefab:
         type: 2}
       propertyPath: wallTriggers.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1758665506}
     - target: {fileID: 114559352700593616, guid: 9af0d0883e6a51441b06cd7d26274b01,
         type: 2}
       propertyPath: wallTriggers.Array.data[1]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 592683536}
     - target: {fileID: 114559352700593616, guid: 9af0d0883e6a51441b06cd7d26274b01,
         type: 2}
       propertyPath: wallTriggers.Array.data[2]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2133257300}
     - target: {fileID: 114614076012222384, guid: 9af0d0883e6a51441b06cd7d26274b01,
         type: 2}
       propertyPath: playerOneCam
