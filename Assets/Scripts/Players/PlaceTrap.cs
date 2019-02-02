@@ -23,9 +23,7 @@ public class PlaceTrap : MonoBehaviour {
     private bool p2Controller;
     //private bool placeEnabled;
 
-    //bool m_Started;
 	void Start () {
-        //m_Started = true;
         //Add click listeners for all trap buttons
 		for(int trapNum = 0; trapNum < trapButtons.Length; trapNum++)
         {
@@ -114,7 +112,7 @@ public class PlaceTrap : MonoBehaviour {
         {
             ray = cam.ScreenPointToRay(Input.mousePosition);
         }
-        if (Physics.Raycast(ray, out hit, float.MaxValue, ~LayerMask.NameToLayer("Tower")))
+        if (Physics.Raycast(ray, out hit, float.MaxValue, LayerMask.GetMask("Tower")))
         {
             return hit;
         }
@@ -167,7 +165,7 @@ public class PlaceTrap : MonoBehaviour {
     //Check  if it's being placed on correct object
     private bool CheckValidLocation()
     {
-        Debug.Log(trap.ValidLocations);
+        //Debug.Log(trap.ValidLocations);
         return true;
 
     }
@@ -176,37 +174,11 @@ public class PlaceTrap : MonoBehaviour {
     {
         if (ghostTrap != null)
         {
-            //Check nearby traps first
-            Collider[] hitColliders = Physics.OverlapBox(ghostTrap.transform.position, new Vector3(10, 10, 10));
-            for(int i = 0; i < hitColliders.Length; i++)
+            if (ghostTrap.GetComponentInChildren<TrapOverlap>() != null && ghostTrap.GetComponentInChildren<TrapOverlap>().nearbyTrap)
             {
-                if(hitColliders[i].tag == "Trap")
-                {
-                    Collider[] otherColliders = hitColliders[i].GetComponent<TrapBase>().OverlapBox();
-                    for(int j = 0; j < otherColliders.Length; j++)
-                    {
-                        //If the ghost trap is within the other object's overlap box
-                        if(otherColliders[j].Equals(ghostTrap))
-                        {
-                            Debug.Log("Trap");
-                            return false;
-                        }
-                    }
-                }
+                return false;
             }
 
-            hitColliders = ghostTrap.GetComponent<TrapBase>().OverlapBox();
-            Debug.Log(hitColliders);
-            for(int i = 0; i < hitColliders.Length; i++)
-            {
-                if(hitColliders[i].tag == "Platform")
-                {
-                    Debug.Log("Platform");
-                    return false;
-                }
-            }
-
-            Debug.Log("None!");
             return true;
         }
 
@@ -219,12 +191,8 @@ public class PlaceTrap : MonoBehaviour {
         {
             ghostTrap = trap.InstantiateTrap(Vector3.zero);
         }
-
-        //Destroy scripts & collider on ghost
-        //foreach (MonoBehaviour script in ghostTrap.GetComponents<MonoBehaviour>())
-        //{ 
-        //    Destroy(script);
-        //}
+        
+        
         Destroy(ghostTrap.GetComponent<Collider>());
 
         //Make half transparent
