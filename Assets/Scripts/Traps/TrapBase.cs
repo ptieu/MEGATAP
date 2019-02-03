@@ -23,44 +23,6 @@ public class TrapBase : MonoBehaviour {
     public Location ValidLocations;
 
 
-    //CameraTwoRotator cam;
-    //[SerializeField] Vector3 overlapBoxOffset;
-    //[SerializeField] Vector3 overlapBoxScale;
-    //private Vector3 offset, scale; //Change these instead of serialized field
-
-    //For drawing overlap box
-   // bool m_Started;
-    private void Start()
-    {
-      //  m_Started = true;
-      //  cam = GameObject.Find("Player 2 Camera").GetComponent<CameraTwoRotator>();
-    }
-    //private void Update()
-    //{
-    //    switch (cam.GetState())
-    //    {
-    //        case 1:
-    //        case 3:
-    //            offset = overlapBoxOffset;
-    //            scale = overlapBoxScale;
-    //            break;
-    //        case 2:
-    //        case 4:
-    //            offset = new Vector3(overlapBoxOffset.z, overlapBoxOffset.y, overlapBoxOffset.x);
-    //            scale = new Vector3(overlapBoxScale.z, overlapBoxScale.y, overlapBoxScale.x);
-    //            break;
-
-    //    }
-    //}
-
-    //public Collider[] OverlapBox()
-    //{
-    //    ////Debug.Log((scale / 4) + "; " + (scale.x / 4) + ", " + (scale.y) + ", " + (scale.z / 4));
-    //    //Vector3 overlapScale = new Vector3(scale.x / 2, scale.y / 4, scale.z / 2);
-    //    //Collider[] hitColliders = Physics.OverlapBox(this.transform.position + offset, overlapScale, Quaternion.identity);
-
-    //    //return hitColliders;
-    //}
     public GameObject InstantiateTrap(Vector3 position)
     {
         return Instantiate(this.gameObject, position, this.transform.rotation);
@@ -165,15 +127,4 @@ public class TrapBase : MonoBehaviour {
     }
 
 
-    //This is to draw the overlap box around the object, to help with debugging
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.color = Color.red;
-    //    //Check that it is being run in Play Mode, so it doesn't try to draw this in Editor mode
-    //    if (m_Started)
-    //    {
-    //        //Draw a cube where the OverlapBox is (positioned where your GameObject is as well as a size)
-    //        Gizmos.DrawWireCube(this.transform.position + offset, scale);
-    //    }
-    //}
 }
