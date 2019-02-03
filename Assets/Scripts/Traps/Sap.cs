@@ -24,7 +24,6 @@ public class Sap : MonoBehaviour {
     // force the knockback into an arc shape.
     void FixedUpdate()
     {
-        Debug.Log(player);
         if(player != null)
         {
             // if colliding, give an amount of slow

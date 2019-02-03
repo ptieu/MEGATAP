@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114426541480001402}
   m_Layer: 0
   m_Name: BananaTrap
-  m_TagString: Platform
+  m_TagString: Trap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -121,3 +121,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ValidLocations: 4
+  overlapBoxOffset: {x: 0, y: 0, z: 0}
+  overlapBoxScale: {x: 1, y: 4, z: 2}

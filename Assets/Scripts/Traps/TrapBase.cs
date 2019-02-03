@@ -13,7 +13,6 @@ public enum Location
     RightWall = 16,
 
     AnyWall = LeftWall | RightWall,
-    //Anywhere = LeftWall | RightWall | Floor | Ceiling | FreeFloat,
     AnySurface = LeftWall | RightWall | Floor | Ceiling,
     FloorAndCeiling = Floor | Ceiling
 }
@@ -22,7 +21,8 @@ public enum Location
 public class TrapBase : MonoBehaviour {
     [EnumFlag] [SerializeField]
     public Location ValidLocations;
-    
+
+
     public GameObject InstantiateTrap(Vector3 position)
     {
         return Instantiate(this.gameObject, position, this.transform.rotation);
@@ -96,7 +96,6 @@ public class TrapBase : MonoBehaviour {
                 rb.velocity = new Vector3(0, knockUpDistance * -playery, knockBackDistance * playerz);
                 break;
         }
-        Debug.Log(playerx + " " + playery + " " + playerz);
     }
 
     // apply stun to inputted
@@ -126,4 +125,6 @@ public class TrapBase : MonoBehaviour {
     {
         Debug.Log("RestartFace");
     }
+
+
 }

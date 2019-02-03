@@ -51,3 +51,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47c919212d88d784b9324f9aadcbf615, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ValidLocations: 0
+  overlapBoxOffset: {x: 0, y: 0, z: 0}
+  overlapBoxScale: {x: 0, y: 0, z: 0}
