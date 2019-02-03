@@ -196,9 +196,12 @@ public class PlaceTrap : MonoBehaviour {
         Destroy(ghostTrap.GetComponent<Collider>());
 
         //Make half transparent
-        Color color = ghostTrap.GetComponent<MeshRenderer>().material.color;
-        color.a = 0.5f;
-        ghostTrap.GetComponent<MeshRenderer>().material.color = color;
+        if (ghostTrap.GetComponentInChildren<MeshRenderer>() != null)
+        {
+            Color color = ghostTrap.GetComponentInChildren<MeshRenderer>().material.color;
+            color.a = 0.5f;
+            ghostTrap.GetComponentInChildren<MeshRenderer>().material.color = color;
+        }
 
     }
 

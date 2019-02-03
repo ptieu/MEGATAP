@@ -134,7 +134,6 @@ public class TrapBase : MonoBehaviour {
                 rb.velocity = new Vector3(0, knockUpDistance * -playery, knockBackDistance * playerz);
                 break;
         }
-        Debug.Log(playerx + " " + playery + " " + playerz);
     }
 
     // apply stun to inputted

@@ -11,7 +11,6 @@ public class TrapOverlap : MonoBehaviour {
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("TrapOverlap") || other.tag == "Platform")
         {
-            Debug.Log(other.tag);
             nearbyTrap = true;
         }
     }
