@@ -8,7 +8,7 @@ public class PlayerOneMovement : MonoBehaviour {
     [SerializeField] private CameraOneRotator cam;
     private int state = 1;
 
-    
+
 	//movement
     [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpHeight;
@@ -26,17 +26,21 @@ public class PlayerOneMovement : MonoBehaviour {
     private float jumpH; // change this when in sap etc.; set it back to jumpHeight when done
 
 	private Rigidbody rb;
-    
+
 
 
 
     private Vector3 movementVector;
+
+    Animator animator;
+
 	void Start() {
 		rb = GetComponent<Rigidbody> ();
         speed = moveSpeed;
         jumpH = jumpHeight;
 
         move = true;
+        animator = GetComponent<Animator>();
     }
 
 	private void Update () {
@@ -82,6 +86,14 @@ public class PlayerOneMovement : MonoBehaviour {
                 crouching = false;
             }
         }
+
+        // Animation parameters update
+        animator.SetFloat("Velocity", rb.velocity.x);
+        animator.SetBool("Jumping", jumping);
+        animator.SetBool("Running", move);
+
+
+
     }
 
     private void FixedUpdate()
@@ -97,7 +109,7 @@ public class PlayerOneMovement : MonoBehaviour {
         }
         rb.velocity = movementVector;
     }
-    
+
 
     private void OnCollisionStay(Collision collision)
     {
